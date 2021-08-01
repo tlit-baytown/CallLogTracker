@@ -1,4 +1,5 @@
 ﻿using CallLogTracker.backend.database.wrappers;
+using CallLogTracker.utility;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
@@ -40,7 +41,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"An exception has occured in GetCompany(): {e.Message}");
+                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCompany(): {e.Message}");
                             }
                         }
                     }
@@ -48,6 +49,48 @@ namespace CallLogTracker.backend.database
                 con.Close();
             }
             return c;
+        }
+
+        public static SortableBindingList<Company> GetCompanies()
+        {
+            SortableBindingList<Company> companies = new SortableBindingList<Company>();
+            string q = Queries.BuildQuery(QType.SELECT, "Company");
+
+            using (MySqlConnection con = Database.GetConnection())
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            try
+                            {
+                                while (reader.Read())
+                                {
+                                    reader.Read();
+                                    Company c = new Company
+                                    {
+                                        ID = reader.GetInt32(0),
+                                        Name = reader.GetString(1),
+                                        Phone = reader.GetString(2),
+                                        SupportEmail = reader.GetString(3),
+                                        NumOfEmployees = reader.GetInt32(4)
+                                    };
+                                    companies.Add(c);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCompanies(): {e.Message}");
+                            }
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return companies;
         }
 
         public static int InsertCompany(Company c)
@@ -134,9 +177,9 @@ namespace CallLogTracker.backend.database
             int affectedRows = 0;
             string q = Queries.BuildQuery(QType.DELETE, "Company", null, null, $"company_id={c.ID}");
 
-            try
+            using (MySqlConnection con = Database.GetConnection())
             {
-                using (MySqlConnection con = Database.GetConnection())
+                try
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand())
@@ -156,12 +199,13 @@ namespace CallLogTracker.backend.database
                     }
                     con.Close();
                 }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in DeleteCompany(): {ex.Message}");
+                    con.Close();
+                    return false;
+                }
             }
-            catch (Exception)
-            {
-                return false;
-            }
-
             return affectedRows != 0;
         }
     }

@@ -152,6 +152,13 @@
     <Compile Include="backend\notifications\TemplateData.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="gui\dialogs\CMessageBox.cs" />
+    <Compile Include="gui\dialogs\CRichMessageBox.cs" />
+    <Compile Include="gui\dialogs\DeleteMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\DeleteMessageForm.Designer.cs">
+      <DependentUpon>DeleteMessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\dialogs\MessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,23 +171,41 @@
     <Compile Include="gui\dialogs\DatabaseConnection.Designer.cs">
       <DependentUpon>DatabaseConnection.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\dialogs\RichMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\RichMessageForm.Designer.cs">
+      <DependentUpon>RichMessageForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="gui\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\user_controls\NewEmployee.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\NewEmployee.Designer.cs">
+      <DependentUpon>NewEmployee.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="security\Hasher.cs" />
     <Compile Include="Test.cs" />
+    <Compile Include="utility\CEventArgs.cs" />
+    <Compile Include="utility\Enums.cs" />
     <Compile Include="utility\SortableBindingList.cs" />
     <Compile Include="utility\TextBoxWriter.cs" />
+    <Compile Include="utility\Validator.cs" />
     <EmbeddedResource Include="gui\dialogs\DatabaseConnection.resx">
       <DependentUpon>DatabaseConnection.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\NewEmployee.resx">
+      <DependentUpon>NewEmployee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -331,6 +356,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\notification_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\success.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\success_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\success_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\computer_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\man_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\man_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_64x64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

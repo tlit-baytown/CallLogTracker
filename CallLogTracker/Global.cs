@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CallLogTracker.backend.database.wrappers;
+using CallLogTracker.utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +31,14 @@ namespace CallLogTracker
             
         }
 
-        public bool DatabaseConnected = false;
+        public bool DatabaseConnected { get; set; } = false;
+        public int NumberOfDBConnectionFormsOpen { get; set; } = 0;
+
+        public SortableBindingList<User> Users { get; set; } = new SortableBindingList<User>();
+
+        public User CurrentUser { get; set; } = null;
+        public Company CurrentCompany { get; set; } = null;
+
+        public MainForm MainForm { get; set; }
     }
 }

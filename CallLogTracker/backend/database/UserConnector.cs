@@ -81,7 +81,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"An error has occured in GetUser(): {e.Message}");
+                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetUser(): {e.Message}");
                             }
                         }
                     }
@@ -121,7 +121,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"An error has occured in GetUser(): {e.Message}");
+                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetUser(): {e.Message}");
                             }
                         }
                     }
@@ -174,7 +174,61 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"An error has occured in GetUsers(): {e.Message}");
+                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetUsers(): {e.Message}");
+                            }
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return users;
+        }
+
+        /// <summary>
+        /// Get a <see cref="SortableBindingList{T}"/> of all the users currently in the database.
+        /// </summary>
+        /// <param name="companyID">The id of the company to get users for.</param>
+        /// <returns>
+        /// <list type="bullet">
+        ///     <item>A <see cref="SortableBindingList{T}"/> of users</item>
+        ///     <item>If no users, an empty list is returned.</item>
+        /// </list>
+        /// </returns>
+        public static SortableBindingList<User> GetUsers(int companyID)
+        {
+            SortableBindingList<User> users = new SortableBindingList<User>();
+            string q = Queries.BuildQuery(QType.SELECT, "User", null, null, $"associated_company={companyID}");
+
+            using (MySqlConnection con = Database.GetConnection())
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            try
+                            {
+                                while (reader.Read())
+                                {
+                                    reader.Read();
+                                    User u = new User
+                                    {
+                                        ID = reader.GetInt32(0),
+                                        Username = reader.GetString(1),
+                                        Email = reader.GetString(2),
+                                        PhoneNumber = reader.GetString(3),
+                                        AssociatedCompany = reader.GetInt32(4),
+                                        Password = reader.GetString(5),
+                                        Name = reader.GetString(6)
+                                    };
+                                    users.Add(u);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetUsers(): {e.Message}");
                             }
                         }
                     }
@@ -314,7 +368,7 @@ namespace CallLogTracker.backend.database
                 }
                 catch (MySqlException ex)
                 {
-                    Console.WriteLine($"An eror has occured in DeleteUser(): {ex.Message}");
+                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in DeleteUser(): {ex.Message}");
                     con.Close();
                     return false;
                 }

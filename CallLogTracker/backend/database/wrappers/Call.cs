@@ -30,15 +30,15 @@ namespace CallLogTracker.backend.database.wrappers
             {
                 ID = CallConnector.InsertCall(this);
                 if (ID == 0)
-                    return "An error has occured while trying to insert a call into the database.";
-                return $"Call with id {{{ID}}} has been inserted.";
+                    return $"{DateTime.Now.ToLocalTime()} -> An error has occured while trying to insert a call into the database.";
+                return $"{DateTime.Now.ToLocalTime()} -> Call with id {{{ID}}} has been inserted.";
             }
             else
             {
                 if (CallConnector.UpdateCall(this))
-                    return $"Call with id {{{ID}}} has been updated.";
+                    return $"{DateTime.Now.ToLocalTime()} -> Call with id {{{ID}}} has been updated.";
                 else
-                    return "An error has occured while trying to update a call in the database.";
+                    return $"{DateTime.Now.ToLocalTime()} -> An error has occured while trying to update a call in the database.";
             }
         }
 
@@ -50,9 +50,14 @@ namespace CallLogTracker.backend.database.wrappers
         public string Delete()
         {
             if (CallConnector.DeleteCall(this))
-                return $"Call with id {{{ID}}} has been deleted.";
+                return $"{DateTime.Now.ToLocalTime()} -> Call with id {{{ID}}} has been deleted.";
             else
-                return "An error has occured while trying to delete a call in the database.";
+                return $"{DateTime.Now.ToLocalTime()} -> An error has occured while trying to delete a call in the database.";
+        }
+
+        public List<utility.Enums.ValidatorError> ValidateObject()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -40,7 +40,7 @@ namespace CallLogTracker.backend.notifications
                 from: new PhoneNumber(Resources.Twilio_PhoneNumber),
                 to: recipient
             );
-            return $"Message to {recipient} has been {message.Status}.";
+            return $"{DateTime.Now.ToLocalTime()} -> Message to {recipient} has been {message.Status}.";
         }
 
         public string SendSMS(string txtBody, List<string> recipients)

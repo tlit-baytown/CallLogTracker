@@ -1,8 +1,10 @@
-﻿using System;
+﻿using CallLogTracker.utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static CallLogTracker.utility.Enums;
 
 namespace CallLogTracker.backend.database.wrappers
 {
@@ -10,16 +12,40 @@ namespace CallLogTracker.backend.database.wrappers
     {
         public int ID { get; set; }
 
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public int AssociatedCompany { get; set; }
-        public string Password { get; set; }
-        public string Name { get; set; }
+        public string Username { get; set; } = "";
+        public string Email { get; set; } = "";
+        public string PhoneNumber { get; set; } = "";
+        public int AssociatedCompany { get; set; } = 0;
+        public string Password { get; set; } = "";
+        public string Name { get; set; } = "";
 
         public Company GetCompany()
         {
             return CompanyConnector.GetCompany(AssociatedCompany);
+        }
+
+        public List<ValidatorError> ValidateObject()
+        {
+            List<ValidatorError> errors = new List<ValidatorError>();
+            if (AssociatedCompany == 0)
+                errors.Add(ValidatorError.User_InvalidCompany);
+
+            if (Name.Length <= 0)
+                errors.Add(ValidatorError.User_IncompleteName);
+            errors.AddRange(Validator.Email(Email));
+
+            if (PhoneNumber.Length <= 0 || PhoneNumber.Length > 12)
+                errors.Add(ValidatorError.User_InvalidPhone);
+
+            if (UserConnector.DoesUserExist(Username))
+                errors.Add(ValidatorError.UserExists);
+
+            if (Username.Length <= 0)
+                errors.Add(ValidatorError.User_IncompleteUsername);
+
+            errors.AddRange(Validator.Password(Password));
+
+            return errors;
         }
 
         public string Insert()
@@ -28,15 +54,15 @@ namespace CallLogTracker.backend.database.wrappers
             {
                 ID = UserConnector.InsertUser(this);
                 if (ID == 0)
-                    return "An error has occured while trying to insert a user into the database.";
-                return $"User with id {{{ID}}} has been inserted.";
+                    return $"{DateTime.Now.ToLocalTime()} -> An error has occured while trying to insert a user into the database.";
+                return $"{DateTime.Now.ToLocalTime()} -> User with id {{{ID}}} has been inserted.";
             }
             else
             {
                 if (UserConnector.UpdateUser(this))
-                    return $"User with id {{{ID}}} has been updated.";
+                    return $"{DateTime.Now.ToLocalTime()} -> User with id {{{ID}}} has been updated.";
                 else
-                    return "An error has occured while trying to update a user in the database.";
+                    return $"{DateTime.Now.ToLocalTime()} -> An error has occured while trying to update a user in the database.";
             }
         }
 
@@ -48,9 +74,9 @@ namespace CallLogTracker.backend.database.wrappers
         public string Delete()
         {
             if (UserConnector.DeleteUser(this))
-                return $"User with id {{{ID}}} has been deleted.";
+                return $"{DateTime.Now.ToLocalTime()} -> User with id {{{ID}}} has been deleted.";
             else
-                return "An error has occured while trying to delete a user in the database.";
+                return $"{DateTime.Now.ToLocalTime()} -> An error has occured while trying to delete a user in the database.";
         }
     }
 }

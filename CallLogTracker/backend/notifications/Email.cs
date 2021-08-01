@@ -27,13 +27,11 @@ namespace CallLogTracker.backend.notifications
             {
                 var msg = MailHelper.CreateSingleTemplateEmail(from, obj.To.First(), Resources.Twilio_SendGridTemplateID, obj.Data.First());
                 var response = await client.SendEmailAsync(msg);
-                Console.WriteLine(response.Body);
             }
             else
             {
                 var msg = MailHelper.CreateMultipleTemplateEmailsToMultipleRecipients(from, obj.To, Resources.Twilio_SendGridTemplateID, (List<object>)obj.Data.Cast<object>());
                 var response = await client.SendEmailAsync(msg);
-                Console.WriteLine(response.Body);
             }
         }
     }

@@ -46,7 +46,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"An exception has occured in GetCall(): {e.Message}");
+                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCall(): {e.Message}");
                             }
                         }
                     }
@@ -146,9 +146,9 @@ namespace CallLogTracker.backend.database
             int affectedRows = 0;
             string q = Queries.BuildQuery(QType.DELETE, "Call", null, null, $"call_id={c.ID}");
 
-            try
+            using (MySqlConnection con = Database.GetConnection())
             {
-                using (MySqlConnection con = Database.GetConnection())
+                try
                 {
                     con.Open();
                     using (MySqlCommand cmd = new MySqlCommand())
@@ -168,10 +168,12 @@ namespace CallLogTracker.backend.database
                     }
                     con.Close();
                 }
-            }
-            catch (Exception)
-            {
-                return false;
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in DeleteCall(): {ex.Message}");
+                    con.Close();
+                    return false;
+                }
             }
 
             return affectedRows != 0;
