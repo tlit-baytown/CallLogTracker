@@ -1,5 +1,6 @@
 ﻿using CallLogTracker.backend.database.wrappers;
 using CallLogTracker.backend.notifications;
+using CallLogTracker.utility;
 using ComponentFactory.Krypton.Toolkit;
 using SendGrid.Helpers.Mail;
 using System;
@@ -21,9 +22,12 @@ namespace CallLogTracker
             InitializeComponent();
         }
 
-        private void editCurrentEmployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
+            TextBoxWriter writer = new TextBoxWriter(txtConsole);
+            Console.SetOut(writer);
 
+            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Call Logger Loaded!");
         }
     }
 }

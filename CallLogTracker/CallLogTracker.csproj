@@ -151,6 +151,19 @@
     <Compile Include="backend\notifications\SMS.cs" />
     <Compile Include="backend\notifications\TemplateData.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="gui\dialogs\CMessageBox.cs" />
+    <Compile Include="gui\dialogs\MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\DatabaseConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\DatabaseConnection.Designer.cs">
+      <DependentUpon>DatabaseConnection.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +175,10 @@
     <Compile Include="security\Hasher.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="utility\SortableBindingList.cs" />
+    <Compile Include="utility\TextBoxWriter.cs" />
+    <EmbeddedResource Include="gui\dialogs\DatabaseConnection.resx">
+      <DependentUpon>DatabaseConnection.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="gui\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -189,6 +206,131 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\060-warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db_connection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_arrow_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_arrow_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up_arrow_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up_arrow_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\updated.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\updated_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warning_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\035-database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\299-smartphone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\312-notification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\356-paper plane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\117-database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\367-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\041-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\043-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\045-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\051-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\218-edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\346-home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mailbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\notification_16x16.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

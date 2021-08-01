@@ -30,9 +30,8 @@ namespace CallLogTracker
         private void InitializeComponent()
         {
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
-            this.btnSendNotification = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonPanel1 = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.hdrCallsToday = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.btnSendNotifications = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.callsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newCallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,20 +45,32 @@ namespace CallLogTracker
             this.newEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editCurrentEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.editConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.emailNotificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sMSNotificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editConnectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lvCallsToday = new System.Windows.Forms.ListView();
+            this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.txtConsole = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
+            this.panContent = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).BeginInit();
+            this.kryptonSplitContainer1.Panel2.SuspendLayout();
             this.kryptonSplitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).BeginInit();
-            this.kryptonPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hdrCallsToday)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hdrCallsToday.Panel)).BeginInit();
+            this.hdrCallsToday.Panel.SuspendLayout();
+            this.hdrCallsToday.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
+            this.kryptonHeaderGroup1.Panel.SuspendLayout();
+            this.kryptonHeaderGroup1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panContent)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonSplitContainer1
@@ -71,40 +82,40 @@ namespace CallLogTracker
             // 
             // kryptonSplitContainer1.Panel1
             // 
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.listView1);
-            this.kryptonSplitContainer1.Panel1.Controls.Add(this.kryptonPanel1);
+            this.kryptonSplitContainer1.Panel1.Controls.Add(this.hdrCallsToday);
+            // 
+            // kryptonSplitContainer1.Panel2
+            // 
+            this.kryptonSplitContainer1.Panel2.Controls.Add(this.panContent);
+            this.kryptonSplitContainer1.Panel2.Controls.Add(this.kryptonHeaderGroup1);
             this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1254, 568);
             this.kryptonSplitContainer1.SplitterDistance = 217;
             this.kryptonSplitContainer1.TabIndex = 1;
             // 
-            // btnSendNotification
+            // hdrCallsToday
             // 
-            this.btnSendNotification.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnSendNotification.Location = new System.Drawing.Point(0, 0);
-            this.btnSendNotification.Name = "btnSendNotification";
-            this.btnSendNotification.Size = new System.Drawing.Size(217, 35);
-            this.btnSendNotification.TabIndex = 0;
-            this.btnSendNotification.Values.Text = "Send Notifications";
+            this.hdrCallsToday.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.btnSendNotifications});
+            this.hdrCallsToday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hdrCallsToday.Location = new System.Drawing.Point(0, 0);
+            this.hdrCallsToday.Name = "hdrCallsToday";
             // 
-            // kryptonPanel1
+            // hdrCallsToday.Panel
             // 
-            this.kryptonPanel1.Controls.Add(this.btnSendNotification);
-            this.kryptonPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.kryptonPanel1.Location = new System.Drawing.Point(0, 533);
-            this.kryptonPanel1.Name = "kryptonPanel1";
-            this.kryptonPanel1.Size = new System.Drawing.Size(217, 35);
-            this.kryptonPanel1.TabIndex = 1;
+            this.hdrCallsToday.Panel.Controls.Add(this.lvCallsToday);
+            this.hdrCallsToday.Size = new System.Drawing.Size(217, 568);
+            this.hdrCallsToday.TabIndex = 0;
+            this.hdrCallsToday.ValuesPrimary.Heading = "Calls Today";
+            this.hdrCallsToday.ValuesPrimary.Image = null;
+            this.hdrCallsToday.ValuesSecondary.Heading = "View all of the calls from today.";
             // 
-            // listView1
+            // btnSendNotifications
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(217, 533);
-            this.listView1.TabIndex = 2;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.btnSendNotifications.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
+            this.btnSendNotifications.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
+            this.btnSendNotifications.Text = "Notify";
+            this.btnSendNotifications.UniqueName = "D232F314EB744CBDF6B1ACC8A8DDEB58";
             // 
             // menuStrip1
             // 
@@ -127,12 +138,14 @@ namespace CallLogTracker
             this.newCallToolStripMenuItem,
             this.editCallToolStripMenuItem,
             this.deleteCallRecordsToolStripMenuItem});
+            this.callsToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources.phone;
             this.callsToolStripMenuItem.Name = "callsToolStripMenuItem";
-            this.callsToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.callsToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.callsToolStripMenuItem.Text = "Calls";
             // 
             // newCallToolStripMenuItem
             // 
+            this.newCallToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources.add_16x16;
             this.newCallToolStripMenuItem.Name = "newCallToolStripMenuItem";
             this.newCallToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newCallToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
@@ -140,6 +153,7 @@ namespace CallLogTracker
             // 
             // editCallToolStripMenuItem
             // 
+            this.editCallToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._218_edit;
             this.editCallToolStripMenuItem.Name = "editCallToolStripMenuItem";
             this.editCallToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.E)));
@@ -148,6 +162,7 @@ namespace CallLogTracker
             // 
             // deleteCallRecordsToolStripMenuItem
             // 
+            this.deleteCallRecordsToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources.delete_16x16;
             this.deleteCallRecordsToolStripMenuItem.Name = "deleteCallRecordsToolStripMenuItem";
             this.deleteCallRecordsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
             this.deleteCallRecordsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
@@ -157,12 +172,14 @@ namespace CallLogTracker
             // 
             this.companyToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editCompanyInformationToolStripMenuItem});
+            this.companyToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._346_home;
             this.companyToolStripMenuItem.Name = "companyToolStripMenuItem";
-            this.companyToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
+            this.companyToolStripMenuItem.Size = new System.Drawing.Size(95, 20);
             this.companyToolStripMenuItem.Text = "Companies";
             // 
             // editCompanyInformationToolStripMenuItem
             // 
+            this.editCompanyInformationToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._218_edit;
             this.editCompanyInformationToolStripMenuItem.Name = "editCompanyInformationToolStripMenuItem";
             this.editCompanyInformationToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.C)));
@@ -177,9 +194,10 @@ namespace CallLogTracker
             this.newEmployeeToolStripMenuItem,
             this.editCurrentEmployeeToolStripMenuItem,
             this.deleteEmployeeToolStripMenuItem});
+            this.userToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._051_man;
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
             this.userToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
-            this.userToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
+            this.userToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.userToolStripMenuItem.Text = "Employees";
             // 
             // cmbCurrentUser
@@ -191,10 +209,11 @@ namespace CallLogTracker
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(189, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(185, 6);
             // 
             // newEmployeeToolStripMenuItem
             // 
+            this.newEmployeeToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._041_man;
             this.newEmployeeToolStripMenuItem.Name = "newEmployeeToolStripMenuItem";
             this.newEmployeeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
             this.newEmployeeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
@@ -202,59 +221,113 @@ namespace CallLogTracker
             // 
             // editCurrentEmployeeToolStripMenuItem
             // 
+            this.editCurrentEmployeeToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._043_man;
             this.editCurrentEmployeeToolStripMenuItem.Name = "editCurrentEmployeeToolStripMenuItem";
             this.editCurrentEmployeeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
             this.editCurrentEmployeeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.editCurrentEmployeeToolStripMenuItem.Text = "Edit Current...";
-            this.editCurrentEmployeeToolStripMenuItem.Click += new System.EventHandler(this.editCurrentEmployeeToolStripMenuItem_Click);
             // 
             // deleteEmployeeToolStripMenuItem
             // 
+            this.deleteEmployeeToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._045_man;
             this.deleteEmployeeToolStripMenuItem.Name = "deleteEmployeeToolStripMenuItem";
             this.deleteEmployeeToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.deleteEmployeeToolStripMenuItem.Text = "Delete...";
-            // 
-            // databaseToolStripMenuItem
-            // 
-            this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newConnectionToolStripMenuItem,
-            this.editConnectionToolStripMenuItem});
-            this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.databaseToolStripMenuItem.Text = "Database";
-            // 
-            // newConnectionToolStripMenuItem
-            // 
-            this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
-            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newConnectionToolStripMenuItem.Text = "New Connection...";
-            // 
-            // editConnectionToolStripMenuItem
-            // 
-            this.editConnectionToolStripMenuItem.Name = "editConnectionToolStripMenuItem";
-            this.editConnectionToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.editConnectionToolStripMenuItem.Text = "Edit Connection...";
             // 
             // notificationsToolStripMenuItem
             // 
             this.notificationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.emailNotificationsToolStripMenuItem,
             this.sMSNotificationsToolStripMenuItem});
+            this.notificationsToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._312_notification;
             this.notificationsToolStripMenuItem.Name = "notificationsToolStripMenuItem";
-            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.notificationsToolStripMenuItem.Size = new System.Drawing.Size(103, 20);
             this.notificationsToolStripMenuItem.Text = "Notifications";
             // 
             // emailNotificationsToolStripMenuItem
             // 
+            this.emailNotificationsToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources.mailbox;
             this.emailNotificationsToolStripMenuItem.Name = "emailNotificationsToolStripMenuItem";
             this.emailNotificationsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.emailNotificationsToolStripMenuItem.Text = "Email Notifications...";
             // 
             // sMSNotificationsToolStripMenuItem
             // 
+            this.sMSNotificationsToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._299_smartphone;
             this.sMSNotificationsToolStripMenuItem.Name = "sMSNotificationsToolStripMenuItem";
             this.sMSNotificationsToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.sMSNotificationsToolStripMenuItem.Text = "SMS Notifications...";
+            // 
+            // databaseToolStripMenuItem
+            // 
+            this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newConnectionToolStripMenuItem,
+            this.editConnectionToolStripMenuItem});
+            this.databaseToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._117_database;
+            this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.databaseToolStripMenuItem.Text = "Database";
+            // 
+            // newConnectionToolStripMenuItem
+            // 
+            this.newConnectionToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._035_database;
+            this.newConnectionToolStripMenuItem.Name = "newConnectionToolStripMenuItem";
+            this.newConnectionToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.newConnectionToolStripMenuItem.Text = "New Connection...";
+            // 
+            // editConnectionToolStripMenuItem
+            // 
+            this.editConnectionToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources.db_connection;
+            this.editConnectionToolStripMenuItem.Name = "editConnectionToolStripMenuItem";
+            this.editConnectionToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.editConnectionToolStripMenuItem.Text = "Edit Connection...";
+            // 
+            // lvCallsToday
+            // 
+            this.lvCallsToday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lvCallsToday.HideSelection = false;
+            this.lvCallsToday.Location = new System.Drawing.Point(0, 0);
+            this.lvCallsToday.MultiSelect = false;
+            this.lvCallsToday.Name = "lvCallsToday";
+            this.lvCallsToday.Size = new System.Drawing.Size(215, 515);
+            this.lvCallsToday.TabIndex = 0;
+            this.lvCallsToday.UseCompatibleStateImageBehavior = false;
+            this.lvCallsToday.View = System.Windows.Forms.View.Details;
+            // 
+            // kryptonHeaderGroup1
+            // 
+            this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 442);
+            this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
+            // 
+            // kryptonHeaderGroup1.Panel
+            // 
+            this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtConsole);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(1032, 126);
+            this.kryptonHeaderGroup1.StateCommon.HeaderPrimary.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kryptonHeaderGroup1.TabIndex = 0;
+            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Console";
+            this.kryptonHeaderGroup1.ValuesPrimary.Image = null;
+            this.kryptonHeaderGroup1.ValuesSecondary.Heading = "";
+            // 
+            // txtConsole
+            // 
+            this.txtConsole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtConsole.Location = new System.Drawing.Point(0, 0);
+            this.txtConsole.Name = "txtConsole";
+            this.txtConsole.ReadOnly = true;
+            this.txtConsole.Size = new System.Drawing.Size(1030, 94);
+            this.txtConsole.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConsole.TabIndex = 0;
+            this.txtConsole.Text = "";
+            // 
+            // panContent
+            // 
+            this.panContent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panContent.Location = new System.Drawing.Point(0, 0);
+            this.panContent.Name = "panContent";
+            this.panContent.Size = new System.Drawing.Size(1032, 442);
+            this.panContent.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -267,15 +340,24 @@ namespace CallLogTracker
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "callLogger";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).EndInit();
             this.kryptonSplitContainer1.Panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel2)).EndInit();
+            this.kryptonSplitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).EndInit();
             this.kryptonSplitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonPanel1)).EndInit();
-            this.kryptonPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hdrCallsToday.Panel)).EndInit();
+            this.hdrCallsToday.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hdrCallsToday)).EndInit();
+            this.hdrCallsToday.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).EndInit();
+            this.kryptonHeaderGroup1.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).EndInit();
+            this.kryptonHeaderGroup1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panContent)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,9 +365,6 @@ namespace CallLogTracker
 
         #endregion
         private ComponentFactory.Krypton.Toolkit.KryptonSplitContainer kryptonSplitContainer1;
-        private ComponentFactory.Krypton.Toolkit.KryptonPanel kryptonPanel1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnSendNotification;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem callsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newCallToolStripMenuItem;
@@ -305,6 +384,12 @@ namespace CallLogTracker
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editConnectionToolStripMenuItem;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup hdrCallsToday;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnSendNotifications;
+        private System.Windows.Forms.ListView lvCallsToday;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
+        private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox txtConsole;
+        private ComponentFactory.Krypton.Toolkit.KryptonPanel panContent;
     }
 }
 
