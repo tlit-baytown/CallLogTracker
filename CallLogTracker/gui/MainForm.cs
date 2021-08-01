@@ -21,20 +21,28 @@ namespace CallLogTracker
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EmailObject obj = new EmailObject
+            MessageObject obj = new MessageObject
             {
-                To = new List<EmailAddress>() { new EmailAddress("ehann@teamlogicit.com", "Ethan (Work)") },
-                Sender = new EmailAddress("supportbayareatx@teamlogicit.com", "TeamLogicIT Support"),
-                Subject = "Hello, this is a test email.",
-                TextBody = "This should be the text body.",
-                HTMLBody = "<h1>This should be the html body.</h1>"
+                To = new List<EmailAddress>() { new EmailAddress("ethan.hann@protonmail.com", "Ethan") }
+            };
+            TemplateData data = new TemplateData()
+            {
+                Answerer = "Charlie",
+                CallBackNumber = "832-599-4248",
+                CallerName = "Tony Smith",
+                EmailAddress = "tsmith@email.com",
+                Message = "User is having problems getting their computer to start. Requests a call back immediately.",
+                Subject = "Urgent message from Call Tracker",
+                TimeStamp = DateTime.Now
             };
 
+            obj.Data.Add(data);
+
             richTextBox1.Text = "Sending email...";
-            Email.SendEmail(obj);
+            //Email.SendEmail(obj);
             //richTextBox1.Text = Email.Instance.SendEmail(obj);
 
-            //richTextBox1.Text = SMS.Instance.SendSMS("This message was sent from C#.net!", new List<string> { "+1713 899 1837", "+18325994248" });
+            richTextBox1.Text = SMS.Instance.SendSMS(obj.Data.First().ToSMSMessage(), new List<string> { "+18325994248" });
         }
     }
 }

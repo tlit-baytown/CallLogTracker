@@ -14,24 +14,24 @@ namespace CallLogTracker.backend.notifications
 {
     public class Email
     {
-        public static void SendEmail(EmailObject obj)
+        public static void SendEmail(MessageObject obj)
         {
-            Console.WriteLine(Execute(obj).Status);
+            Execute(obj);
         }
 
-        static async Task Execute(EmailObject obj)
+        static async Task Execute(MessageObject obj)
         {
             SendGridClient client = new SendGridClient(Resources.Twilio_SendGridAPIKey);
-            EmailAddress from = obj.Sender;
+            EmailAddress from = new EmailAddress(Resources.SendGrid_Sender);
             if (obj.To.Count == 1)
             {
-                var msg = MailHelper.CreateSingleTemplateEmail(from, obj.To.First(), obj.Subject, obj.TextBody, obj.HTMLBody);
+                var msg = MailHelper.CreateSingleTemplateEmail(from, obj.To.First(), Resources.Twilio_SendGridTemplateID, obj.Data.First());
                 var response = await client.SendEmailAsync(msg);
                 Console.WriteLine(response.Body);
             }
             else
             {
-                var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, obj.To, obj.Subject, obj.TextBody, obj.HTMLBody);
+                var msg = MailHelper.CreateMultipleTemplateEmailsToMultipleRecipients(from, obj.To, Resources.Twilio_SendGridTemplateID, (List<object>)obj.Data.Cast<object>());
                 var response = await client.SendEmailAsync(msg);
                 Console.WriteLine(response.Body);
             }

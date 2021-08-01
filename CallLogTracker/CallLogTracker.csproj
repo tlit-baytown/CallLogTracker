@@ -119,9 +119,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="backend\notifications\Attachment.cs" />
-    <Compile Include="backend\notifications\EmailObject.cs" />
+    <Compile Include="backend\notifications\MessageObject.cs" />
     <Compile Include="backend\notifications\Email.cs" />
     <Compile Include="backend\notifications\SMS.cs" />
+    <Compile Include="backend\notifications\TemplateData.cs" />
     <Compile Include="gui\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

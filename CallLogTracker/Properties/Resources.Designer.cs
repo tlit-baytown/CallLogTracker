@@ -61,6 +61,15 @@ namespace CallLogTracker.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to supportbayareatx@teamlogicit.com.
+        /// </summary>
+        internal static string SendGrid_Sender {
+            get {
+                return ResourceManager.GetString("SendGrid_Sender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to api-1403F02EF14F11EBA866F23C91C88F4E.
         /// </summary>
         internal static string Smtp2Go_ApiKey {

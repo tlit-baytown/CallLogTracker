@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="SendGrid_Sender" xml:space="preserve">
+    <value>supportbayareatx@teamlogicit.com</value>
+  </data>
   <data name="Smtp2Go_ApiKey" xml:space="preserve">
     <value>api-1403F02EF14F11EBA866F23C91C88F4E</value>
   </data>
