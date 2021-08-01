@@ -4,6 +4,7 @@ using CallLogTracker.backend.notifications;
 using CallLogTracker.gui.dialogs;
 using CallLogTracker.gui.user_controls;
 using CallLogTracker.Properties;
+using CallLogTracker.security;
 using CallLogTracker.utility;
 using ComponentFactory.Krypton.Toolkit;
 using MySql.Data.MySqlClient;
@@ -24,6 +25,8 @@ namespace CallLogTracker
 {
     public partial class MainForm : KryptonForm
     {
+        private bool loggedIn = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -80,7 +83,7 @@ namespace CallLogTracker
                     case -1: //all good, begin loading database data
                     {
                         if (Global.Instance.DatabaseConnected)
-                            UpdateTitleText();
+                            Global.Instance.MainForm.checkConnectionBGWorker.RunWorkerAsync();
                         Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Database connected: {Database.Server}\\{Database.DB}");
                         break;
                     }
@@ -91,7 +94,7 @@ namespace CallLogTracker
             }
         }
 
-        private void UpdateTitleText()
+        public void UpdateTitleText()
         {
             Text = $"{Resources.AppName} - {Database.Server}\\{Database.DB} -" +
                             $" {(Global.Instance.CurrentUser == null ? "No User" : $"{Global.Instance.CurrentUser.Name}")} -" +
@@ -140,7 +143,28 @@ namespace CallLogTracker
                     cmbUsers.DataSource = Global.Instance.Users;
                 }
             }
-                
+
+            if (Global.Instance.NumberOfLoginFormsOpen == 0)
+            {
+                LoginForm loginForm = new LoginForm();
+                loginForm.LoginDone += ProcessLogin;
+                Global.Instance.NumberOfLoginFormsOpen++;
+                loginForm.ShowDialog();
+            }
+        }
+
+        private void ProcessLogin(object sender, EventArgs e)
+        {
+            if (e is LoginDoneEventArgs args)
+            {
+                Global.Instance.CurrentUser = args.LoggedInUser;
+                if (cmbUsers.Items.Count > 0 && cmbUsers.Items.Contains(args.LoggedInUser))
+                {
+                    cmbUsers.SelectedItem = args.LoggedInUser;
+                    loggedIn = true;
+                    UpdateTitleText();
+                }
+            }
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -149,12 +173,139 @@ namespace CallLogTracker
             Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Checking database connection. Please wait...");
         }
 
+        public void SelectCompany()
+        {
+            if (Global.Instance.CurrentCompany != null)
+            {
+                if (Global.Instance.Companies.ToList().Find(c => c.ID == Global.Instance.CurrentCompany.ID) != null)
+                {
+                    cmbCompanies.SelectedItem = Global.Instance.CurrentCompany;
+                    UpdateTitleText();
+                }
+            }
+        }
+
         private void btnNewEmployee_Click(object sender, EventArgs e)
         {
             NewEmployee ctl = new NewEmployee();
             ctl.Dock = DockStyle.Fill;
             panContent.Controls.Clear();
             panContent.Controls.Add(ctl);
+        }
+
+        private void btnNewCompany_Click(object sender, EventArgs e)
+        {
+            NewCompany ctl = new NewCompany();
+            ctl.Dock = DockStyle.Fill;
+            panContent.Controls.Clear();
+            panContent.Controls.Add(ctl);
+        }
+
+        private void btnEditCurrentEmployee_Click(object sender, EventArgs e)
+        {
+            if (Global.Instance.CurrentUser == null)
+            {
+                CMessageBox.Show("There is no employee selected to edit!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
+                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to edit a non-existent employee denied.");
+                return;
+            }
+
+            NewEmployee ctl = new NewEmployee(Global.Instance.CurrentUser);
+            ctl.Dock = DockStyle.Fill;
+            panContent.Controls.Clear();
+            panContent.Controls.Add(ctl);
+        }
+
+        private void btnEditCompany_Click(object sender, EventArgs e)
+        {
+            if (Global.Instance.CurrentCompany == null)
+            {
+                CMessageBox.Show("There is no company selected to edit!", "No Company", MessageBoxButtons.OK, Resources.error_64x64);
+                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to edit a non-existent company denied.");
+                return;
+            }
+
+            NewCompany ctl = new NewCompany(Global.Instance.CurrentCompany);
+            ctl.Dock = DockStyle.Fill;
+            panContent.Controls.Clear();
+            panContent.Controls.Add(ctl);
+        }
+
+        public void UpdateCompanies()
+        {
+            cmbCompanies.DataSource = Global.Instance.Companies;
+            if (Global.Instance.CurrentCompany != null)
+                cmbCompanies.SelectedItem = Global.Instance.CurrentCompany;
+        }
+
+        public void UpdateUsers()
+        {
+            cmbUsers.DataSource = Global.Instance.Users;
+            if (Global.Instance.CurrentUser != null)
+                cmbUsers.SelectedItem = Global.Instance.CurrentUser;
+        }
+
+        private void cmbCompanies_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (Global.Instance.DatabaseConnected)
+            {
+                if (cmbCompanies.Items.Count > 0)
+                    Global.Instance.CurrentCompany = cmbCompanies.Items[0] as Company;
+
+                if (Global.Instance.CurrentCompany != null)
+                {
+                    Global.Instance.Users = UserConnector.GetUsers(Global.Instance.CurrentCompany.ID);
+                    cmbUsers.DataSource = Global.Instance.Users;
+                }
+            }
+
+            UpdateTitleText();
+        }
+
+        private void cmbCompanies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Global.Instance.DatabaseConnected)
+            {
+                Global.Instance.CurrentCompany = cmbCompanies.Items[cmbCompanies.SelectedIndex] as Company;
+
+                if (Global.Instance.CurrentCompany != null)
+                {
+                    Global.Instance.Users = UserConnector.GetUsers(Global.Instance.CurrentCompany.ID);
+                    cmbUsers.DataSource = Global.Instance.Users;
+                }
+            }
+
+            UpdateTitleText();
+        }
+
+        private void cmbUsers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Global.Instance.DatabaseConnected)
+            {
+                if (Global.Instance.CurrentUser != null)
+                {
+                    User selectedUser = cmbUsers.Items[cmbUsers.SelectedIndex] as User;
+                    if (selectedUser.ID != Global.Instance.CurrentUser.ID)
+                    {
+                        string passwordInput = KryptonInputBox.Show(this, "Please enter the user's password: ", "Password Needed");
+                        if (Hasher.AuthenticatePassword(passwordInput, selectedUser.Password))
+                        {
+                            Global.Instance.CurrentUser = selectedUser;
+                        }
+                        else
+                        {
+                            CMessageBox.Show("Invalid password!", "Not Authenticated", MessageBoxButtons.OK, Resources.error_64x64);
+                            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> {Global.Instance.CurrentUser.Name} attempted to sign into {selectedUser.Name}'s account.");
+                        }
+                    }
+                }
+                else
+                {
+                    Global.Instance.CurrentUser = cmbUsers.Items[cmbUsers.SelectedIndex] as User;
+                }
+            }
+
+            UpdateTitleText();
         }
     }
 }

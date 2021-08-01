@@ -13,6 +13,34 @@ namespace CallLogTracker.backend.database
 {
     public class CompanyConnector
     {
+        /// <summary>
+        /// Checks if the specified companyName exists in the Company table.
+        /// </summary>
+        /// <param name="companyName">The name of the company to search for.</param>
+        /// <returns>True if the company already exists; False otherwise</returns>
+        public static bool DoesCompanyExist(string companyName)
+        {
+            bool companyExists = false;
+            string q = Queries.BuildQuery(QType.SELECT, "Company", null, new ArrayList { "name" }, $"name='{companyName}'");
+
+            using (MySqlConnection con = Database.GetConnection())
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            companyExists = true;
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return companyExists;
+        }
+
         public static Company GetCompany(int id)
         {
             Company c = null;

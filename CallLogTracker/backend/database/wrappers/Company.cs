@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CallLogTracker.utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,23 @@ namespace CallLogTracker.backend.database.wrappers
 
         public List<ValidatorError> ValidateObject()
         {
-            throw new NotImplementedException();
+            List<ValidatorError> errors = new List<ValidatorError>();
+
+            if (Name.Length <= 0)
+                errors.Add(ValidatorError.Company_IncompleteName);
+
+            if (Phone.Length <= 0 || Phone.Length > 12)
+                errors.Add(ValidatorError.Company_InvalidPhone);
+
+            if (CompanyConnector.DoesCompanyExist(Name))
+                errors.Add(ValidatorError.CompanyExists);
+
+            if (NumOfEmployees <= 0)
+                errors.Add(ValidatorError.Company_InvalidEmployeeCount);
+
+            errors.AddRange(Validator.Email(SupportEmail));
+
+            return errors;
         }
 
         public string Insert()

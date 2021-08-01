@@ -159,6 +159,12 @@
     <Compile Include="gui\dialogs\DeleteMessageForm.Designer.cs">
       <DependentUpon>DeleteMessageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\dialogs\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\dialogs\MessageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,6 +189,12 @@
     <Compile Include="gui\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\user_controls\NewCompany.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\NewCompany.Designer.cs">
+      <DependentUpon>NewCompany.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\user_controls\NewEmployee.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -201,8 +213,14 @@
     <EmbeddedResource Include="gui\dialogs\DatabaseConnection.resx">
       <DependentUpon>DatabaseConnection.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gui\dialogs\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="gui\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\NewCompany.resx">
+      <DependentUpon>NewCompany.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\user_controls\NewEmployee.resx">
       <DependentUpon>NewEmployee.cs</DependentUpon>
@@ -218,6 +236,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.Company.datasource" />
+    <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.User.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -383,6 +403,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\save_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone_128x128.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

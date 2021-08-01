@@ -212,7 +212,6 @@ namespace CallLogTracker.backend.database
                             {
                                 while (reader.Read())
                                 {
-                                    reader.Read();
                                     User u = new User
                                     {
                                         ID = reader.GetInt32(0),

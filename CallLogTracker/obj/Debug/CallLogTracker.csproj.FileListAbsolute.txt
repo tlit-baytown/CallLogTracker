@@ -106,3 +106,5 @@ C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\C
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Workspace.dll
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.DatabaseConnection.resources
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewEmployee.resources
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewCompany.resources
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.LoginForm.resources

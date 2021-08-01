@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CallLogTracker.backend.database.wrappers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,16 @@ namespace CallLogTracker.utility
             public DBArgs(int exCode)
             {
                 ExceptionCode = exCode;
+            }
+        }
+
+        public class LoginDoneEventArgs : EventArgs
+        {
+            public User LoggedInUser { get; internal set; }
+
+            public LoginDoneEventArgs(User u)
+            {
+                LoggedInUser = u;
             }
         }
     }

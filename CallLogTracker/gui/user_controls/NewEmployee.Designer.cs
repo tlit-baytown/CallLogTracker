@@ -42,6 +42,7 @@ namespace CallLogTracker.gui.user_controls
             this.txtUsername = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtPhoneNumber = new ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox();
+            this.btnClose = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             ((System.ComponentModel.ISupportInitialize)(this.hdrContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hdrContainer.Panel)).BeginInit();
             this.hdrContainer.Panel.SuspendLayout();
@@ -53,7 +54,8 @@ namespace CallLogTracker.gui.user_controls
             // 
             this.hdrContainer.AutoSize = true;
             this.hdrContainer.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
-            this.btnAddEmployee});
+            this.btnAddEmployee,
+            this.btnClose});
             this.hdrContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hdrContainer.Location = new System.Drawing.Point(0, 0);
             this.hdrContainer.Name = "hdrContainer";
@@ -231,6 +233,14 @@ namespace CallLogTracker.gui.user_controls
             this.txtPhoneNumber.Enter += new System.EventHandler(this.txtPhoneNumber_Enter);
             this.txtPhoneNumber.Leave += new System.EventHandler(this.txtBox_Leave);
             // 
+            // btnClose
+            // 
+            this.btnClose.Image = global::CallLogTracker.Properties.Resources.error_16x16;
+            this.btnClose.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
+            this.btnClose.Text = "Close";
+            this.btnClose.UniqueName = "B79690CC905642A5BEBCD7F1683A26FD";
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
             // NewEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -265,5 +275,6 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
         private ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox txtPhoneNumber;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnAddEmployee;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnClose;
     }
 }

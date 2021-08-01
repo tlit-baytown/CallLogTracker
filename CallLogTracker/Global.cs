@@ -33,8 +33,10 @@ namespace CallLogTracker
 
         public bool DatabaseConnected { get; set; } = false;
         public int NumberOfDBConnectionFormsOpen { get; set; } = 0;
+        public int NumberOfLoginFormsOpen { get; set; } = 0;
 
         public SortableBindingList<User> Users { get; set; } = new SortableBindingList<User>();
+        public SortableBindingList<Company> Companies { get; set; } = new SortableBindingList<Company>();
 
         public User CurrentUser { get; set; } = null;
         public Company CurrentCompany { get; set; } = null;

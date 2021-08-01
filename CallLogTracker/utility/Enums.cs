@@ -21,7 +21,7 @@ namespace CallLogTracker.utility
             User_IncompleteUsername,
             [Description("The username already exists in the database.\n")]
             UserExists,
-            [Description("The email address entered is incomplete or is not in the correct format.")]
+            [Description("The email address entered is incomplete or is not in the correct format.\n")]
             InvalidEmailAddress,
             [Description("The email address cannot be empty.")]
             NoLengthEmailAddress,
@@ -31,12 +31,20 @@ namespace CallLogTracker.utility
             User_InvalidPhone,
             [Description("The employee's password must be between 6 and 24 characters.\n")]
             User_InvalidPassword,
-            [Description("The password must contain at least 1 special character.")]
+            [Description("The password must contain at least 1 special character.\n")]
             Password_NumOfSpecials,
-            [Description("The password must contain at least 1 digit.")]
+            [Description("The password must contain at least 1 digit.\n")]
             Password_NumOfDigits,
             [Description("The employee has no company associated with them. Select a company and try again.\n")]
             User_InvalidCompany,
+            [Description("The company's name cannot be empty.\n")]
+            Company_IncompleteName,
+            [Description("The company's phone number was incomplete or not in a valid format.\n")]
+            Company_InvalidPhone,
+            [Description("The company already exists in the database.\n")]
+            CompanyExists,
+            [Description("The company must have at least one employee.\n")]
+            Company_InvalidEmployeeCount,
             [Description("An exception occured while trying to validate the input. Please try again.")]
             Exception,
             [Description("No error has occured and all validation succeeded.")]
