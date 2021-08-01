@@ -36,6 +36,24 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="ComponentFactory.Krypton.Design">
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Docking">
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Navigator">
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Ribbon">
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Toolkit">
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Workspace">
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Workspace.dll</HintPath>
+    </Reference>
     <Reference Include="EmailValidation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=60f3df2f38e92638, processorArchitecture=MSIL">
       <HintPath>packages\EmailValidation.1.0.5\lib\net45\EmailValidation.dll</HintPath>
     </Reference>
@@ -118,10 +136,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="backend\database\CallConnector.cs" />
+    <Compile Include="backend\database\CompanyConnector.cs" />
+    <Compile Include="backend\database\Database.cs" />
+    <Compile Include="backend\database\IDBObject.cs" />
+    <Compile Include="backend\database\Queries.cs" />
+    <Compile Include="backend\database\UserConnector.cs" />
+    <Compile Include="backend\database\wrappers\Call.cs" />
+    <Compile Include="backend\database\wrappers\Company.cs" />
+    <Compile Include="backend\database\wrappers\User.cs" />
+    <Compile Include="backend\Enums.cs" />
     <Compile Include="backend\notifications\MessageObject.cs" />
     <Compile Include="backend\notifications\Email.cs" />
     <Compile Include="backend\notifications\SMS.cs" />
     <Compile Include="backend\notifications\TemplateData.cs" />
+    <Compile Include="Global.cs" />
     <Compile Include="gui\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

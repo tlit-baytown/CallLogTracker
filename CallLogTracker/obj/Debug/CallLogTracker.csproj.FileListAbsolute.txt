@@ -98,3 +98,9 @@ C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\C
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.csproj.CopyComplete
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.exe
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.pdb
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Design.dll
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Docking.dll
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Navigator.dll
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Ribbon.dll
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Workspace.dll
