@@ -108,3 +108,4 @@ C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\C
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewEmployee.resources
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewCompany.resources
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.LoginForm.resources
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.FirstRunUser.resources

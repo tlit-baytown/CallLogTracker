@@ -13,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static CallLogTracker.utility.CEventArgs;
 using static CallLogTracker.utility.Enums;
 
 namespace CallLogTracker.gui.user_controls
@@ -22,6 +23,8 @@ namespace CallLogTracker.gui.user_controls
         private readonly User newUser;
         private bool passwordChanged = false;
         private bool isEditing = false;
+
+        public EventHandler UserCreated;
 
         public NewEmployee()
         {
@@ -98,6 +101,7 @@ namespace CallLogTracker.gui.user_controls
                     }
 
                     Global.Instance.MainForm.UpdateUsers();
+                    UserCreated?.Invoke(this, new UserCreatedEventArgs(newUser));
 
                     Global.Instance.MainForm.panContent.Controls.Clear();
                 }

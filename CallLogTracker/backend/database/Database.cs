@@ -14,27 +14,27 @@ namespace CallLogTracker.backend.database
         /// <summary>
         /// The hostname of the database connection
         /// </summary>
-        public static string Server { get; set; } = "10.0.0.2";
+        public static string Server { get; set; } = "";
 
         /// <summary>
         /// The port the database connection is listening on
         /// </summary>
-        public static string Port { get; set; } = "3307";
+        public static string Port { get; set; } = "";
 
         /// <summary>
         /// The name of the database to connect to
         /// </summary>
-        public static string DB { get; set; } = "CallTracking";
+        public static string DB { get; set; } = "";
 
         /// <summary>
         /// The user name for the database
         /// </summary>
-        public static string Username { get; set; } = "root";
+        public static string Username { get; set; } = "";
 
         /// <summary>
         /// The password for the database
         /// </summary>
-        public static string Password { get; set; } = "Qwerty7946!?";
+        public static string Password { get; set; } = "";
 
         /// <summary>
         /// The full connection string
@@ -179,6 +179,27 @@ namespace CallLogTracker.backend.database
                 con.Close();
             }
             return lastRowID;
+        }
+
+        public static int GetNumberOfRows(string tableName)
+        {
+            int numOfRows = 0;
+            string q = $"SELECT COUNT(*) FROM {tableName};";
+
+            using (MySqlConnection con = new MySqlConnection(ConnectionString))
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        reader.Read();
+                        numOfRows = reader.GetInt32(0);
+                    }
+                }
+                con.Close();
+            }
+            return numOfRows;
         }
     }
 }

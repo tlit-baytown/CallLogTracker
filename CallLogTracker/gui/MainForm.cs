@@ -96,9 +96,9 @@ namespace CallLogTracker
 
         public void UpdateTitleText()
         {
-            Text = $"{Resources.AppName} - {Database.Server}\\{Database.DB} -" +
-                            $" {(Global.Instance.CurrentUser == null ? "No User" : $"{Global.Instance.CurrentUser.Name}")} -" +
-                            $" {(Global.Instance.CurrentCompany == null ? "No Company" : $"{Global.Instance.CurrentCompany.Name}")}";
+            Text = $"{Resources.AppName} \t Database: {Database.Server}\\{Database.DB} \t" +
+                            $" Current User: {(Global.Instance.CurrentUser == null ? "No User" : $"{Global.Instance.CurrentUser.Name}")} \t" +
+                            $" Current Company: {(Global.Instance.CurrentCompany == null ? "No Company" : $"{Global.Instance.CurrentCompany.Name}")}";
         }
 
         MySqlException code;
@@ -143,13 +143,28 @@ namespace CallLogTracker
                     cmbUsers.DataSource = Global.Instance.Users;
                 }
             }
-
-            if (Global.Instance.NumberOfLoginFormsOpen == 0)
+            else
             {
-                LoginForm loginForm = new LoginForm();
-                loginForm.LoginDone += ProcessLogin;
-                Global.Instance.NumberOfLoginFormsOpen++;
-                loginForm.ShowDialog();
+                DatabaseConnection dbform = new DatabaseConnection();
+                dbform.DatabaseConnectFinished += OnDBConnectDone;
+                dbform.ShowDialog();
+            }
+
+            if (Database.GetNumberOfRows("User") == 0)
+            {
+                FirstRunUser firstRunUser = new FirstRunUser();
+                firstRunUser.UserCreated += ProcessLogin;
+                firstRunUser.ShowDialog();
+            }
+            else
+            {
+                if (Global.Instance.NumberOfLoginFormsOpen == 0)
+                {
+                    LoginForm loginForm = new LoginForm();
+                    loginForm.LoginDone += ProcessLogin;
+                    Global.Instance.NumberOfLoginFormsOpen++;
+                    loginForm.ShowDialog();
+                }
             }
         }
 
@@ -158,11 +173,29 @@ namespace CallLogTracker
             if (e is LoginDoneEventArgs args)
             {
                 Global.Instance.CurrentUser = args.LoggedInUser;
-                if (cmbUsers.Items.Count > 0 && cmbUsers.Items.Contains(args.LoggedInUser))
+                if (cmbUsers.Items.Count > 0)
                 {
-                    cmbUsers.SelectedItem = args.LoggedInUser;
+                    int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
+                    cmbUsers.SelectedIndex = index == -1 ? 0 : index;
+
                     loggedIn = true;
                     UpdateTitleText();
+
+                    panContent.Controls.Clear();
+                }
+            }
+            else if (e is UserCreatedEventArgs a)
+            {
+                Global.Instance.CurrentUser = a.CreatedUser;
+                if (cmbUsers.Items.Count > 0)
+                {
+                    int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
+                    cmbUsers.SelectedIndex = index == -1 ? 0 : index;
+
+                    loggedIn = true;
+                    UpdateTitleText();
+
+                    panContent.Controls.Clear();
                 }
             }
         }
@@ -296,6 +329,9 @@ namespace CallLogTracker
                         {
                             CMessageBox.Show("Invalid password!", "Not Authenticated", MessageBoxButtons.OK, Resources.error_64x64);
                             Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> {Global.Instance.CurrentUser.Name} attempted to sign into {selectedUser.Name}'s account.");
+                            
+                            int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
+                            cmbUsers.SelectedIndex = index == -1 ? 0 : index;
                         }
                     }
                 }

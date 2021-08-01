@@ -31,5 +31,15 @@ namespace CallLogTracker.utility
                 LoggedInUser = u;
             }
         }
+
+        public class UserCreatedEventArgs : EventArgs
+        {
+            public User CreatedUser { get; internal set; }
+
+            public UserCreatedEventArgs(User u)
+            {
+                CreatedUser = u;
+            }
+        }
     }
 }

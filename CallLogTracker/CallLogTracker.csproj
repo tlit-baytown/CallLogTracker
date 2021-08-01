@@ -159,6 +159,12 @@
     <Compile Include="gui\dialogs\DeleteMessageForm.Designer.cs">
       <DependentUpon>DeleteMessageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\dialogs\FirstRunUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\FirstRunUser.Designer.cs">
+      <DependentUpon>FirstRunUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\dialogs\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +218,9 @@
     <Compile Include="utility\Validator.cs" />
     <EmbeddedResource Include="gui\dialogs\DatabaseConnection.resx">
       <DependentUpon>DatabaseConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\dialogs\FirstRunUser.resx">
+      <DependentUpon>FirstRunUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\dialogs\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

@@ -112,5 +112,13 @@ namespace CallLogTracker.gui.dialogs
                 CMessageBox.Show("The username you entered does not exist.", "Invalid Login", MessageBoxButtons.OK, Resources.warning_64x64);
             }
         }
+
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
+        }
     }
 }

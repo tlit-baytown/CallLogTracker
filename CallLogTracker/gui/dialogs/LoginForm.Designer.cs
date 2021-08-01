@@ -30,19 +30,19 @@ namespace CallLogTracker.gui.dialogs
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.lblPassword = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lblUsername = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtUsername = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.lblPassword = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtPassword = new ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox();
-            this.btnLogin = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnDatabaseConnection = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnLogin = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.lblHelp = new ComponentFactory.Krypton.Toolkit.KryptonWrapLabel();
             this.btnForgotPassword = new ComponentFactory.Krypton.Toolkit.ButtonSpecAny();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -60,6 +60,17 @@ namespace CallLogTracker.gui.dialogs
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(463, 193);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.pictureBox1.Image = global::CallLogTracker.Properties.Resources.phone_128x128;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(133, 128);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
             // 
             // tableLayoutPanel2
             // 
@@ -85,6 +96,15 @@ namespace CallLogTracker.gui.dialogs
             this.tableLayoutPanel2.Size = new System.Drawing.Size(318, 187);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
+            // lblPassword
+            // 
+            this.lblPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblPassword.Location = new System.Drawing.Point(3, 37);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(112, 20);
+            this.lblPassword.TabIndex = 2;
+            this.lblPassword.Values.Text = "Password: ";
+            // 
             // lblUsername
             // 
             this.lblUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -102,15 +122,6 @@ namespace CallLogTracker.gui.dialogs
             this.txtUsername.Size = new System.Drawing.Size(194, 23);
             this.txtUsername.TabIndex = 1;
             // 
-            // lblPassword
-            // 
-            this.lblPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPassword.Location = new System.Drawing.Point(3, 37);
-            this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(112, 20);
-            this.lblPassword.TabIndex = 2;
-            this.lblPassword.Values.Text = "Password: ";
-            // 
             // txtPassword
             // 
             this.txtPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
@@ -120,16 +131,6 @@ namespace CallLogTracker.gui.dialogs
             this.txtPassword.Size = new System.Drawing.Size(194, 23);
             this.txtPassword.TabIndex = 3;
             this.txtPassword.UseSystemPasswordChar = true;
-            // 
-            // btnLogin
-            // 
-            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnLogin.Location = new System.Drawing.Point(202, 159);
-            this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(113, 25);
-            this.btnLogin.TabIndex = 4;
-            this.btnLogin.Values.Text = "Log In";
-            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // btnDatabaseConnection
             // 
@@ -141,6 +142,16 @@ namespace CallLogTracker.gui.dialogs
             this.btnDatabaseConnection.TabIndex = 5;
             this.btnDatabaseConnection.Values.Text = "DB Connection";
             this.btnDatabaseConnection.Click += new System.EventHandler(this.btnDatabaseConnection_Click);
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogin.Location = new System.Drawing.Point(202, 159);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(113, 25);
+            this.btnLogin.TabIndex = 4;
+            this.btnLogin.Values.Text = "Log In";
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // lblHelp
             // 
@@ -160,17 +171,6 @@ namespace CallLogTracker.gui.dialogs
             this.btnForgotPassword.Text = "Forgot Password?";
             this.btnForgotPassword.UniqueName = "EC9ECE46F1214BEDBBBC0562446DF449";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox1.Image = global::CallLogTracker.Properties.Resources.phone_128x128;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(133, 128);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -180,6 +180,7 @@ namespace CallLogTracker.gui.dialogs
             this.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecAny[] {
             this.btnForgotPassword});
             this.ClientSize = new System.Drawing.Size(463, 193);
+            this.ControlBox = false;
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -187,10 +188,11 @@ namespace CallLogTracker.gui.dialogs
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login to Call Tracker";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginForm_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
