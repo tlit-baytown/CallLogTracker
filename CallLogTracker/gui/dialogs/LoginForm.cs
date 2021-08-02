@@ -19,6 +19,7 @@ namespace CallLogTracker.gui.dialogs
     public partial class LoginForm : KryptonForm
     {
         private User u;
+        private bool forciblyClosed = true;
 
         public EventHandler LoginDone;
 
@@ -95,11 +96,20 @@ namespace CallLogTracker.gui.dialogs
             u = UserConnector.GetUser(txtUsername.Text);
             if (u != null)
             {
+                if (u.AssociatedCompany != (cmbCompanies.SelectedItem as Company).ID)
+                {
+                    CMessageBox.Show("That employee is not part of the selected company!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
+                    return;
+                }
+
                 bool passwordCorrect = Hasher.AuthenticatePassword(txtPassword.Text, u.Password);
                 if (passwordCorrect)
                 {
                     LoginDone?.Invoke(this, new LoginDoneEventArgs(u));
                     Global.Instance.NumberOfLoginFormsOpen--;
+                    forciblyClosed = false;
+                    Global.Instance.MainForm.UpdateTitleText();
+
                     Close();
                 }
                 else
@@ -115,10 +125,85 @@ namespace CallLogTracker.gui.dialogs
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.WindowsShutDown || e.CloseReason == CloseReason.FormOwnerClosing)
             {
                 Application.Exit();
             }
+
+            if (forciblyClosed)
+                Application.Exit();
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            if (Global.Instance.DatabaseConnected)
+            {
+                Global.Instance.Companies = CompanyConnector.GetCompanies();
+                cmbCompanies.DataSource = Global.Instance.Companies;
+                if (cmbCompanies.Items.Count > 0)
+                {
+                    cmbCompanies.Enabled = true;
+                    cmbCompanies.SelectedIndex = 0;
+                }
+            }
+            else
+            {
+                cmbCompanies.DataSource = null;
+                cmbCompanies.Enabled = false;
+            }
+        }
+
+        private void cmbCompanies_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Global.Instance.CurrentCompany = cmbCompanies.SelectedItem as Company;
+
+            if (Global.Instance.CurrentCompany != null)
+            {
+                Global.Instance.Users = UserConnector.GetUsers(Global.Instance.CurrentCompany.ID);
+            }
+        }
+
+        private void SelectCompany()
+        {
+            if (Global.Instance.CurrentCompany != null)
+            {
+                if (Global.Instance.Companies.ToList().Find(c => c.ID == Global.Instance.CurrentCompany.ID) != null)
+                {
+                    cmbCompanies.SelectedItem = Global.Instance.CurrentCompany;
+                    Global.Instance.MainForm.UpdateTitleText();
+                }
+            }
+        }
+
+        private void UpdateCompanies()
+        {
+            cmbCompanies.DataSource = Global.Instance.Companies;
+            if (Global.Instance.CurrentCompany != null)
+            {
+                int index = cmbCompanies.Items.IndexOf(cmbCompanies.Items.Cast<Company>().Where(c => c.ID == Global.Instance.CurrentCompany.ID));
+                cmbCompanies.SelectedIndex = index == -1 ? 0 : index;
+            }
+        }
+
+        private void cmbCompanies_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (Global.Instance.DatabaseConnected)
+            {
+                if (Global.Instance.CurrentCompany != null)
+                {
+                    Global.Instance.Users = UserConnector.GetUsers(Global.Instance.CurrentCompany.ID);
+                }
+                else
+                {
+                    if (cmbCompanies.Items.Count > 0)
+                    {
+                        Global.Instance.CurrentCompany = cmbCompanies.Items[0] as Company;
+                        Global.Instance.Users = UserConnector.GetUsers(Global.Instance.CurrentCompany.ID);
+                    }
+                }
+            }
+
+            Global.Instance.MainForm.UpdateTitleText();
         }
     }
 }

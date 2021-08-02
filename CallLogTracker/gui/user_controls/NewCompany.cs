@@ -76,13 +76,11 @@ namespace CallLogTracker.gui.user_controls
                             Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Could not find company with id {newCompany.ID} in the list of companies.");
                     }
 
-                    Global.Instance.MainForm.UpdateCompanies();
-
-                    DialogResult result = CMessageBox.Show("Would you like to make the newly added company the current one?", "Make Current?", MessageBoxButtons.YesNo, Resources.info_64x64);
+                    DialogResult result = CMessageBox.Show("Would you like to make the newly added company the current one?\nThis action will log you out.", "Make Current?", MessageBoxButtons.YesNo, Resources.info_64x64);
                     if (result == DialogResult.Yes)
                     {
                         Global.Instance.CurrentCompany = newCompany;
-                        Global.Instance.MainForm.SelectCompany();
+                        Global.Instance.MainForm.LogOut();
                     }
 
                     Global.Instance.MainForm.panContent.Controls.Clear();

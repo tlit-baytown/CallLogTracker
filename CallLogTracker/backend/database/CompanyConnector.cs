@@ -97,7 +97,6 @@ namespace CallLogTracker.backend.database
                             {
                                 while (reader.Read())
                                 {
-                                    reader.Read();
                                     Company c = new Company
                                     {
                                         ID = reader.GetInt32(0),

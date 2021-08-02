@@ -30,6 +30,8 @@ namespace CallLogTracker
         public MainForm()
         {
             InitializeComponent();
+
+            UpdateTitleText();
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -130,20 +132,8 @@ namespace CallLogTracker
             //Set main form
             Global.Instance.MainForm = this;
 
-            //If database is connected, get all of the users
-            if (Global.Instance.DatabaseConnected)
-            {
-                cmbCompanies.DataSource = CompanyConnector.GetCompanies();
-                if (cmbCompanies.Items.Count > 0)
-                    Global.Instance.CurrentCompany = cmbCompanies.Items[0] as Company;
-
-                if (Global.Instance.CurrentCompany != null)
-                {
-                    Global.Instance.Users = UserConnector.GetUsers(Global.Instance.CurrentCompany.ID);
-                    cmbUsers.DataSource = Global.Instance.Users;
-                }
-            }
-            else
+            //If database is not connected, show form again.
+            if (!Global.Instance.DatabaseConnected)
             {
                 DatabaseConnection dbform = new DatabaseConnection();
                 dbform.DatabaseConnectFinished += OnDBConnectDone;
@@ -160,10 +150,7 @@ namespace CallLogTracker
             {
                 if (Global.Instance.NumberOfLoginFormsOpen == 0)
                 {
-                    LoginForm loginForm = new LoginForm();
-                    loginForm.LoginDone += ProcessLogin;
-                    Global.Instance.NumberOfLoginFormsOpen++;
-                    loginForm.ShowDialog();
+                    LogIn();
                 }
             }
         }
@@ -173,6 +160,8 @@ namespace CallLogTracker
             if (e is LoginDoneEventArgs args)
             {
                 Global.Instance.CurrentUser = args.LoggedInUser;
+                cmbUsers.DataSource = Global.Instance.Users;
+
                 if (cmbUsers.Items.Count > 0)
                 {
                     int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
@@ -187,6 +176,8 @@ namespace CallLogTracker
             else if (e is UserCreatedEventArgs a)
             {
                 Global.Instance.CurrentUser = a.CreatedUser;
+                cmbUsers.DataSource = Global.Instance.Users;
+
                 if (cmbUsers.Items.Count > 0)
                 {
                     int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
@@ -206,16 +197,23 @@ namespace CallLogTracker
             Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Checking database connection. Please wait...");
         }
 
-        public void SelectCompany()
+        
+
+        public void LogOut()
         {
-            if (Global.Instance.CurrentCompany != null)
+            if (Global.Instance.CurrentUser != null)
             {
-                if (Global.Instance.Companies.ToList().Find(c => c.ID == Global.Instance.CurrentCompany.ID) != null)
-                {
-                    cmbCompanies.SelectedItem = Global.Instance.CurrentCompany;
-                    UpdateTitleText();
-                }
+                Global.Instance.CurrentUser = null;
+                LogIn();
             }
+        }
+
+        public void LogIn()
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.LoginDone += ProcessLogin;
+            Global.Instance.NumberOfLoginFormsOpen++;
+            loginForm.ShowDialog();
         }
 
         private void btnNewEmployee_Click(object sender, EventArgs e)
@@ -264,51 +262,16 @@ namespace CallLogTracker
             panContent.Controls.Add(ctl);
         }
 
-        public void UpdateCompanies()
-        {
-            cmbCompanies.DataSource = Global.Instance.Companies;
-            if (Global.Instance.CurrentCompany != null)
-                cmbCompanies.SelectedItem = Global.Instance.CurrentCompany;
-        }
-
         public void UpdateUsers()
         {
             cmbUsers.DataSource = Global.Instance.Users;
             if (Global.Instance.CurrentUser != null)
-                cmbUsers.SelectedItem = Global.Instance.CurrentUser;
-        }
-
-        private void cmbCompanies_DataSourceChanged(object sender, EventArgs e)
-        {
-            if (Global.Instance.DatabaseConnected)
             {
-                if (cmbCompanies.Items.Count > 0)
-                    Global.Instance.CurrentCompany = cmbCompanies.Items[0] as Company;
-
-                if (Global.Instance.CurrentCompany != null)
-                {
-                    Global.Instance.Users = UserConnector.GetUsers(Global.Instance.CurrentCompany.ID);
-                    cmbUsers.DataSource = Global.Instance.Users;
-                }
+                int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(c => c.ID == Global.Instance.CurrentUser.ID));
+                cmbUsers.SelectedIndex = index == -1 ? 0 : index;
             }
-
-            UpdateTitleText();
-        }
-
-        private void cmbCompanies_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (Global.Instance.DatabaseConnected)
-            {
-                Global.Instance.CurrentCompany = cmbCompanies.Items[cmbCompanies.SelectedIndex] as Company;
-
-                if (Global.Instance.CurrentCompany != null)
-                {
-                    Global.Instance.Users = UserConnector.GetUsers(Global.Instance.CurrentCompany.ID);
-                    cmbUsers.DataSource = Global.Instance.Users;
-                }
-            }
-
-            UpdateTitleText();
+            if (Global.Instance.CurrentUser == null)
+                LogOut();
         }
 
         private void cmbUsers_SelectedIndexChanged(object sender, EventArgs e)
