@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>CallLogTracker.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>phone.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
@@ -195,6 +201,12 @@
     <Compile Include="gui\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\user_controls\NewCall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\NewCall.Designer.cs">
+      <DependentUpon>NewCall.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\user_controls\NewCompany.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -228,6 +240,9 @@
     <EmbeddedResource Include="gui\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\NewCall.resx">
+      <DependentUpon>NewCall.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="gui\user_controls\NewCompany.resx">
       <DependentUpon>NewCompany.cs</DependentUpon>
     </EmbeddedResource>
@@ -245,6 +260,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.Call.datasource" />
     <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.Company.datasource" />
     <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.User.datasource" />
     <None Include="Properties\Settings.settings">
@@ -418,6 +434,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\phone_128x128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="phone.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

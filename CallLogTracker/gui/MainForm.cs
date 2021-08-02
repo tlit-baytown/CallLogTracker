@@ -169,6 +169,7 @@ namespace CallLogTracker
 
                     loggedIn = true;
                     UpdateTitleText();
+                    Global.Instance.CallsToday = CallConnector.GetCallsForToday();
 
                     panContent.Controls.Clear();
                 }
@@ -186,6 +187,7 @@ namespace CallLogTracker
                     loggedIn = true;
                     UpdateTitleText();
 
+                    Global.Instance.CallsToday = CallConnector.GetCallsForToday();
                     panContent.Controls.Clear();
                 }
             }
@@ -227,6 +229,14 @@ namespace CallLogTracker
         private void btnNewCompany_Click(object sender, EventArgs e)
         {
             NewCompany ctl = new NewCompany();
+            ctl.Dock = DockStyle.Fill;
+            panContent.Controls.Clear();
+            panContent.Controls.Add(ctl);
+        }
+
+        private void btnNewCall_Click(object sender, EventArgs e)
+        {
+            NewCall ctl = new NewCall();
             ctl.Dock = DockStyle.Fill;
             panContent.Controls.Clear();
             panContent.Controls.Add(ctl);

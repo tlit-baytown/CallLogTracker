@@ -164,3 +164,9 @@ C:\Users\Kelvin\Documents\Projects\Github\CallLogTracker\CallLogTracker\obj\Debu
 C:\Users\Kelvin\Documents\Projects\Github\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.csproj.CopyComplete
 C:\Users\Kelvin\Documents\Projects\Github\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.exe
 C:\Users\Kelvin\Documents\Projects\Github\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.pdb
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.DatabaseConnection.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.FirstRunUser.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.LoginForm.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewCompany.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewEmployee.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewCall.resources

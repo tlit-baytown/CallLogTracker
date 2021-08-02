@@ -22,6 +22,8 @@ namespace CallLogTracker.backend.database.wrappers
 
         public string Message { get; set; }
 
+        public DateTime Date { get; set; }
+
         public DateTime Timestamp { get; set; }
 
         public string Insert()

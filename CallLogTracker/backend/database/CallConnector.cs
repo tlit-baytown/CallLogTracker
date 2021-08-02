@@ -1,4 +1,5 @@
 ﻿using CallLogTracker.backend.database.wrappers;
+using CallLogTracker.utility;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
@@ -54,6 +55,61 @@ namespace CallLogTracker.backend.database
                 con.Close();
             }
             return c;
+        }
+
+        public static SortableBindingList<Call> GetCallsForToday()
+        {
+            SortableBindingList<Call> calls = new SortableBindingList<Call>();
+            if (Global.Instance.CurrentUser == null || Global.Instance.CurrentCompany == null)
+            {
+                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> : User or company was null while attempting to fetch calls. Returning an empty list...");
+                return calls;
+            }
+
+            string q = $"SELECT * FROM Call WHERE date='{DateTime.Now.Date}' AND " +
+                $"(user_id={Global.Instance.CurrentUser.ID} AND " +
+                $"company_id={Global.Instance.CurrentCompany.ID});";
+
+            using (MySqlConnection con = Database.GetConnection())
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            try
+                            {
+                                reader.Read();
+                                Call c = new Call
+                                {
+                                    ID = reader.GetInt32(0),
+                                    CompanyID = reader.GetInt32(1),
+                                    UserID = reader.GetInt32(2),
+                                    CallerName = reader.GetString(3),
+                                    CallerPhone = reader.GetString(4),
+                                    Message = reader.GetString(6),
+                                    Date = reader.GetDateTime(7),
+                                    Timestamp = reader.GetDateTime(8)
+                                };
+                                if (reader.IsDBNull(5))
+                                    c.CallerEmail = "N/A";
+                                else
+                                    c.CallerEmail = reader.GetString(5);
+
+                                calls.Add(c);
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCallsForToday(): {e.Message}");
+                            }
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return calls;
         }
 
         public static int InsertCall(Call c)
