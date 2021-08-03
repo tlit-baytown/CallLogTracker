@@ -30,11 +30,17 @@ namespace CallLogTracker
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.kryptonSplitContainer1 = new ComponentFactory.Krypton.Toolkit.KryptonSplitContainer();
             this.hdrCallsToday = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btnSendNotifications = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
-            this.lvCallsToday = new System.Windows.Forms.ListView();
+            this.dgCallsToday = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid();
+            this.urgentColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.callerNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.callerPhoneColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.callerMessageColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panContent = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.txtConsole = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
@@ -42,6 +48,17 @@ namespace CallLogTracker
             this.cmbUsers = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lblSelectUser = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.callBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.companyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.callsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +78,7 @@ namespace CallLogTracker
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNewDBConnection = new System.Windows.Forms.ToolStripMenuItem();
             this.checkConnectionBGWorker = new System.ComponentModel.BackgroundWorker();
-            this.callBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.getCallsBGWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonSplitContainer1.Panel1)).BeginInit();
             this.kryptonSplitContainer1.Panel1.SuspendLayout();
@@ -72,6 +89,7 @@ namespace CallLogTracker
             ((System.ComponentModel.ISupportInitialize)(this.hdrCallsToday.Panel)).BeginInit();
             this.hdrCallsToday.Panel.SuspendLayout();
             this.hdrCallsToday.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgCallsToday)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panContent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
@@ -80,9 +98,9 @@ namespace CallLogTracker
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.callBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.callBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // kryptonSplitContainer1
@@ -103,7 +121,7 @@ namespace CallLogTracker
             this.kryptonSplitContainer1.Panel2.Controls.Add(this.flowLayoutPanel1);
             this.kryptonSplitContainer1.SeparatorStyle = ComponentFactory.Krypton.Toolkit.SeparatorStyle.HighProfile;
             this.kryptonSplitContainer1.Size = new System.Drawing.Size(1254, 564);
-            this.kryptonSplitContainer1.SplitterDistance = 216;
+            this.kryptonSplitContainer1.SplitterDistance = 247;
             this.kryptonSplitContainer1.TabIndex = 1;
             // 
             // hdrCallsToday
@@ -116,8 +134,8 @@ namespace CallLogTracker
             // 
             // hdrCallsToday.Panel
             // 
-            this.hdrCallsToday.Panel.Controls.Add(this.lvCallsToday);
-            this.hdrCallsToday.Size = new System.Drawing.Size(216, 564);
+            this.hdrCallsToday.Panel.Controls.Add(this.dgCallsToday);
+            this.hdrCallsToday.Size = new System.Drawing.Size(247, 564);
             this.hdrCallsToday.TabIndex = 0;
             this.hdrCallsToday.ValuesPrimary.Heading = "Calls Today";
             this.hdrCallsToday.ValuesPrimary.Image = null;
@@ -130,25 +148,60 @@ namespace CallLogTracker
             this.btnSendNotifications.Text = "Notify";
             this.btnSendNotifications.UniqueName = "D232F314EB744CBDF6B1ACC8A8DDEB58";
             // 
-            // lvCallsToday
+            // dgCallsToday
             // 
-            this.lvCallsToday.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.callBindingSource, "ID", true));
-            this.lvCallsToday.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lvCallsToday.HideSelection = false;
-            this.lvCallsToday.Location = new System.Drawing.Point(0, 0);
-            this.lvCallsToday.MultiSelect = false;
-            this.lvCallsToday.Name = "lvCallsToday";
-            this.lvCallsToday.Size = new System.Drawing.Size(214, 511);
-            this.lvCallsToday.TabIndex = 0;
-            this.lvCallsToday.UseCompatibleStateImageBehavior = false;
-            this.lvCallsToday.View = System.Windows.Forms.View.Details;
+            this.dgCallsToday.AllowUserToAddRows = false;
+            this.dgCallsToday.AllowUserToDeleteRows = false;
+            this.dgCallsToday.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgCallsToday.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.urgentColumn,
+            this.callerNameColumn,
+            this.callerPhoneColumn,
+            this.callerMessageColumn});
+            this.dgCallsToday.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgCallsToday.FillMode = JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.FillMode.GROUPSONLY;
+            this.dgCallsToday.GroupCollection = outlookGridGroupCollection1;
+            this.dgCallsToday.Location = new System.Drawing.Point(0, 0);
+            this.dgCallsToday.Name = "dgCallsToday";
+            this.dgCallsToday.PreviousSelectedGroupRow = -1;
+            this.dgCallsToday.ReadOnly = true;
+            this.dgCallsToday.Size = new System.Drawing.Size(245, 511);
+            this.dgCallsToday.TabIndex = 0;
+            // 
+            // urgentColumn
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.urgentColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.urgentColumn.HeaderText = "Urgent";
+            this.urgentColumn.Name = "urgentColumn";
+            this.urgentColumn.ReadOnly = true;
+            // 
+            // callerNameColumn
+            // 
+            this.callerNameColumn.HeaderText = "Name";
+            this.callerNameColumn.Name = "callerNameColumn";
+            this.callerNameColumn.ReadOnly = true;
+            // 
+            // callerPhoneColumn
+            // 
+            this.callerPhoneColumn.HeaderText = "Phone";
+            this.callerPhoneColumn.Name = "callerPhoneColumn";
+            this.callerPhoneColumn.ReadOnly = true;
+            // 
+            // callerMessageColumn
+            // 
+            this.callerMessageColumn.HeaderText = "Msg";
+            this.callerMessageColumn.Name = "callerMessageColumn";
+            this.callerMessageColumn.ReadOnly = true;
             // 
             // panContent
             // 
             this.panContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panContent.Location = new System.Drawing.Point(0, 27);
             this.panContent.Name = "panContent";
-            this.panContent.Size = new System.Drawing.Size(1033, 411);
+            this.panContent.Size = new System.Drawing.Size(1002, 411);
             this.panContent.TabIndex = 1;
             // 
             // kryptonHeaderGroup1
@@ -160,7 +213,7 @@ namespace CallLogTracker
             // kryptonHeaderGroup1.Panel
             // 
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.txtConsole);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(1033, 126);
+            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(1002, 126);
             this.kryptonHeaderGroup1.StateCommon.HeaderPrimary.Content.ShortText.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonHeaderGroup1.TabIndex = 0;
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Console";
@@ -173,7 +226,7 @@ namespace CallLogTracker
             this.txtConsole.Location = new System.Drawing.Point(0, 0);
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
-            this.txtConsole.Size = new System.Drawing.Size(1031, 94);
+            this.txtConsole.Size = new System.Drawing.Size(1000, 94);
             this.txtConsole.StateCommon.Content.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtConsole.TabIndex = 0;
             this.txtConsole.Text = "";
@@ -187,7 +240,7 @@ namespace CallLogTracker
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1033, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1002, 27);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // cmbUsers
@@ -196,7 +249,7 @@ namespace CallLogTracker
             this.cmbUsers.DisplayMember = "Name";
             this.cmbUsers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUsers.DropDownWidth = 153;
-            this.cmbUsers.Location = new System.Drawing.Point(877, 3);
+            this.cmbUsers.Location = new System.Drawing.Point(846, 3);
             this.cmbUsers.Name = "cmbUsers";
             this.cmbUsers.Size = new System.Drawing.Size(153, 21);
             this.cmbUsers.TabIndex = 0;
@@ -208,11 +261,85 @@ namespace CallLogTracker
             // 
             // lblSelectUser
             // 
-            this.lblSelectUser.Location = new System.Drawing.Point(833, 3);
+            this.lblSelectUser.Location = new System.Drawing.Point(802, 3);
             this.lblSelectUser.Name = "lblSelectUser";
             this.lblSelectUser.Size = new System.Drawing.Size(38, 20);
             this.lblSelectUser.TabIndex = 2;
             this.lblSelectUser.Values.Text = "User: ";
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "CallerName";
+            this.dataGridViewTextBoxColumn8.HeaderText = "CallerName";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.Width = 102;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "CallerPhone";
+            this.dataGridViewTextBoxColumn9.HeaderText = "CallerPhone";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.Width = 153;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "CallerEmail";
+            this.dataGridViewTextBoxColumn10.HeaderText = "CallerEmail";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.Width = 306;
+            // 
+            // callBindingSource
+            // 
+            this.callBindingSource.DataSource = typeof(CallLogTracker.backend.database.wrappers.Call);
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "CallerName";
+            this.dataGridViewTextBoxColumn5.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.Width = 102;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "CallerPhone";
+            this.dataGridViewTextBoxColumn6.HeaderText = "Phone";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.Width = 153;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "Message";
+            this.dataGridViewTextBoxColumn7.HeaderText = "Msg";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.Width = 306;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "CallerName";
+            this.dataGridViewTextBoxColumn1.HeaderText = "CallerName";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 77;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "CallerPhone";
+            this.dataGridViewTextBoxColumn2.HeaderText = "CallerPhone";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 102;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "CallerEmail";
+            this.dataGridViewTextBoxColumn3.HeaderText = "CallerEmail";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.Width = 153;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Message";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Message";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.Width = 306;
             // 
             // companyBindingSource
             // 
@@ -386,9 +513,13 @@ namespace CallLogTracker
             this.checkConnectionBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.checkConnectionBGWorker_ProgressChanged);
             this.checkConnectionBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.checkConnectionBGWorker_RunWorkerCompleted);
             // 
-            // callBindingSource
+            // getCallsBGWorker
             // 
-            this.callBindingSource.DataSource = typeof(CallLogTracker.backend.database.wrappers.Call);
+            this.getCallsBGWorker.WorkerReportsProgress = true;
+            this.getCallsBGWorker.WorkerSupportsCancellation = true;
+            this.getCallsBGWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.getCallsBGWorker_DoWork);
+            this.getCallsBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.getCallsBGWorker_ProgressChanged);
+            this.getCallsBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.getCallsBGWorker_RunWorkerCompleted);
             // 
             // MainForm
             // 
@@ -414,6 +545,7 @@ namespace CallLogTracker
             this.hdrCallsToday.Panel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.hdrCallsToday)).EndInit();
             this.hdrCallsToday.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgCallsToday)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panContent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).EndInit();
             this.kryptonHeaderGroup1.Panel.ResumeLayout(false);
@@ -423,10 +555,10 @@ namespace CallLogTracker
             this.flowLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbUsers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.callBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.companyBindingSource)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.callBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -452,7 +584,7 @@ namespace CallLogTracker
         private System.Windows.Forms.ToolStripMenuItem btnNewDBConnection;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup hdrCallsToday;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnSendNotifications;
-        private System.Windows.Forms.ListView lvCallsToday;
+        private JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid dgCallsToday;
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
         private ComponentFactory.Krypton.Toolkit.KryptonRichTextBox txtConsole;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cmbUsers;
@@ -464,6 +596,21 @@ namespace CallLogTracker
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblSelectUser;
         public System.ComponentModel.BackgroundWorker checkConnectionBGWorker;
         private System.Windows.Forms.BindingSource callBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.ComponentModel.BackgroundWorker getCallsBGWorker;
+        private System.Windows.Forms.DataGridViewTextBoxColumn urgentColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn callerNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn callerPhoneColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn callerMessageColumn;
     }
 }
 

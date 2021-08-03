@@ -176,3 +176,4 @@ D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.K
 D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Ribbon.dll
 D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
 D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Workspace.dll
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.dll

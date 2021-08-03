@@ -7,6 +7,7 @@ using CallLogTracker.Properties;
 using CallLogTracker.security;
 using CallLogTracker.utility;
 using ComponentFactory.Krypton.Toolkit;
+using JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid;
 using MySql.Data.MySqlClient;
 using SendGrid.Helpers.Mail;
 using System;
@@ -169,7 +170,8 @@ namespace CallLogTracker
 
                     loggedIn = true;
                     UpdateTitleText();
-                    Global.Instance.CallsToday = CallConnector.GetCallsForToday();
+
+                    getCallsBGWorker.RunWorkerAsync();
 
                     panContent.Controls.Clear();
                 }
@@ -187,7 +189,8 @@ namespace CallLogTracker
                     loggedIn = true;
                     UpdateTitleText();
 
-                    Global.Instance.CallsToday = CallConnector.GetCallsForToday();
+                    getCallsBGWorker.RunWorkerAsync();
+
                     panContent.Controls.Clear();
                 }
             }
@@ -297,6 +300,7 @@ namespace CallLogTracker
                         if (Hasher.AuthenticatePassword(passwordInput, selectedUser.Password))
                         {
                             Global.Instance.CurrentUser = selectedUser;
+                            getCallsBGWorker.RunWorkerAsync();
                         }
                         else
                         {
@@ -315,6 +319,62 @@ namespace CallLogTracker
             }
 
             UpdateTitleText();
+        }
+
+        private void SetUpGrid()
+        {
+            OutlookGridRow row;
+            List<OutlookGridRow> rows = new List<OutlookGridRow>();
+            dgCallsToday.SuspendLayout();
+            dgCallsToday.ClearInternalRows();
+
+
+            foreach (Call c in Global.Instance.CallsToday)
+            {
+                row = new OutlookGridRow();
+                row.CreateCells(dgCallsToday, new object[] { 
+                    c.IsUrgent ? "*" : "",
+                    c.CallerName,
+                    c.CallerPhone,
+                    c.Message
+                });
+                row.Tag = c;
+                rows.Add(row);
+            }
+
+            dgCallsToday.ResumeLayout();
+            dgCallsToday.AssignRows(rows);
+            dgCallsToday.Fill();
+
+            foreach (Call c in Global.Instance.CallsToday)
+            {
+                if (!c.IsUrgent)
+                {
+                    int index = rows.FindIndex(e => (e.Tag as Call).ID == c.ID);
+                    if (index != -1)
+                    {
+                        dgCallsToday[0, index].Style = new DataGridViewCellStyle();
+                        dgCallsToday.UpdateCellValue(0, index);
+                    }
+                }
+            }
+        }
+
+        private void getCallsBGWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            getCallsBGWorker.ReportProgress(50);
+            Global.Instance.CallsToday = CallConnector.GetCallsForToday();
+            getCallsBGWorker.ReportProgress(100);
+        }
+
+        private void getCallsBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Console.WriteLine($"Getting calls for today... {e.ProgressPercentage}%");
+        }
+
+        private void getCallsBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            SetUpGrid();
         }
     }
 }

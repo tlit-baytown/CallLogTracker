@@ -26,6 +26,8 @@ namespace CallLogTracker.backend.database.wrappers
 
         public DateTime Timestamp { get; set; }
 
+        public bool IsUrgent { get; set; }
+
         public string Insert()
         {
             if (ID == 0)

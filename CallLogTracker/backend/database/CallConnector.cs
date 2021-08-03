@@ -38,9 +38,11 @@ namespace CallLogTracker.backend.database
                                     CallerName = reader.GetString(3),
                                     CallerPhone = reader.GetString(4),
                                     Message = reader.GetString(6),
-                                    Date = DateTime.Parse(reader.GetString(7)),
-                                    Timestamp = reader.GetDateTime(8)
+                                    IsUrgent = reader.GetBoolean(7),
+                                    Date = DateTime.Parse(reader.GetString(8)),
+                                    Timestamp = reader.GetDateTime(9)
                                 };
+
                                 if (reader.IsDBNull(5))
                                     c.CallerEmail = "N/A";
                                 else
@@ -82,24 +84,28 @@ namespace CallLogTracker.backend.database
                         {
                             try
                             {
-                                reader.Read();
-                                Call c = new Call
+                                while (reader.Read())
                                 {
-                                    ID = reader.GetInt32(0),
-                                    CompanyID = reader.GetInt32(1),
-                                    UserID = reader.GetInt32(2),
-                                    CallerName = reader.GetString(3),
-                                    CallerPhone = reader.GetString(4),
-                                    Message = reader.GetString(6),
-                                    Date = DateTime.Parse(reader.GetString(7)),
-                                    Timestamp = reader.GetDateTime(8)
-                                };
-                                if (reader.IsDBNull(5))
-                                    c.CallerEmail = "N/A";
-                                else
-                                    c.CallerEmail = reader.GetString(5);
+                                    Call c = new Call
+                                    {
+                                        ID = reader.GetInt32(0),
+                                        CompanyID = reader.GetInt32(1),
+                                        UserID = reader.GetInt32(2),
+                                        CallerName = reader.GetString(3),
+                                        CallerPhone = reader.GetString(4),
+                                        Message = reader.GetString(6),
+                                        IsUrgent = reader.GetBoolean(7),
+                                        Date = DateTime.Parse(reader.GetString(8)),
+                                        Timestamp = reader.GetDateTime(9)
+                                    };
 
-                                calls.Add(c);
+                                    if (reader.IsDBNull(5))
+                                        c.CallerEmail = "N/A";
+                                    else
+                                        c.CallerEmail = reader.GetString(5);
+
+                                    calls.Add(c);
+                                }
                             }
                             catch (Exception e)
                             {
@@ -136,8 +142,9 @@ namespace CallLogTracker.backend.database
                         cmd.Parameters.AddWithValue("@3", c.CallerPhone);
                         cmd.Parameters.AddWithValue("@4", c.CallerEmail);
                         cmd.Parameters.AddWithValue("@5", c.Message);
-                        cmd.Parameters.AddWithValue("@6", c.Date.ToShortDateString());
-                        cmd.Parameters.AddWithValue("@7", c.Timestamp);
+                        cmd.Parameters.AddWithValue("@6", c.IsUrgent);
+                        cmd.Parameters.AddWithValue("@7", c.Date.ToShortDateString());
+                        cmd.Parameters.AddWithValue("@8", c.Timestamp);
 
                         cmd.Connection = con;
                         affectedRows = cmd.ExecuteNonQuery();
@@ -179,8 +186,9 @@ namespace CallLogTracker.backend.database
                         cmd.Parameters.AddWithValue("@4", c.CallerPhone);
                         cmd.Parameters.AddWithValue("@5", c.CallerEmail);
                         cmd.Parameters.AddWithValue("@6", c.Message);
-                        cmd.Parameters.AddWithValue("@7", c.Date.ToShortDateString());
-                        cmd.Parameters.AddWithValue("@8", c.Timestamp);
+                        cmd.Parameters.AddWithValue("@7", c.IsUrgent);
+                        cmd.Parameters.AddWithValue("@8", c.Date.ToShortDateString());
+                        cmd.Parameters.AddWithValue("@9", c.Timestamp);
 
                         cmd.Connection = con;
                         affectedRows = cmd.ExecuteNonQuery();
