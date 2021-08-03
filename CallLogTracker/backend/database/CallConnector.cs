@@ -38,7 +38,8 @@ namespace CallLogTracker.backend.database
                                     CallerName = reader.GetString(3),
                                     CallerPhone = reader.GetString(4),
                                     Message = reader.GetString(6),
-                                    Timestamp = reader.GetDateTime(7)
+                                    Date = DateTime.Parse(reader.GetString(7)),
+                                    Timestamp = reader.GetDateTime(8)
                                 };
                                 if (reader.IsDBNull(5))
                                     c.CallerEmail = "N/A";
@@ -66,7 +67,7 @@ namespace CallLogTracker.backend.database
                 return calls;
             }
 
-            string q = $"SELECT * FROM Call WHERE date='{DateTime.Now.Date}' AND " +
+            string q = $"SELECT * FROM `Call` WHERE date_recorded='{DateTime.Now.Date.ToShortDateString()}' AND " +
                 $"(user_id={Global.Instance.CurrentUser.ID} AND " +
                 $"company_id={Global.Instance.CurrentCompany.ID});";
 
@@ -90,7 +91,7 @@ namespace CallLogTracker.backend.database
                                     CallerName = reader.GetString(3),
                                     CallerPhone = reader.GetString(4),
                                     Message = reader.GetString(6),
-                                    Date = reader.GetDateTime(7),
+                                    Date = DateTime.Parse(reader.GetString(7)),
                                     Timestamp = reader.GetDateTime(8)
                                 };
                                 if (reader.IsDBNull(5))
@@ -135,7 +136,8 @@ namespace CallLogTracker.backend.database
                         cmd.Parameters.AddWithValue("@3", c.CallerPhone);
                         cmd.Parameters.AddWithValue("@4", c.CallerEmail);
                         cmd.Parameters.AddWithValue("@5", c.Message);
-                        cmd.Parameters.AddWithValue("@6", c.Timestamp);
+                        cmd.Parameters.AddWithValue("@6", c.Date.ToShortDateString());
+                        cmd.Parameters.AddWithValue("@7", c.Timestamp);
 
                         cmd.Connection = con;
                         affectedRows = cmd.ExecuteNonQuery();
@@ -177,7 +179,8 @@ namespace CallLogTracker.backend.database
                         cmd.Parameters.AddWithValue("@4", c.CallerPhone);
                         cmd.Parameters.AddWithValue("@5", c.CallerEmail);
                         cmd.Parameters.AddWithValue("@6", c.Message);
-                        cmd.Parameters.AddWithValue("@7", c.Timestamp);
+                        cmd.Parameters.AddWithValue("@7", c.Date.ToShortDateString());
+                        cmd.Parameters.AddWithValue("@8", c.Timestamp);
 
                         cmd.Connection = con;
                         affectedRows = cmd.ExecuteNonQuery();

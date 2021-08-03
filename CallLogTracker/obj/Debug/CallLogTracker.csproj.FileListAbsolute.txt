@@ -170,3 +170,9 @@ D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui
 D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewCompany.resources
 D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewEmployee.resources
 D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewCall.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Design.dll
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Docking.dll
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Navigator.dll
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Ribbon.dll
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Workspace.dll
