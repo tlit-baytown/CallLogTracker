@@ -109,8 +109,6 @@ namespace CallLogTracker.gui.user_controls
             hdrGroup.ValuesSecondary.Heading = "Hover over a label for more information.";
         }
 
-        #endregion
-
         private void lblCallerName_MouseEnter(object sender, EventArgs e)
         {
             hdrGroup.ValuesSecondary.Heading = "Enter the caller's full name. (Max: 255 chars)";
@@ -189,5 +187,6 @@ namespace CallLogTracker.gui.user_controls
         {
             rtbMessage.StateCommon.Border.Color1 = Color.White;
         }
+        #endregion
     }
 }

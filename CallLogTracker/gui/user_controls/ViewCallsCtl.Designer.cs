@@ -42,6 +42,7 @@ namespace CallLogTracker.gui.user_controls
             this.messageColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.groupBox = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
             this.getCallsBGWorker = new System.ComponentModel.BackgroundWorker();
+            this.btnNotify = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -52,6 +53,7 @@ namespace CallLogTracker.gui.user_controls
             // kryptonHeaderGroup1
             // 
             this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.btnNotify,
             this.chkOnlyCallsToday,
             this.btnEdit,
             this.btnRefresh});
@@ -187,6 +189,13 @@ namespace CallLogTracker.gui.user_controls
             this.getCallsBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.getCallsBGWorker_ProgressChanged);
             this.getCallsBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.getCallsBGWorker_RunWorkerCompleted);
             // 
+            // btnNotify
+            // 
+            this.btnNotify.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
+            this.btnNotify.Text = "Notify";
+            this.btnNotify.UniqueName = "02F4C5D7D27E44EEFC8DC905C3AAB7F6";
+            this.btnNotify.Click += new System.EventHandler(this.btnNotify_Click);
+            // 
             // ViewCallsCtl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,5 +227,6 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn nameColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn phoneColumn;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn messageColumn;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnNotify;
     }
 }
