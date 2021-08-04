@@ -34,15 +34,12 @@ namespace CallLogTracker
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.callsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNewCall = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEditCall = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDeleteCall = new System.Windows.Forms.ToolStripMenuItem();
             this.companyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNewCompany = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEditCompany = new System.Windows.Forms.ToolStripMenuItem();
             this.userToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNewEmployee = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEditCurrentEmployee = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnDeleteEmployee = new System.Windows.Forms.ToolStripMenuItem();
             this.notificationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnEmailNotifications = new System.Windows.Forms.ToolStripMenuItem();
             this.btnSMSNotifications = new System.Windows.Forms.ToolStripMenuItem();
@@ -85,9 +82,7 @@ namespace CallLogTracker
             // callsToolStripMenuItem
             // 
             this.callsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNewCall,
-            this.btnEditCall,
-            this.btnDeleteCall});
+            this.btnNewCall});
             this.callsToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources.phone;
             this.callsToolStripMenuItem.Name = "callsToolStripMenuItem";
             this.callsToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
@@ -98,26 +93,9 @@ namespace CallLogTracker
             this.btnNewCall.Image = global::CallLogTracker.Properties.Resources.add_16x16;
             this.btnNewCall.Name = "btnNewCall";
             this.btnNewCall.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.btnNewCall.Size = new System.Drawing.Size(216, 26);
+            this.btnNewCall.Size = new System.Drawing.Size(184, 26);
             this.btnNewCall.Text = "New...";
             this.btnNewCall.Click += new System.EventHandler(this.btnNewCall_Click);
-            // 
-            // btnEditCall
-            // 
-            this.btnEditCall.Image = global::CallLogTracker.Properties.Resources._218_edit;
-            this.btnEditCall.Name = "btnEditCall";
-            this.btnEditCall.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.E)));
-            this.btnEditCall.Size = new System.Drawing.Size(216, 26);
-            this.btnEditCall.Text = "Edit...";
-            // 
-            // btnDeleteCall
-            // 
-            this.btnDeleteCall.Image = global::CallLogTracker.Properties.Resources.delete_16x16;
-            this.btnDeleteCall.Name = "btnDeleteCall";
-            this.btnDeleteCall.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Delete)));
-            this.btnDeleteCall.Size = new System.Drawing.Size(216, 26);
-            this.btnDeleteCall.Text = "Delete Records...";
             // 
             // companyToolStripMenuItem
             // 
@@ -151,8 +129,7 @@ namespace CallLogTracker
             // 
             this.userToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnNewEmployee,
-            this.btnEditCurrentEmployee,
-            this.btnDeleteEmployee});
+            this.btnEditCurrentEmployee});
             this.userToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources._051_man;
             this.userToolStripMenuItem.Name = "userToolStripMenuItem";
             this.userToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.U)));
@@ -176,13 +153,6 @@ namespace CallLogTracker
             this.btnEditCurrentEmployee.Size = new System.Drawing.Size(192, 26);
             this.btnEditCurrentEmployee.Text = "Edit Current...";
             this.btnEditCurrentEmployee.Click += new System.EventHandler(this.btnEditCurrentEmployee_Click);
-            // 
-            // btnDeleteEmployee
-            // 
-            this.btnDeleteEmployee.Image = global::CallLogTracker.Properties.Resources._045_man;
-            this.btnDeleteEmployee.Name = "btnDeleteEmployee";
-            this.btnDeleteEmployee.Size = new System.Drawing.Size(192, 26);
-            this.btnDeleteEmployee.Text = "Delete...";
             // 
             // notificationsToolStripMenuItem
             // 
@@ -306,14 +276,11 @@ namespace CallLogTracker
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem callsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem btnNewCall;
-        private System.Windows.Forms.ToolStripMenuItem btnEditCall;
-        private System.Windows.Forms.ToolStripMenuItem btnDeleteCall;
         private System.Windows.Forms.ToolStripMenuItem companyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem btnEditCompany;
         private System.Windows.Forms.ToolStripMenuItem userToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem btnNewEmployee;
         private System.Windows.Forms.ToolStripMenuItem btnEditCurrentEmployee;
-        private System.Windows.Forms.ToolStripMenuItem btnDeleteEmployee;
         private System.Windows.Forms.ToolStripMenuItem notificationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem btnEmailNotifications;
         private System.Windows.Forms.ToolStripMenuItem btnSMSNotifications;

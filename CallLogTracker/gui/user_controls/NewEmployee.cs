@@ -43,6 +43,7 @@ namespace CallLogTracker.gui.user_controls
             newUser = currentUser;
             PopulateFields();
             hdrContainer.ValuesPrimary.Heading = "Edit Employee";
+            hdrContainer.ValuesPrimary.Description = "Create a new employee in the current company. All fields are required.";
             isEditing = true;
         }
 

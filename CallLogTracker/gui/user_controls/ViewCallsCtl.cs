@@ -48,6 +48,7 @@ namespace CallLogTracker.gui.user_controls
         private void chkOnlyCallsToday_Click(object sender, EventArgs e)
         {
             onlyCallsToday = (chkOnlyCallsToday.Checked == ButtonCheckState.Checked);
+            LoadData();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)

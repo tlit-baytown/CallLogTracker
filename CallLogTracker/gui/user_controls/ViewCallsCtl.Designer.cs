@@ -101,6 +101,7 @@ namespace CallLogTracker.gui.user_controls
             // 
             // dgCalls
             // 
+            this.dgCalls.AllowDrop = true;
             this.dgCalls.AllowUserToAddRows = false;
             this.dgCalls.AllowUserToDeleteRows = false;
             this.dgCalls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
