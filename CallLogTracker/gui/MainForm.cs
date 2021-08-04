@@ -6,6 +6,8 @@ using CallLogTracker.gui.user_controls;
 using CallLogTracker.Properties;
 using CallLogTracker.security;
 using CallLogTracker.utility;
+using ComponentFactory.Krypton.Docking;
+using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid;
 using MySql.Data.MySqlClient;
@@ -28,6 +30,9 @@ namespace CallLogTracker
     {
         private bool loggedIn = false;
 
+        public KryptonDockingWorkspace DockingWorkspace { get; private set; } = null;
+        private ConsolePage ConsolePg = new ConsolePage();
+
         public MainForm()
         {
             InitializeComponent();
@@ -37,11 +42,23 @@ namespace CallLogTracker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            TextBoxWriter writer = new TextBoxWriter(txtConsole);
-            Console.SetOut(writer);
+            //TODO: hook into console user control
+            //TextBoxWriter writer = new TextBoxWriter(txtConsole);
+            //Console.SetOut(writer);
             Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Call Logger Loaded!");
 
             InitializeSettings();
+
+            DockingWorkspace = dockingManager.ManageWorkspace("MainWorkspace", dockableWorkspace);
+            dockingManager.ManageControl("Control", panContent, DockingWorkspace);
+            dockingManager.ManageFloating("Floating", this);
+
+            dockingManager.AddAutoHiddenGroup("Control", DockingEdge.Bottom, new KryptonPage[] { ConsolePg, new ViewCallsPage() });
+
+            //Set main form
+            Global.Instance.MainForm = this;
+
+            cmbUsers.ComboBox.DisplayMember = "Name";
         }
 
         private void InitializeSettings()
@@ -130,9 +147,6 @@ namespace CallLogTracker
             else
                 UpdateTitleText();
 
-            //Set main form
-            Global.Instance.MainForm = this;
-
             //If database is not connected, show form again.
             if (!Global.Instance.DatabaseConnected)
             {
@@ -161,7 +175,7 @@ namespace CallLogTracker
             if (e is LoginDoneEventArgs args)
             {
                 Global.Instance.CurrentUser = args.LoggedInUser;
-                cmbUsers.DataSource = Global.Instance.Users;
+                cmbUsers.ComboBox.DataSource = Global.Instance.Users;
 
                 if (cmbUsers.Items.Count > 0)
                 {
@@ -171,15 +185,13 @@ namespace CallLogTracker
                     loggedIn = true;
                     UpdateTitleText();
 
-                    getCallsBGWorker.RunWorkerAsync();
-
-                    panContent.Controls.Clear();
+                    RefreshWorkspace();
                 }
             }
             else if (e is UserCreatedEventArgs a)
             {
                 Global.Instance.CurrentUser = a.CreatedUser;
-                cmbUsers.DataSource = Global.Instance.Users;
+                cmbUsers.ComboBox.DataSource = Global.Instance.Users;
 
                 if (cmbUsers.Items.Count > 0)
                 {
@@ -189,9 +201,7 @@ namespace CallLogTracker
                     loggedIn = true;
                     UpdateTitleText();
 
-                    getCallsBGWorker.RunWorkerAsync();
-
-                    panContent.Controls.Clear();
+                    RefreshWorkspace();
                 }
             }
         }
@@ -223,26 +233,44 @@ namespace CallLogTracker
 
         private void btnNewEmployee_Click(object sender, EventArgs e)
         {
-            NewEmployee ctl = new NewEmployee();
-            ctl.Dock = DockStyle.Fill;
-            panContent.Controls.Clear();
-            panContent.Controls.Add(ctl);
+            if (Global.Instance.CurrentUser == null)
+            {
+                CMessageBox.Show("No employee is currently logged in!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
+                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to create a new call denied.");
+                return;
+            }
+
+            KryptonPage page = new NewEmployeePage();
+            dockingManager.AddToWorkspace("MainWorkspace", new KryptonPage[] { page });
+            dockingManager.FindDockingWorkspace("MainWorkspace").SelectPage(page.UniqueName);
         }
 
         private void btnNewCompany_Click(object sender, EventArgs e)
         {
-            NewCompany ctl = new NewCompany();
-            ctl.Dock = DockStyle.Fill;
-            panContent.Controls.Clear();
-            panContent.Controls.Add(ctl);
+            if (Global.Instance.CurrentUser == null)
+            {
+                CMessageBox.Show("No employee is currently logged in!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
+                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to create a new call denied.");
+                return;
+            }
+
+            KryptonPage page = new NewCompanyPage();
+            dockingManager.AddToWorkspace("MainWorkspace", new KryptonPage[] { page });
+            dockingManager.FindDockingWorkspace("MainWorkspace").SelectPage(page.UniqueName);
         }
 
         private void btnNewCall_Click(object sender, EventArgs e)
         {
-            NewCall ctl = new NewCall();
-            ctl.Dock = DockStyle.Fill;
-            panContent.Controls.Clear();
-            panContent.Controls.Add(ctl);
+            if (Global.Instance.CurrentUser == null)
+            {
+                CMessageBox.Show("No employee is currently logged in!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
+                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to create a new call denied.");
+                return;
+            }
+
+            KryptonPage page = new NewCallPage();
+            dockingManager.AddToWorkspace("MainWorkspace", new KryptonPage[] { page });
+            dockingManager.FindDockingWorkspace("MainWorkspace").SelectPage(page.UniqueName);
         }
 
         private void btnEditCurrentEmployee_Click(object sender, EventArgs e)
@@ -254,10 +282,9 @@ namespace CallLogTracker
                 return;
             }
 
-            NewEmployee ctl = new NewEmployee(Global.Instance.CurrentUser);
-            ctl.Dock = DockStyle.Fill;
-            panContent.Controls.Clear();
-            panContent.Controls.Add(ctl);
+            KryptonPage page = new NewEmployeePage(Global.Instance.CurrentUser);
+            dockingManager.AddToWorkspace("MainWorkspace", new KryptonPage[] { page });
+            dockingManager.FindDockingWorkspace("MainWorkspace").SelectPage(page.UniqueName);
         }
 
         private void btnEditCompany_Click(object sender, EventArgs e)
@@ -269,15 +296,14 @@ namespace CallLogTracker
                 return;
             }
 
-            NewCompany ctl = new NewCompany(Global.Instance.CurrentCompany);
-            ctl.Dock = DockStyle.Fill;
-            panContent.Controls.Clear();
-            panContent.Controls.Add(ctl);
+            KryptonPage page = new NewCompanyPage(Global.Instance.CurrentCompany);
+            dockingManager.AddToWorkspace("MainWorkspace", new KryptonPage[] { page });
+            dockingManager.FindDockingWorkspace("MainWorkspace").SelectPage(page.UniqueName);
         }
 
         public void UpdateUsers()
         {
-            cmbUsers.DataSource = Global.Instance.Users;
+            cmbUsers.ComboBox.DataSource = Global.Instance.Users;
             if (Global.Instance.CurrentUser != null)
             {
                 int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(c => c.ID == Global.Instance.CurrentUser.ID));
@@ -300,7 +326,7 @@ namespace CallLogTracker
                         if (Hasher.AuthenticatePassword(passwordInput, selectedUser.Password))
                         {
                             Global.Instance.CurrentUser = selectedUser;
-                            getCallsBGWorker.RunWorkerAsync();
+                            RefreshWorkspace();
                         }
                         else
                         {
@@ -321,60 +347,19 @@ namespace CallLogTracker
             UpdateTitleText();
         }
 
-        private void SetUpGrid()
+        private void RefreshWorkspace()
         {
-            OutlookGridRow row;
-            List<OutlookGridRow> rows = new List<OutlookGridRow>();
-            dgCallsToday.SuspendLayout();
-            dgCallsToday.ClearInternalRows();
-
-
-            foreach (Call c in Global.Instance.CallsToday)
+            List<KryptonPage> pages = new List<KryptonPage>();
+            foreach (KryptonPage page in dockingManager.Pages)
             {
-                row = new OutlookGridRow();
-                row.CreateCells(dgCallsToday, new object[] { 
-                    c.IsUrgent ? "*" : "",
-                    c.CallerName,
-                    c.CallerPhone,
-                    c.Message
-                });
-                row.Tag = c;
-                rows.Add(row);
+                if (!page.UniqueName.Equals("Console") || !page.UniqueName.Equals("CallsPage"))
+                    pages.Add(page);
             }
 
-            dgCallsToday.ResumeLayout();
-            dgCallsToday.AssignRows(rows);
-            dgCallsToday.Fill();
+            DockingWorkspace.RemovePages(pages.ToArray(), true);
 
-            foreach (Call c in Global.Instance.CallsToday)
-            {
-                if (!c.IsUrgent)
-                {
-                    int index = rows.FindIndex(e => (e.Tag as Call).ID == c.ID);
-                    if (index != -1)
-                    {
-                        dgCallsToday[0, index].Style = new DataGridViewCellStyle();
-                        dgCallsToday.UpdateCellValue(0, index);
-                    }
-                }
-            }
-        }
-
-        private void getCallsBGWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            getCallsBGWorker.ReportProgress(50);
-            Global.Instance.CallsToday = CallConnector.GetCallsForToday();
-            getCallsBGWorker.ReportProgress(100);
-        }
-
-        private void getCallsBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-            Console.WriteLine($"Getting calls for today... {e.ProgressPercentage}%");
-        }
-
-        private void getCallsBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            SetUpGrid();
+            //Update employee's calls in the grid
+            (dockingManager.PageForUniqueName("CallsPage") as ViewCallsPage).UpdateCalls();
         }
     }
 }

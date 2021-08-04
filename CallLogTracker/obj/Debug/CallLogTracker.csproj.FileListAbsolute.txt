@@ -177,3 +177,7 @@ D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.K
 D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Toolkit.dll
 D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\ComponentFactory.Krypton.Workspace.dll
 D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.dll
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.ConsoleCtl.resources
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.NewCall.resources
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.user_controls.ViewCallsCtl.resources
+C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\bin\Debug\JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.dll

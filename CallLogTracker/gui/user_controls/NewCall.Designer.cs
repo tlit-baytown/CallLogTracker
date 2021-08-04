@@ -30,9 +30,8 @@ namespace CallLogTracker.gui.user_controls
         private void InitializeComponent()
         {
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.btnSave = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btnSaveAndNotify = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
-            this.btnClose = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.btnSave = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.SuspendLayout();
@@ -42,8 +41,7 @@ namespace CallLogTracker.gui.user_controls
             // 
             this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
             this.btnSaveAndNotify,
-            this.btnSave,
-            this.btnClose});
+            this.btnSave});
             this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
             this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
@@ -53,14 +51,6 @@ namespace CallLogTracker.gui.user_controls
             this.kryptonHeaderGroup1.ValuesPrimary.Image = null;
             this.kryptonHeaderGroup1.ValuesSecondary.Heading = "Fill in the required information and click \"Save\" or \"Save and Notifty\".";
             // 
-            // btnSave
-            // 
-            this.btnSave.Image = global::CallLogTracker.Properties.Resources.save_16x16;
-            this.btnSave.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
-            this.btnSave.Text = "Save";
-            this.btnSave.UniqueName = "CF0CA85D36204CF706A7F9D97100EE38";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // btnSaveAndNotify
             // 
             this.btnSaveAndNotify.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
@@ -69,12 +59,13 @@ namespace CallLogTracker.gui.user_controls
             this.btnSaveAndNotify.UniqueName = "6224666C23F84F07CCAA865B3D1EA9E8";
             this.btnSaveAndNotify.Click += new System.EventHandler(this.btnSaveAndNotify_Click);
             // 
-            // btnClose
+            // btnSave
             // 
-            this.btnClose.Image = global::CallLogTracker.Properties.Resources.error_16x16;
-            this.btnClose.Text = "Close";
-            this.btnClose.UniqueName = "D2E6EA0BC877454B03A590CD3BA070E0";
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            this.btnSave.Image = global::CallLogTracker.Properties.Resources.save_16x16;
+            this.btnSave.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
+            this.btnSave.Text = "Save";
+            this.btnSave.UniqueName = "CF0CA85D36204CF706A7F9D97100EE38";
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // NewCall
             // 
@@ -95,6 +86,5 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnSaveAndNotify;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnSave;
-        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnClose;
     }
 }

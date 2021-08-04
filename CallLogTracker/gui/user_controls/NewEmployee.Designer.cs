@@ -42,7 +42,6 @@ namespace CallLogTracker.gui.user_controls
             this.txtUsername = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtPhoneNumber = new ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox();
-            this.btnClose = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             ((System.ComponentModel.ISupportInitialize)(this.hdrContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hdrContainer.Panel)).BeginInit();
             this.hdrContainer.Panel.SuspendLayout();
@@ -54,8 +53,7 @@ namespace CallLogTracker.gui.user_controls
             // 
             this.hdrContainer.AutoSize = true;
             this.hdrContainer.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
-            this.btnAddEmployee,
-            this.btnClose});
+            this.btnAddEmployee});
             this.hdrContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hdrContainer.Location = new System.Drawing.Point(0, 0);
             this.hdrContainer.Name = "hdrContainer";
@@ -139,9 +137,9 @@ namespace CallLogTracker.gui.user_controls
             // kryptonLabel1
             // 
             this.kryptonLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel1.Location = new System.Drawing.Point(3, 33);
+            this.kryptonLabel1.Location = new System.Drawing.Point(3, 32);
             this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(114, 20);
+            this.kryptonLabel1.Size = new System.Drawing.Size(114, 22);
             this.kryptonLabel1.TabIndex = 2;
             this.kryptonLabel1.TabStop = false;
             this.kryptonLabel1.Values.Text = "Email Address: ";
@@ -151,9 +149,9 @@ namespace CallLogTracker.gui.user_controls
             // lblUsername
             // 
             this.lblUsername.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblUsername.Location = new System.Drawing.Point(3, 4);
+            this.lblUsername.Location = new System.Drawing.Point(3, 3);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(114, 20);
+            this.lblUsername.Size = new System.Drawing.Size(114, 22);
             this.lblUsername.TabIndex = 0;
             this.lblUsername.TabStop = false;
             this.lblUsername.Values.Text = "Employee Name: ";
@@ -175,9 +173,9 @@ namespace CallLogTracker.gui.user_controls
             // kryptonLabel2
             // 
             this.kryptonLabel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel2.Location = new System.Drawing.Point(3, 62);
+            this.kryptonLabel2.Location = new System.Drawing.Point(3, 61);
             this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(114, 20);
+            this.kryptonLabel2.Size = new System.Drawing.Size(114, 22);
             this.kryptonLabel2.TabIndex = 4;
             this.kryptonLabel2.TabStop = false;
             this.kryptonLabel2.Values.Text = "Phone Number: ";
@@ -187,9 +185,9 @@ namespace CallLogTracker.gui.user_controls
             // kryptonLabel3
             // 
             this.kryptonLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel3.Location = new System.Drawing.Point(3, 91);
+            this.kryptonLabel3.Location = new System.Drawing.Point(3, 90);
             this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(114, 20);
+            this.kryptonLabel3.Size = new System.Drawing.Size(114, 22);
             this.kryptonLabel3.TabIndex = 6;
             this.kryptonLabel3.TabStop = false;
             this.kryptonLabel3.Values.Text = "Username: ";
@@ -211,9 +209,9 @@ namespace CallLogTracker.gui.user_controls
             // kryptonLabel4
             // 
             this.kryptonLabel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.kryptonLabel4.Location = new System.Drawing.Point(3, 120);
+            this.kryptonLabel4.Location = new System.Drawing.Point(3, 119);
             this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Size = new System.Drawing.Size(114, 20);
+            this.kryptonLabel4.Size = new System.Drawing.Size(114, 22);
             this.kryptonLabel4.TabIndex = 8;
             this.kryptonLabel4.TabStop = false;
             this.kryptonLabel4.Values.Text = "Password: ";
@@ -232,14 +230,6 @@ namespace CallLogTracker.gui.user_controls
             this.txtPhoneNumber.TextChanged += new System.EventHandler(this.txtPhoneNumber_TextChanged);
             this.txtPhoneNumber.Enter += new System.EventHandler(this.txtPhoneNumber_Enter);
             this.txtPhoneNumber.Leave += new System.EventHandler(this.txtBox_Leave);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Image = global::CallLogTracker.Properties.Resources.error_16x16;
-            this.btnClose.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
-            this.btnClose.Text = "Close";
-            this.btnClose.UniqueName = "B79690CC905642A5BEBCD7F1683A26FD";
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // NewEmployee
             // 
@@ -275,6 +265,5 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
         private ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox txtPhoneNumber;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnAddEmployee;
-        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnClose;
     }
 }

@@ -42,6 +42,8 @@ namespace CallLogTracker
         public User CurrentUser { get; set; } = null;
         public Company CurrentCompany { get; set; } = null;
 
+        public string SelectedPageUniqueName = "";
+
         public MainForm MainForm { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using CallLogTracker.gui.dialogs;
 using CallLogTracker.Properties;
 using CallLogTracker.security;
 using CallLogTracker.utility;
+using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using System;
 using System.Collections.Generic;
@@ -56,8 +57,15 @@ namespace CallLogTracker.gui.user_controls
             }
         }
 
+        private KryptonPage GetParent()
+        {
+            return Parent as KryptonPage;
+        }
+
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
+            Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
+
             List<ValidatorError> errors = newUser.ValidateObject();
 
             //If we are editing an employee, remove the validation for existing user and password length if txtPassword is empty (we assume no password change).
@@ -88,7 +96,7 @@ namespace CallLogTracker.gui.user_controls
 
                 if (!userInsert.Contains("error"))
                 {
-                    //If this company is not already in the list, add it. Otherwise, update it.
+                    //If this user is not already in the list, add it. Otherwise, update it.
                     if (Global.Instance.Users.ToList().Where(c => c.ID == newUser.ID).Count() <= 0)
                         Global.Instance.Users.Add(newUser);
                     else
@@ -103,7 +111,10 @@ namespace CallLogTracker.gui.user_controls
                     Global.Instance.MainForm.UpdateUsers();
                     UserCreated?.Invoke(this, new UserCreatedEventArgs(newUser));
 
-                    Global.Instance.MainForm.panContent.Controls.Clear();
+                    if (isEditing)
+                        Global.Instance.MainForm.DockingWorkspace.DockingManager.CloseRequest(new string[] { Global.Instance.SelectedPageUniqueName });
+                    else
+                        Global.Instance.MainForm.DockingWorkspace.RemovePage(Global.Instance.SelectedPageUniqueName, true);
                 }
             }
         }
@@ -209,10 +220,5 @@ namespace CallLogTracker.gui.user_controls
             }
         }
         #endregion
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            Global.Instance.MainForm.panContent.Controls.Clear();
-        }
     }
 }

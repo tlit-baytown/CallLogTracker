@@ -204,24 +204,41 @@
     <Compile Include="gui\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\user_controls\ConsoleCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\ConsoleCtl.Designer.cs">
+      <DependentUpon>ConsoleCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\user_controls\ConsolePage.cs" />
     <Compile Include="gui\user_controls\NewCall.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="gui\user_controls\NewCall.Designer.cs">
       <DependentUpon>NewCall.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\user_controls\NewCallPage.cs" />
     <Compile Include="gui\user_controls\NewCompany.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="gui\user_controls\NewCompany.Designer.cs">
       <DependentUpon>NewCompany.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\user_controls\NewCompanyPage.cs" />
     <Compile Include="gui\user_controls\NewEmployee.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="gui\user_controls\NewEmployee.Designer.cs">
       <DependentUpon>NewEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\user_controls\NewEmployeePage.cs" />
+    <Compile Include="gui\user_controls\ViewCallsCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\ViewCallsCtl.Designer.cs">
+      <DependentUpon>ViewCallsCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\user_controls\ViewCallsPage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="security\Hasher.cs" />
@@ -243,6 +260,9 @@
     <EmbeddedResource Include="gui\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\ConsoleCtl.resx">
+      <DependentUpon>ConsoleCtl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="gui\user_controls\NewCall.resx">
       <DependentUpon>NewCall.cs</DependentUpon>
     </EmbeddedResource>
@@ -251,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="gui\user_controls\NewEmployee.resx">
       <DependentUpon>NewEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\ViewCallsCtl.resx">
+      <DependentUpon>ViewCallsCtl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -440,6 +463,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="phone.ico" />
+    <None Include="Resources\edit_16x16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

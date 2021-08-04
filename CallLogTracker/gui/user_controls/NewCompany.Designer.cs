@@ -40,7 +40,6 @@ namespace CallLogTracker.gui.user_controls
             this.lblNumOfEmployees = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtNumOfEmployees = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.txtPhoneNumber = new ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox();
-            this.btnClose = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             ((System.ComponentModel.ISupportInitialize)(this.hdrContainer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hdrContainer.Panel)).BeginInit();
             this.hdrContainer.Panel.SuspendLayout();
@@ -52,8 +51,7 @@ namespace CallLogTracker.gui.user_controls
             // 
             this.hdrContainer.AutoSize = true;
             this.hdrContainer.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
-            this.btnSave,
-            this.btnClose});
+            this.btnSave});
             this.hdrContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hdrContainer.Location = new System.Drawing.Point(0, 0);
             this.hdrContainer.Name = "hdrContainer";
@@ -120,9 +118,9 @@ namespace CallLogTracker.gui.user_controls
             // lblSupportEmail
             // 
             this.lblSupportEmail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSupportEmail.Location = new System.Drawing.Point(3, 33);
+            this.lblSupportEmail.Location = new System.Drawing.Point(3, 32);
             this.lblSupportEmail.Name = "lblSupportEmail";
-            this.lblSupportEmail.Size = new System.Drawing.Size(143, 20);
+            this.lblSupportEmail.Size = new System.Drawing.Size(143, 22);
             this.lblSupportEmail.TabIndex = 2;
             this.lblSupportEmail.TabStop = false;
             this.lblSupportEmail.Values.Text = "Support Email: ";
@@ -132,9 +130,9 @@ namespace CallLogTracker.gui.user_controls
             // lblCompanyName
             // 
             this.lblCompanyName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCompanyName.Location = new System.Drawing.Point(3, 4);
+            this.lblCompanyName.Location = new System.Drawing.Point(3, 3);
             this.lblCompanyName.Name = "lblCompanyName";
-            this.lblCompanyName.Size = new System.Drawing.Size(143, 20);
+            this.lblCompanyName.Size = new System.Drawing.Size(143, 22);
             this.lblCompanyName.TabIndex = 0;
             this.lblCompanyName.TabStop = false;
             this.lblCompanyName.Values.Text = "Company Name: ";
@@ -156,9 +154,9 @@ namespace CallLogTracker.gui.user_controls
             // lblPhoneNumber
             // 
             this.lblPhoneNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPhoneNumber.Location = new System.Drawing.Point(3, 62);
+            this.lblPhoneNumber.Location = new System.Drawing.Point(3, 61);
             this.lblPhoneNumber.Name = "lblPhoneNumber";
-            this.lblPhoneNumber.Size = new System.Drawing.Size(143, 20);
+            this.lblPhoneNumber.Size = new System.Drawing.Size(143, 22);
             this.lblPhoneNumber.TabIndex = 4;
             this.lblPhoneNumber.TabStop = false;
             this.lblPhoneNumber.Values.Text = "Phone Number: ";
@@ -168,9 +166,9 @@ namespace CallLogTracker.gui.user_controls
             // lblNumOfEmployees
             // 
             this.lblNumOfEmployees.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblNumOfEmployees.Location = new System.Drawing.Point(3, 91);
+            this.lblNumOfEmployees.Location = new System.Drawing.Point(3, 90);
             this.lblNumOfEmployees.Name = "lblNumOfEmployees";
-            this.lblNumOfEmployees.Size = new System.Drawing.Size(143, 20);
+            this.lblNumOfEmployees.Size = new System.Drawing.Size(143, 22);
             this.lblNumOfEmployees.TabIndex = 6;
             this.lblNumOfEmployees.TabStop = false;
             this.lblNumOfEmployees.Values.Text = "Number of Employees: ";
@@ -201,14 +199,6 @@ namespace CallLogTracker.gui.user_controls
             this.txtPhoneNumber.TextChanged += new System.EventHandler(this.txtPhoneNumber_TextChanged);
             this.txtPhoneNumber.Enter += new System.EventHandler(this.txtPhoneNumber_Enter);
             this.txtPhoneNumber.Leave += new System.EventHandler(this.txtBox_Leave);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Image = global::CallLogTracker.Properties.Resources.error_16x16;
-            this.btnClose.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
-            this.btnClose.Text = "Close";
-            this.btnClose.UniqueName = "933BFFA9AC74458EFFA9AD74D42A303F";
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // NewCompany
             // 
@@ -242,6 +232,5 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblNumOfEmployees;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtNumOfEmployees;
         private ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox txtPhoneNumber;
-        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnClose;
     }
 }
