@@ -1,16 +1,12 @@
 ﻿using CallLogTracker.backend.database;
 using CallLogTracker.backend.database.wrappers;
+using CallLogTracker.utility;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CallLogTracker.gui.user_controls
@@ -33,6 +29,7 @@ namespace CallLogTracker.gui.user_controls
         private void ViewCallsCtl_Load(object sender, EventArgs e)
         {
             dgCalls.RegisterGroupBoxEvents();
+            DataGridViewSetup.SetupDGV(dgCalls, false);
             LoadData();
         }
 
@@ -88,7 +85,7 @@ namespace CallLogTracker.gui.user_controls
             {
                 row = new OutlookGridRow();
                 row.CreateCells(dgCalls, new object[] {
-                    c.Date.ToShortDateString().Replace('/', '-'),
+                    c.Date.ToShortDateString(),
                     c.IsUrgent ? "*" : "",
                     c.CallerName,
                     c.CallerPhone,

@@ -4,13 +4,8 @@ using CallLogTracker.Properties;
 using CallLogTracker.security;
 using ComponentFactory.Krypton.Toolkit;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static CallLogTracker.utility.CEventArgs;
 
@@ -32,7 +27,7 @@ namespace CallLogTracker.gui.dialogs
 
         private void btnForgotPassword_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnDatabaseConnection_Click(object sender, EventArgs e)
@@ -74,7 +69,7 @@ namespace CallLogTracker.gui.dialogs
                                 Global.Instance.MainForm.UpdateTitleText();
                             }
                         }
-                            
+
                         Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Database connected: {Database.Server}\\{Database.DB}");
                         break;
                     }

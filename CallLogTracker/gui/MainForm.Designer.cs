@@ -75,7 +75,7 @@ namespace CallLogTracker
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1254, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1584, 28);
             this.menuStrip.TabIndex = 2;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -93,7 +93,7 @@ namespace CallLogTracker
             this.btnNewCall.Image = global::CallLogTracker.Properties.Resources.add_16x16;
             this.btnNewCall.Name = "btnNewCall";
             this.btnNewCall.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.btnNewCall.Size = new System.Drawing.Size(184, 26);
+            this.btnNewCall.Size = new System.Drawing.Size(154, 26);
             this.btnNewCall.Text = "New...";
             this.btnNewCall.Click += new System.EventHandler(this.btnNewCall_Click);
             // 
@@ -225,7 +225,7 @@ namespace CallLogTracker
             this.dockableWorkspace.Root.UniqueName = "F9D3478C0F5B4730B0B77B1B0E4D103A";
             this.dockableWorkspace.Root.WorkspaceControl = this.dockableWorkspace;
             this.dockableWorkspace.ShowMaximizeButton = false;
-            this.dockableWorkspace.Size = new System.Drawing.Size(1254, 564);
+            this.dockableWorkspace.Size = new System.Drawing.Size(1584, 733);
             this.dockableWorkspace.TabIndex = 3;
             this.dockableWorkspace.TabStop = true;
             // 
@@ -235,7 +235,7 @@ namespace CallLogTracker
             this.panContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panContent.Location = new System.Drawing.Point(0, 28);
             this.panContent.Name = "panContent";
-            this.panContent.Size = new System.Drawing.Size(1254, 564);
+            this.panContent.Size = new System.Drawing.Size(1584, 733);
             this.panContent.TabIndex = 4;
             // 
             // userBindingSource
@@ -250,7 +250,7 @@ namespace CallLogTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1254, 592);
+            this.ClientSize = new System.Drawing.Size(1584, 761);
             this.Controls.Add(this.panContent);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

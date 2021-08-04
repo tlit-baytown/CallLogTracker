@@ -32,6 +32,12 @@ namespace CallLogTracker.gui.user_controls
             this.hdrGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btnSaveAndNotify = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btnSave = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
+            this.rtbMessage = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblCharCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblLastUpdated = new System.Windows.Forms.ToolStripStatusLabel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.txtCallerEmail = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.lblCallerEmail = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
@@ -40,22 +46,16 @@ namespace CallLogTracker.gui.user_controls
             this.lblPhoneNumber = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.txtPhoneNumber = new ComponentFactory.Krypton.Toolkit.KryptonMaskedTextBox();
             this.chkIsUrgent = new ComponentFactory.Krypton.Toolkit.KryptonCheckBox();
-            this.kryptonGroupBox1 = new ComponentFactory.Krypton.Toolkit.KryptonGroupBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.lblCharCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.rtbMessage = new ComponentFactory.Krypton.Toolkit.KryptonRichTextBox();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lblLastUpdated = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.hdrGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hdrGroup.Panel)).BeginInit();
             this.hdrGroup.Panel.SuspendLayout();
             this.hdrGroup.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).BeginInit();
             this.kryptonGroupBox1.Panel.SuspendLayout();
             this.kryptonGroupBox1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // hdrGroup
@@ -94,6 +94,82 @@ namespace CallLogTracker.gui.user_controls
             this.btnSave.Text = "Save";
             this.btnSave.UniqueName = "CF0CA85D36204CF706A7F9D97100EE38";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // kryptonGroupBox1
+            // 
+            this.kryptonGroupBox1.CaptionOverlap = 1D;
+            this.kryptonGroupBox1.CaptionStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitleControl;
+            this.kryptonGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.kryptonGroupBox1.Location = new System.Drawing.Point(0, 116);
+            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
+            // 
+            // kryptonGroupBox1.Panel
+            // 
+            this.kryptonGroupBox1.Panel.Controls.Add(this.rtbMessage);
+            this.kryptonGroupBox1.Panel.Controls.Add(this.statusStrip1);
+            this.kryptonGroupBox1.Size = new System.Drawing.Size(1016, 440);
+            this.kryptonGroupBox1.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.kryptonGroupBox1.StateCommon.Border.Color1 = System.Drawing.Color.White;
+            this.kryptonGroupBox1.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.kryptonGroupBox1.StateCommon.Content.LongText.Color1 = System.Drawing.Color.Red;
+            this.kryptonGroupBox1.TabIndex = 2;
+            this.kryptonGroupBox1.Values.Description = "*";
+            this.kryptonGroupBox1.Values.Heading = "Message";
+            this.kryptonGroupBox1.MouseEnter += new System.EventHandler(this.kryptonGroupBox1_MouseEnter);
+            this.kryptonGroupBox1.MouseLeave += new System.EventHandler(this.ResetHelpText);
+            // 
+            // rtbMessage
+            // 
+            this.rtbMessage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rtbMessage.Location = new System.Drawing.Point(0, 0);
+            this.rtbMessage.MaxLength = 65535;
+            this.rtbMessage.Name = "rtbMessage";
+            this.rtbMessage.Size = new System.Drawing.Size(1012, 387);
+            this.rtbMessage.StateCommon.Border.Color1 = System.Drawing.Color.Black;
+            this.rtbMessage.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.rtbMessage.TabIndex = 1;
+            this.rtbMessage.Text = "";
+            this.rtbMessage.TextChanged += new System.EventHandler(this.rtbMessage_TextChanged);
+            this.rtbMessage.Enter += new System.EventHandler(this.rtbMessage_Enter);
+            this.rtbMessage.Leave += new System.EventHandler(this.rtbMessage_Leave);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblCharCount,
+            this.toolStripStatusLabel1,
+            this.lblLastUpdated});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 387);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.statusStrip1.Size = new System.Drawing.Size(1012, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblCharCount
+            // 
+            this.lblCharCount.Name = "lblCharCount";
+            this.lblCharCount.Size = new System.Drawing.Size(127, 17);
+            this.lblCharCount.Text = "Char. Count: 0 / 65,535";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(870, 17);
+            this.toolStripStatusLabel1.Spring = true;
+            // 
+            // lblLastUpdated
+            // 
+            this.lblLastUpdated.Name = "lblLastUpdated";
+            this.lblLastUpdated.Size = new System.Drawing.Size(104, 17);
+            this.lblLastUpdated.Text = "Last Updated: N/A";
+            this.lblLastUpdated.Visible = false;
             // 
             // tableLayoutPanel1
             // 
@@ -213,73 +289,6 @@ namespace CallLogTracker.gui.user_controls
             this.chkIsUrgent.MouseEnter += new System.EventHandler(this.chkIsUrgent_MouseEnter);
             this.chkIsUrgent.MouseLeave += new System.EventHandler(this.ResetHelpText);
             // 
-            // kryptonGroupBox1
-            // 
-            this.kryptonGroupBox1.CaptionOverlap = 1D;
-            this.kryptonGroupBox1.CaptionStyle = ComponentFactory.Krypton.Toolkit.LabelStyle.TitleControl;
-            this.kryptonGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonGroupBox1.Location = new System.Drawing.Point(0, 116);
-            this.kryptonGroupBox1.Name = "kryptonGroupBox1";
-            // 
-            // kryptonGroupBox1.Panel
-            // 
-            this.kryptonGroupBox1.Panel.Controls.Add(this.rtbMessage);
-            this.kryptonGroupBox1.Panel.Controls.Add(this.statusStrip1);
-            this.kryptonGroupBox1.Size = new System.Drawing.Size(1016, 440);
-            this.kryptonGroupBox1.StateCommon.Content.LongText.Color1 = System.Drawing.Color.Red;
-            this.kryptonGroupBox1.TabIndex = 2;
-            this.kryptonGroupBox1.Values.Description = "*";
-            this.kryptonGroupBox1.Values.Heading = "Message";
-            this.kryptonGroupBox1.MouseEnter += new System.EventHandler(this.kryptonGroupBox1_MouseEnter);
-            this.kryptonGroupBox1.MouseLeave += new System.EventHandler(this.ResetHelpText);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblCharCount,
-            this.toolStripStatusLabel1,
-            this.lblLastUpdated});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 387);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.statusStrip1.Size = new System.Drawing.Size(1012, 22);
-            this.statusStrip1.SizingGrip = false;
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // lblCharCount
-            // 
-            this.lblCharCount.Name = "lblCharCount";
-            this.lblCharCount.Size = new System.Drawing.Size(127, 17);
-            this.lblCharCount.Text = "Char. Count: 0 / 65,535";
-            // 
-            // rtbMessage
-            // 
-            this.rtbMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rtbMessage.Location = new System.Drawing.Point(0, 0);
-            this.rtbMessage.MaxLength = 65535;
-            this.rtbMessage.Name = "rtbMessage";
-            this.rtbMessage.Size = new System.Drawing.Size(1012, 387);
-            this.rtbMessage.TabIndex = 1;
-            this.rtbMessage.Text = "";
-            this.rtbMessage.TextChanged += new System.EventHandler(this.rtbMessage_TextChanged);
-            this.rtbMessage.Enter += new System.EventHandler(this.rtbMessage_Enter);
-            this.rtbMessage.Leave += new System.EventHandler(this.rtbMessage_Leave);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(870, 17);
-            this.toolStripStatusLabel1.Spring = true;
-            // 
-            // lblLastUpdated
-            // 
-            this.lblLastUpdated.Name = "lblLastUpdated";
-            this.lblLastUpdated.Size = new System.Drawing.Size(104, 17);
-            this.lblLastUpdated.Text = "Last Updated: N/A";
-            this.lblLastUpdated.Visible = false;
-            // 
             // NewCall
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,8 +301,6 @@ namespace CallLogTracker.gui.user_controls
             this.hdrGroup.Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hdrGroup)).EndInit();
             this.hdrGroup.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonGroupBox1.Panel)).EndInit();
             this.kryptonGroupBox1.Panel.ResumeLayout(false);
             this.kryptonGroupBox1.Panel.PerformLayout();
@@ -301,6 +308,8 @@ namespace CallLogTracker.gui.user_controls
             this.kryptonGroupBox1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

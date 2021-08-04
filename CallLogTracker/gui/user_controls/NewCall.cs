@@ -2,13 +2,8 @@
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CallLogTracker.gui.user_controls
@@ -69,11 +64,6 @@ namespace CallLogTracker.gui.user_controls
         {
             Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
 
-
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -185,7 +175,7 @@ namespace CallLogTracker.gui.user_controls
 
         private void rtbMessage_Leave(object sender, EventArgs e)
         {
-            rtbMessage.StateCommon.Border.Color1 = Color.White;
+            rtbMessage.StateCommon.Border.Color1 = Color.Black;
         }
         #endregion
     }

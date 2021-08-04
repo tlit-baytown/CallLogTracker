@@ -1,11 +1,5 @@
-﻿using CallLogTracker.Properties;
-using Newtonsoft.Json;
-using SendGrid.Helpers.Mail;
-using System;
+﻿using SendGrid.Helpers.Mail;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CallLogTracker.backend.notifications
 {

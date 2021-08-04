@@ -1,26 +1,18 @@
 ﻿using CallLogTracker.backend.database;
 using CallLogTracker.backend.database.wrappers;
-using CallLogTracker.backend.notifications;
 using CallLogTracker.gui.dialogs;
 using CallLogTracker.gui.user_controls;
 using CallLogTracker.Properties;
 using CallLogTracker.security;
-using CallLogTracker.utility;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
-using JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid;
 using MySql.Data.MySqlClient;
-using SendGrid.Helpers.Mail;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static CallLogTracker.utility.CEventArgs;
 
@@ -174,34 +166,40 @@ namespace CallLogTracker
         {
             if (e is LoginDoneEventArgs args)
             {
-                Global.Instance.CurrentUser = args.LoggedInUser;
                 cmbUsers.ComboBox.DataSource = Global.Instance.Users;
 
                 if (cmbUsers.Items.Count > 0)
                 {
-                    int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
+                    int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == args.LoggedInUser.ID).First());
                     cmbUsers.SelectedIndex = index == -1 ? 0 : index;
 
-                    loggedIn = true;
+                    Global.Instance.CurrentUser = args.LoggedInUser;
+
                     UpdateTitleText();
 
                     RefreshWorkspace();
+
+                    loggedIn = true;
                 }
             }
             else if (e is UserCreatedEventArgs a)
             {
-                Global.Instance.CurrentUser = a.CreatedUser;
                 cmbUsers.ComboBox.DataSource = Global.Instance.Users;
 
                 if (cmbUsers.Items.Count > 0)
                 {
-                    int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
+                    loggedIn = true;
+
+                    int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == a.CreatedUser.ID).First());
                     cmbUsers.SelectedIndex = index == -1 ? 0 : index;
 
-                    loggedIn = true;
+                    Global.Instance.CurrentUser = a.CreatedUser;
+
                     UpdateTitleText();
 
                     RefreshWorkspace();
+
+                    loggedIn = true;
                 }
             }
         }
@@ -212,7 +210,7 @@ namespace CallLogTracker
             Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Checking database connection. Please wait...");
         }
 
-        
+
 
         public void LogOut()
         {
@@ -317,7 +315,7 @@ namespace CallLogTracker
         {
             if (Global.Instance.DatabaseConnected)
             {
-                if (Global.Instance.CurrentUser != null)
+                if (Global.Instance.CurrentUser != null & loggedIn)
                 {
                     User selectedUser = cmbUsers.Items[cmbUsers.SelectedIndex] as User;
                     if (selectedUser.ID != Global.Instance.CurrentUser.ID)
@@ -332,7 +330,7 @@ namespace CallLogTracker
                         {
                             CMessageBox.Show("Invalid password!", "Not Authenticated", MessageBoxButtons.OK, Resources.error_64x64);
                             Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> {Global.Instance.CurrentUser.Name} attempted to sign into {selectedUser.Name}'s account.");
-                            
+
                             int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
                             cmbUsers.SelectedIndex = index == -1 ? 0 : index;
                         }

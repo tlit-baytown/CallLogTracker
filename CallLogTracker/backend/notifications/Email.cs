@@ -1,13 +1,8 @@
 ﻿using CallLogTracker.Properties;
 using SendGrid;
 using SendGrid.Helpers.Mail;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CallLogTracker.backend.notifications

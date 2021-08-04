@@ -1,10 +1,5 @@
 ﻿using CallLogTracker.backend.database.wrappers;
 using CallLogTracker.utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CallLogTracker
 {
@@ -17,7 +12,7 @@ namespace CallLogTracker
         {
             get
             {
-                lock(padlock)
+                lock (padlock)
                 {
                     if (instance == null)
                         instance = new Global();
@@ -28,7 +23,7 @@ namespace CallLogTracker
 
         private Global()
         {
-            
+
         }
 
         public bool DatabaseConnected { get; set; } = false;
@@ -37,7 +32,7 @@ namespace CallLogTracker
 
         public SortableBindingList<User> Users { get; set; } = new SortableBindingList<User>();
         public SortableBindingList<Company> Companies { get; set; } = new SortableBindingList<Company>();
-        public SortableBindingList<Call> CallsToday { get; set;  } = new SortableBindingList<Call>();
+        public SortableBindingList<Call> CallsToday { get; set; } = new SortableBindingList<Call>();
 
         public User CurrentUser { get; set; } = null;
         public Company CurrentCompany { get; set; } = null;

@@ -1,9 +1,7 @@
 ﻿using CallLogTracker.Properties;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
@@ -19,7 +17,7 @@ namespace CallLogTracker.backend.notifications
         {
             get
             {
-                lock(padlock)
+                lock (padlock)
                 {
                     if (instance == null)
                         instance = new SMS();

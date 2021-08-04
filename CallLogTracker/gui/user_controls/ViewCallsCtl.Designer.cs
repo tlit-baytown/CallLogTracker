@@ -31,18 +31,13 @@ namespace CallLogTracker.gui.user_controls
         {
             JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
+            this.btnNotify = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.chkOnlyCallsToday = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btnEdit = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btnRefresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.dgCalls = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid();
-            this.dateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.urgentColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.nameColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.phoneColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
-            this.messageColumn = new ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn();
             this.groupBox = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
             this.getCallsBGWorker = new System.ComponentModel.BackgroundWorker();
-            this.btnNotify = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
             this.kryptonHeaderGroup1.Panel.SuspendLayout();
@@ -70,6 +65,13 @@ namespace CallLogTracker.gui.user_controls
             this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Calls";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = null;
             this.kryptonHeaderGroup1.ValuesSecondary.Heading = "This grid displays all phone calls in the system for the current user.";
+            // 
+            // btnNotify
+            // 
+            this.btnNotify.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
+            this.btnNotify.Text = "Notify";
+            this.btnNotify.UniqueName = "02F4C5D7D27E44EEFC8DC905C3AAB7F6";
+            this.btnNotify.Click += new System.EventHandler(this.btnNotify_Click);
             // 
             // chkOnlyCallsToday
             // 
@@ -106,12 +108,6 @@ namespace CallLogTracker.gui.user_controls
             this.dgCalls.AllowDrop = true;
             this.dgCalls.AllowUserToAddRows = false;
             this.dgCalls.AllowUserToDeleteRows = false;
-            this.dgCalls.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dateColumn,
-            this.urgentColumn,
-            this.nameColumn,
-            this.phoneColumn,
-            this.messageColumn});
             this.dgCalls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgCalls.FillMode = JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.FillMode.GROUPSANDNODES;
             this.dgCalls.GroupBox = this.groupBox;
@@ -122,55 +118,8 @@ namespace CallLogTracker.gui.user_controls
             this.dgCalls.ReadOnly = true;
             this.dgCalls.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCalls.ShowEditingIcon = false;
-            this.dgCalls.Size = new System.Drawing.Size(1111, 350);
+            this.dgCalls.Size = new System.Drawing.Size(1111, 352);
             this.dgCalls.TabIndex = 1;
-            // 
-            // dateColumn
-            // 
-            this.dateColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.dateColumn.HeaderText = "Date Taken";
-            this.dateColumn.MaxInputLength = 20;
-            this.dateColumn.Name = "dateColumn";
-            this.dateColumn.ReadOnly = true;
-            this.dateColumn.ToolTipText = "The date this call was recorded to the database.";
-            // 
-            // urgentColumn
-            // 
-            this.urgentColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.urgentColumn.HeaderText = "Is Urgent?";
-            this.urgentColumn.MaxInputLength = 1;
-            this.urgentColumn.Name = "urgentColumn";
-            this.urgentColumn.ReadOnly = true;
-            this.urgentColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.urgentColumn.ToolTipText = "Indicates if the call was urgent (high priority) or not.";
-            this.urgentColumn.Width = 88;
-            // 
-            // nameColumn
-            // 
-            this.nameColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.nameColumn.HeaderText = "Name";
-            this.nameColumn.Name = "nameColumn";
-            this.nameColumn.ReadOnly = true;
-            this.nameColumn.ToolTipText = "The name of the person who called.";
-            this.nameColumn.Width = 150;
-            // 
-            // phoneColumn
-            // 
-            this.phoneColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.phoneColumn.HeaderText = "Phone #";
-            this.phoneColumn.Name = "phoneColumn";
-            this.phoneColumn.ReadOnly = true;
-            this.phoneColumn.ToolTipText = "The call-back phone number for the customer.";
-            this.phoneColumn.Width = 100;
-            // 
-            // messageColumn
-            // 
-            this.messageColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.messageColumn.HeaderText = "Message";
-            this.messageColumn.Name = "messageColumn";
-            this.messageColumn.ReadOnly = true;
-            this.messageColumn.ToolTipText = "The message pertaining to the phone call.";
-            this.messageColumn.Width = 632;
             // 
             // groupBox
             // 
@@ -188,13 +137,6 @@ namespace CallLogTracker.gui.user_controls
             this.getCallsBGWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.getCallsBGWorker_DoWork);
             this.getCallsBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.getCallsBGWorker_ProgressChanged);
             this.getCallsBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.getCallsBGWorker_RunWorkerCompleted);
-            // 
-            // btnNotify
-            // 
-            this.btnNotify.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
-            this.btnNotify.Text = "Notify";
-            this.btnNotify.UniqueName = "02F4C5D7D27E44EEFC8DC905C3AAB7F6";
-            this.btnNotify.Click += new System.EventHandler(this.btnNotify_Click);
             // 
             // ViewCallsCtl
             // 
@@ -222,11 +164,6 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup chkOnlyCallsToday;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnEdit;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnRefresh;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn urgentColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn nameColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn phoneColumn;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridViewTextBoxColumn messageColumn;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnNotify;
     }
 }
