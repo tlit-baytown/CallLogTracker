@@ -123,6 +123,47 @@ namespace CallLogTracker.backend.notifications
                 Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> No employees in list to notify!");
                 return false;
             }
+
+            //SMS Notifications
+            TemplateData data = new TemplateData()
+            {
+                Answerer = Global.Instance.CurrentUser.Name,
+                CallBackNumber = c.CallerPhone,
+                CallerName = c.CallerName,
+                EmailAddress = c.CallerEmail == null ? "" : c.CallerEmail,
+                Message = c.Message.Length > 255 ? c.Message.Substring(0, 255) : c.Message,
+                Subject = c.IsUrgent ? "Urgent message from Call Tracker" : "New message from Call Tracker",
+                TimeStamp = c.Date
+            };
+
+            List<string> phoneNumbers = new List<string>();
+            foreach (SMSRecipient s in SMSRecipients)
+                phoneNumbers.Add($"+1{s.User.PhoneNumber.Replace("-", "")}");
+
+            SMS.Instance.SendSMS(data.ToSMSMessage(), phoneNumbers);
+
+            //MessageObject obj = new MessageObject
+            //{
+            //    To = new List<EmailAddress>() { new EmailAddress("ethan.hann@protonmail.com", "Ethan") }
+            //};
+            //TemplateData data = new TemplateData()
+            //{
+            //    Answerer = "Charlie",
+            //    CallBackNumber = "832-599-4248",
+            //    CallerName = "Tony Smith",
+            //    EmailAddress = "tsmith@email.com",
+            //    Message = "User is having problems getting their computer to start. Requests a call back immediately.",
+            //    Subject = "Urgent message from Call Tracker",
+            //    TimeStamp = DateTime.Now
+            //};
+
+            //obj.Data.Add(data);
+
+            //Email.SendEmail(obj);
+
+            //SMS.Instance.SendSMS(obj.Data.First().ToSMSMessage(), new List<string> { "+18325994248" });
+
+            //Email Notifications
             return true;
 
         }
