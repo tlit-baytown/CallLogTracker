@@ -5,6 +5,14 @@ namespace CallLogTracker.utility
 {
     public class Enums
     {
+        public enum QType
+        {
+            SELECT,
+            INSERT,
+            UPDATE,
+            DELETE
+        }
+
         /// <summary>
         /// Enum representing the various validator errors from the <see cref="Validator"/> class.
         /// </summary>
@@ -40,6 +48,12 @@ namespace CallLogTracker.utility
             CompanyExists,
             [Description("The company must have at least one employee.\n")]
             Company_InvalidEmployeeCount,
+            [Description("The caller's name cannot be empty and should be between 1 and 255 chars.")]
+            Call_InvalidName,
+            [Description("The caller's phone number cannot be empty and should be 12 chars.")]
+            Call_InvalidPhone,
+            [Description("The message cannot be empty and should be between 1 and 65,535 chars.")]
+            Call_InvalidMessage,
             [Description("An exception occured while trying to validate the input. Please try again.")]
             Exception,
             [Description("No error has occured and all validation succeeded.")]

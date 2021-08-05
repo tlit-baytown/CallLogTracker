@@ -29,7 +29,7 @@ namespace CallLogTracker.gui.user_controls
         /// </summary>
         private void InitializeComponent()
         {
-            JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
+            JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection2 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
             this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.btnNotify = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.chkOnlyCallsToday = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
@@ -48,8 +48,8 @@ namespace CallLogTracker.gui.user_controls
             // kryptonHeaderGroup1
             // 
             this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
-            this.btnNotify,
             this.chkOnlyCallsToday,
+            this.btnNotify,
             this.btnEdit,
             this.btnRefresh});
             this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -62,12 +62,13 @@ namespace CallLogTracker.gui.user_controls
             this.kryptonHeaderGroup1.Panel.Controls.Add(this.groupBox);
             this.kryptonHeaderGroup1.Size = new System.Drawing.Size(1113, 443);
             this.kryptonHeaderGroup1.TabIndex = 0;
-            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "Calls";
+            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "";
             this.kryptonHeaderGroup1.ValuesPrimary.Image = null;
-            this.kryptonHeaderGroup1.ValuesSecondary.Heading = "This grid displays all phone calls in the system for the current user.";
+            this.kryptonHeaderGroup1.ValuesSecondary.Heading = "";
             // 
             // btnNotify
             // 
+            this.btnNotify.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
             this.btnNotify.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
             this.btnNotify.Text = "Notify";
             this.btnNotify.UniqueName = "02F4C5D7D27E44EEFC8DC905C3AAB7F6";
@@ -76,6 +77,7 @@ namespace CallLogTracker.gui.user_controls
             // chkOnlyCallsToday
             // 
             this.chkOnlyCallsToday.Checked = ComponentFactory.Krypton.Toolkit.ButtonCheckState.Checked;
+            this.chkOnlyCallsToday.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
             this.chkOnlyCallsToday.Text = "Show Only Calls from Today";
             this.chkOnlyCallsToday.ToolTipBody = "Show only those calls that are from today.";
             this.chkOnlyCallsToday.ToolTipTitle = "Quick Filter";
@@ -95,6 +97,7 @@ namespace CallLogTracker.gui.user_controls
             // 
             // btnRefresh
             // 
+            this.btnRefresh.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
             this.btnRefresh.Image = global::CallLogTracker.Properties.Resources.reload_16x16;
             this.btnRefresh.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Alternate;
             this.btnRefresh.Text = "Refresh";
@@ -111,14 +114,14 @@ namespace CallLogTracker.gui.user_controls
             this.dgCalls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgCalls.FillMode = JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.FillMode.GROUPSANDNODES;
             this.dgCalls.GroupBox = this.groupBox;
-            this.dgCalls.GroupCollection = outlookGridGroupCollection1;
+            this.dgCalls.GroupCollection = outlookGridGroupCollection2;
             this.dgCalls.Location = new System.Drawing.Point(0, 32);
             this.dgCalls.Name = "dgCalls";
             this.dgCalls.PreviousSelectedGroupRow = -1;
             this.dgCalls.ReadOnly = true;
             this.dgCalls.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCalls.ShowEditingIcon = false;
-            this.dgCalls.Size = new System.Drawing.Size(1111, 352);
+            this.dgCalls.Size = new System.Drawing.Size(1111, 377);
             this.dgCalls.TabIndex = 1;
             // 
             // groupBox

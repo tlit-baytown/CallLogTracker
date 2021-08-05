@@ -19,6 +19,9 @@ namespace CallLogTracker.gui.user_controls
         public ViewCallsCtl()
         {
             InitializeComponent();
+
+            dgCalls.RegisterGroupBoxEvents();
+            DataGridViewSetup.SetupDGV(dgCalls, false);
         }
 
         public void UpdateCalls()
@@ -28,8 +31,6 @@ namespace CallLogTracker.gui.user_controls
 
         private void ViewCallsCtl_Load(object sender, EventArgs e)
         {
-            dgCalls.RegisterGroupBoxEvents();
-            DataGridViewSetup.SetupDGV(dgCalls, false);
             LoadData();
         }
 

@@ -311,6 +311,12 @@ namespace CallLogTracker
                 LogOut();
         }
 
+        public void UpdateCalls()
+        {
+            //Update employee's calls in the grid
+            (dockingManager.PageForUniqueName("CallsPage") as ViewCallsPage).UpdateCalls();
+        }
+
         private void cmbUsers_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Global.Instance.DatabaseConnected)

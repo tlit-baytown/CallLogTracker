@@ -160,7 +160,6 @@
     <Compile Include="backend\database\wrappers\Call.cs" />
     <Compile Include="backend\database\wrappers\Company.cs" />
     <Compile Include="backend\database\wrappers\User.cs" />
-    <Compile Include="backend\Enums.cs" />
     <Compile Include="backend\notifications\MessageObject.cs" />
     <Compile Include="backend\notifications\Email.cs" />
     <Compile Include="backend\notifications\SMS.cs" />

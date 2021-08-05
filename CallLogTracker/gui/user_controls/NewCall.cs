@@ -1,10 +1,15 @@
 ﻿using CallLogTracker.backend.database.wrappers;
+using CallLogTracker.gui.dialogs;
+using CallLogTracker.Properties;
+using CallLogTracker.utility;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using static CallLogTracker.utility.Enums;
 
 namespace CallLogTracker.gui.user_controls
 {
@@ -18,6 +23,14 @@ namespace CallLogTracker.gui.user_controls
             InitializeComponent();
 
             newCall = new Call();
+            if (Global.Instance.CurrentCompany != null && Global.Instance.CurrentUser != null)
+            {
+                newCall.CompanyID = Global.Instance.CurrentCompany.ID;
+                newCall.UserID = Global.Instance.CurrentUser.ID;
+            }
+
+            newCall.Date = DateTime.Now;
+
             lblLastUpdated.Visible = false;
         }
 
@@ -55,16 +68,68 @@ namespace CallLogTracker.gui.user_controls
 
         private void btnSaveAndNotify_Click(object sender, EventArgs e)
         {
-            Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
+            if (Save())
+            {
+                Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
 
+                //NOTIFY RECIPIENTS
+
+                if (isEditing)
+                    Global.Instance.MainForm.DockingWorkspace.DockingManager.CloseRequest(new string[] { Global.Instance.SelectedPageUniqueName });
+                else
+                    Global.Instance.MainForm.DockingWorkspace.RemovePage(Global.Instance.SelectedPageUniqueName, true);
+            }
 
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
+            if (Save())
+            {
+                Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
 
+                if (isEditing)
+                    Global.Instance.MainForm.DockingWorkspace.DockingManager.CloseRequest(new string[] { Global.Instance.SelectedPageUniqueName });
+                else
+                    Global.Instance.MainForm.DockingWorkspace.RemovePage(Global.Instance.SelectedPageUniqueName, true);
+            }
+        }
 
+        private bool Save()
+        {
+            List<ValidatorError> errors = newCall.ValidateObject();
+
+            if (errors.Count > 0)
+            {
+                string richText = Validator.ToRichText(errors);
+                CRichMsgBox.Show("The call did not pass validation checks. Check below for issues:", "Invalid Call", richText, MessageBoxButtons.OK, Resources.error_64x64);
+                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Call could not be added because of validation checks.");
+                return false;
+            }
+
+            string callInsert = newCall.Insert();
+            if (!callInsert.Contains("error"))
+            {
+                //If this call is not already in the list, add it. Otherwise, update it.
+                if (Global.Instance.CallsToday.ToList().Where(c => c.ID == newCall.ID).Count() <= 0)
+                    Global.Instance.CallsToday.Add(newCall);
+                else
+                {
+                    int index = Global.Instance.CallsToday.ToList().FindIndex(c => c.ID == newCall.ID);
+                    if (index != -1)
+                        Global.Instance.CallsToday[index] = newCall;
+                    else
+                        Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Could not find call with id {newCall.ID} in the list of calls.");
+                }
+
+                Global.Instance.MainForm.UpdateCalls();
+
+                return true;
+            }
+
+            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> {callInsert}");
+
+            return false;
         }
 
         #region GUI Events

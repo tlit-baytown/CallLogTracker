@@ -3,7 +3,7 @@ using CallLogTracker.utility;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
-using static CallLogTracker.backend.Enums;
+using static CallLogTracker.utility.Enums;
 
 namespace CallLogTracker.backend.database
 {

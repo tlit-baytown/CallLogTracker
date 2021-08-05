@@ -3,7 +3,7 @@ using CallLogTracker.utility;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
-using static CallLogTracker.backend.Enums;
+using static CallLogTracker.utility.Enums;
 
 namespace CallLogTracker.backend.database
 {
@@ -12,7 +12,7 @@ namespace CallLogTracker.backend.database
         public static Call GetCall(int id)
         {
             Call c = null;
-            string q = Queries.BuildQuery(Enums.QType.SELECT, "Call", null, null, $"call_id={id}");
+            string q = Queries.BuildQuery(QType.SELECT, "Calls", null, null, $"call_id={id}");
 
             using (MySqlConnection con = Database.GetConnection())
             {
@@ -65,7 +65,7 @@ namespace CallLogTracker.backend.database
                 return calls;
             }
 
-            string q = $"SELECT * FROM `Call` WHERE " +
+            string q = $"SELECT * FROM Calls WHERE " +
                 $"(user_id={Global.Instance.CurrentUser.ID} AND " +
                 $"company_id={Global.Instance.CurrentCompany.ID});";
 
@@ -124,7 +124,7 @@ namespace CallLogTracker.backend.database
                 return calls;
             }
 
-            string q = $"SELECT * FROM `Call` WHERE date_recorded='{DateTime.Now.Date.ToShortDateString()}' AND " +
+            string q = $"SELECT * FROM Calls WHERE date_recorded='{DateTime.Now.Date.ToShortDateString()}' AND " +
                 $"(user_id={Global.Instance.CurrentUser.ID} AND " +
                 $"company_id={Global.Instance.CurrentCompany.ID});";
 
@@ -177,10 +177,11 @@ namespace CallLogTracker.backend.database
         public static int InsertCall(Call c)
         {
             int affectedRows = 0;
-            ArrayList columns = Database.GetColumns("Call");
-            columns.RemoveAt(0);
+            ArrayList columns = Database.GetColumns("Calls");
+            columns.RemoveAt(0); //remove id column
+            columns.RemoveAt(columns.Count - 1);//remove timestamp column
             columns.TrimToSize();
-            string q = Queries.BuildQuery(Enums.QType.INSERT, "Call", null, columns);
+            string q = Queries.BuildQuery(QType.INSERT, "Calls", null, columns);
 
             using (MySqlConnection con = Database.GetConnection())
             {
@@ -195,11 +196,15 @@ namespace CallLogTracker.backend.database
                         cmd.Parameters.AddWithValue("@1", c.UserID);
                         cmd.Parameters.AddWithValue("@2", c.CallerName);
                         cmd.Parameters.AddWithValue("@3", c.CallerPhone);
-                        cmd.Parameters.AddWithValue("@4", c.CallerEmail);
+
+                        if (c.CallerEmail == null)
+                            cmd.Parameters.AddWithValue("@4", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@4", c.CallerEmail);
+
                         cmd.Parameters.AddWithValue("@5", c.Message);
                         cmd.Parameters.AddWithValue("@6", c.IsUrgent);
                         cmd.Parameters.AddWithValue("@7", c.Date.ToShortDateString());
-                        cmd.Parameters.AddWithValue("@8", c.Timestamp);
 
                         cmd.Connection = con;
                         affectedRows = cmd.ExecuteNonQuery();
@@ -216,14 +221,17 @@ namespace CallLogTracker.backend.database
                 }
                 con.Close();
             }
-            return affectedRows != 0 ? Database.GetLastRowIDInserted("Call") : 0;
+            return affectedRows != 0 ? Database.GetLastRowIDInserted("Calls") : 0;
         }
 
         public static bool UpdateCall(Call c)
         {
             int affectedRows = 0;
-            ArrayList columns = Database.GetColumns("Call");
-            string q = Queries.BuildQuery(QType.UPDATE, "Call", null, columns, $"call_id={c.ID}");
+            ArrayList columns = Database.GetColumns("Calls");
+            columns.RemoveAt(columns.Count - 1); //remove timestamp column
+            columns.TrimToSize();
+
+            string q = Queries.BuildQuery(QType.UPDATE, "Calls", null, columns, $"call_id={c.ID}");
 
             using (MySqlConnection con = Database.GetConnection())
             {
@@ -239,11 +247,15 @@ namespace CallLogTracker.backend.database
                         cmd.Parameters.AddWithValue("@2", c.UserID);
                         cmd.Parameters.AddWithValue("@3", c.CallerName);
                         cmd.Parameters.AddWithValue("@4", c.CallerPhone);
-                        cmd.Parameters.AddWithValue("@5", c.CallerEmail);
+
+                        if (c.CallerEmail == null)
+                            cmd.Parameters.AddWithValue("@5", DBNull.Value);
+                        else
+                            cmd.Parameters.AddWithValue("@5", c.CallerEmail);
+
                         cmd.Parameters.AddWithValue("@6", c.Message);
                         cmd.Parameters.AddWithValue("@7", c.IsUrgent);
                         cmd.Parameters.AddWithValue("@8", c.Date.ToShortDateString());
-                        cmd.Parameters.AddWithValue("@9", c.Timestamp);
 
                         cmd.Connection = con;
                         affectedRows = cmd.ExecuteNonQuery();
@@ -266,7 +278,7 @@ namespace CallLogTracker.backend.database
         public static bool DeleteCall(Call c)
         {
             int affectedRows = 0;
-            string q = Queries.BuildQuery(QType.DELETE, "Call", null, null, $"call_id={c.ID}");
+            string q = Queries.BuildQuery(QType.DELETE, "Calls", null, null, $"call_id={c.ID}");
 
             using (MySqlConnection con = Database.GetConnection())
             {

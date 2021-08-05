@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Text;
-using static CallLogTracker.backend.Enums;
+using static CallLogTracker.utility.Enums;
 
 namespace CallLogTracker.backend.database
 {
