@@ -30,7 +30,7 @@ namespace CallLogTracker.backend.notifications
         public string ToSMSMessage()
         {
             StringBuilder bldr = new StringBuilder();
-            bldr.Append("An important phone call has happened while you were out.").Append("\n");
+            bldr.Append($"{Subject}").Append("\n");
             bldr.Append($"Call Taken By: {Answerer}\n");
             bldr.Append($"Caller: {CallerName}\n");
             bldr.Append($"Caller Email: {EmailAddress}\n");

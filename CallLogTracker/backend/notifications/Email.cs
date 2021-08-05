@@ -31,18 +31,3 @@ namespace CallLogTracker.backend.notifications
         }
     }
 }
-
-/*
- * {
-  "caller_name": "Tira",
-  "subject": "Important Call",
-  "answerer": "Charlie",
-  "call_back": "281-839-2829",
-  "email": "recipient@example.com",
-  "message": "User is having issues with her computer.",
-  "timestamp": "7/30/2021 2:01 PM CST"
-}
-SendGrid (for email notifications): https://app.sendgrid.com
-Twilio (for SMS notifications): https://console.twilio.com
-Both logins are in KeePass
- */
