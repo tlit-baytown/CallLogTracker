@@ -1,5 +1,6 @@
 ﻿using CallLogTracker.backend.database;
 using CallLogTracker.backend.database.wrappers;
+using CallLogTracker.backend.notifications;
 using CallLogTracker.utility;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
@@ -45,7 +46,14 @@ namespace CallLogTracker.gui.user_controls
 
         private void btnNotify_Click(object sender, EventArgs e)
         {
-
+            if (dgCalls.SelectedRows.Count == 1)
+            {
+                Call c = dgCalls.SelectedRows[0].Tag as Call;
+                if (Notifier.Instance.Notify(c))
+                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Recipients notified of call {c.ID}.{c.UserID}.{c.CompanyID}");
+                else
+                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> There was an error while trying to notify recipients of call {c.ID}.{c.UserID}.{c.CompanyID}.");
+            }
         }
 
         private void chkOnlyCallsToday_Click(object sender, EventArgs e)

@@ -170,6 +170,7 @@ namespace CallLogTracker
             this.btnEmailNotifications.Name = "btnEmailNotifications";
             this.btnEmailNotifications.Size = new System.Drawing.Size(187, 26);
             this.btnEmailNotifications.Text = "Email Notifications...";
+            this.btnEmailNotifications.Click += new System.EventHandler(this.btnEmailNotifications_Click);
             // 
             // btnSMSNotifications
             // 
@@ -177,6 +178,7 @@ namespace CallLogTracker
             this.btnSMSNotifications.Name = "btnSMSNotifications";
             this.btnSMSNotifications.Size = new System.Drawing.Size(187, 26);
             this.btnSMSNotifications.Text = "SMS Notifications...";
+            this.btnSMSNotifications.Click += new System.EventHandler(this.btnSMSNotifications_Click);
             // 
             // databaseToolStripMenuItem
             // 

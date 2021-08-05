@@ -1,5 +1,6 @@
 ﻿using CallLogTracker.backend.database;
 using CallLogTracker.backend.database.wrappers;
+using CallLogTracker.backend.notifications;
 using CallLogTracker.gui.dialogs;
 using CallLogTracker.gui.user_controls;
 using CallLogTracker.Properties;
@@ -61,6 +62,8 @@ namespace CallLogTracker
                 Settings.Default.UpgradeRequired = false;
                 Settings.Default.Save();
             }
+
+
         }
 
         private void btnNewDBConnection_Click(object sender, EventArgs e)
@@ -160,6 +163,8 @@ namespace CallLogTracker
                     LogIn();
                 }
             }
+
+            Notifier.Instance.Initialize();
         }
 
         private void ProcessLogin(object sender, EventArgs e)
@@ -208,6 +213,7 @@ namespace CallLogTracker
         {
             checkConnectionBGWorker.RunWorkerAsync();
             Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Checking database connection. Please wait...");
+
         }
 
 
@@ -364,6 +370,18 @@ namespace CallLogTracker
 
             //Update employee's calls in the grid
             (dockingManager.PageForUniqueName("CallsPage") as ViewCallsPage).UpdateCalls();
+        }
+
+        private void btnEmailNotifications_Click(object sender, EventArgs e)
+        {
+            NotificationsForm nf = new NotificationsForm(false);
+            nf.ShowDialog();
+        }
+
+        private void btnSMSNotifications_Click(object sender, EventArgs e)
+        {
+            NotificationsForm nf = new NotificationsForm();
+            nf.ShowDialog();
         }
     }
 }

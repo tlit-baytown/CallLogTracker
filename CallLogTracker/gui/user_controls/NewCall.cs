@@ -1,4 +1,5 @@
 ﻿using CallLogTracker.backend.database.wrappers;
+using CallLogTracker.backend.notifications;
 using CallLogTracker.gui.dialogs;
 using CallLogTracker.Properties;
 using CallLogTracker.utility;
@@ -72,14 +73,16 @@ namespace CallLogTracker.gui.user_controls
             {
                 Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
 
-                //NOTIFY RECIPIENTS
+                if (Notifier.Instance.Notify(newCall))
+                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Recipients notified of call {newCall.ID}.{newCall.UserID}.{newCall.CompanyID}");
+                else
+                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> There was an error while trying to notify recipients of call {newCall.ID}.{newCall.UserID}.{newCall.CompanyID}.");
 
                 if (isEditing)
                     Global.Instance.MainForm.DockingWorkspace.DockingManager.CloseRequest(new string[] { Global.Instance.SelectedPageUniqueName });
                 else
                     Global.Instance.MainForm.DockingWorkspace.RemovePage(Global.Instance.SelectedPageUniqueName, true);
             }
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)

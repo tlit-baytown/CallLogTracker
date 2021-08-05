@@ -160,10 +160,13 @@
     <Compile Include="backend\database\wrappers\Call.cs" />
     <Compile Include="backend\database\wrappers\Company.cs" />
     <Compile Include="backend\database\wrappers\User.cs" />
+    <Compile Include="backend\EmailRecipient.cs" />
     <Compile Include="backend\notifications\MessageObject.cs" />
     <Compile Include="backend\notifications\Email.cs" />
+    <Compile Include="backend\notifications\Notifier.cs" />
     <Compile Include="backend\notifications\SMS.cs" />
     <Compile Include="backend\notifications\TemplateData.cs" />
+    <Compile Include="backend\SMSRecipient.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="gui\dialogs\CMessageBox.cs" />
     <Compile Include="gui\dialogs\CRichMessageBox.cs" />
@@ -202,6 +205,12 @@
     </Compile>
     <Compile Include="gui\dialogs\RichMessageForm.Designer.cs">
       <DependentUpon>RichMessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\NotificationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\NotificationsForm.Designer.cs">
+      <DependentUpon>NotificationsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="gui\MainForm.cs">
       <SubType>Form</SubType>
@@ -262,6 +271,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="gui\dialogs\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\dialogs\NotificationsForm.resx">
+      <DependentUpon>NotificationsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

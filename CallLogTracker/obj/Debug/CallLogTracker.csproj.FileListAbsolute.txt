@@ -176,3 +176,4 @@ C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\C
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.csproj.CopyComplete
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.exe
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.pdb
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.NotificationsForm.resources
