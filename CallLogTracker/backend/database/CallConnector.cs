@@ -46,7 +46,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCall(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry("An exception has occured in GetCall(): {e.Message}");
                             }
                         }
                     }
@@ -59,15 +59,13 @@ namespace CallLogTracker.backend.database
         public static SortableBindingList<Call> GetCalls()
         {
             SortableBindingList<Call> calls = new SortableBindingList<Call>();
-            if (Global.Instance.CurrentUser == null || Global.Instance.CurrentCompany == null)
+            if (Global.Instance.CurrentCompany == null)
             {
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> : User or company was null while attempting to fetch calls. Returning an empty list...");
+                Global.Instance.MainForm.GetConsole().AddEntry(": Company was null while attempting to fetch calls. Returning an empty list...");
                 return calls;
             }
 
-            string q = $"SELECT * FROM Calls WHERE " +
-                $"(user_id={Global.Instance.CurrentUser.ID} AND " +
-                $"company_id={Global.Instance.CurrentCompany.ID});";
+            string q = $"SELECT * FROM Calls WHERE company_id={Global.Instance.CurrentCompany.ID};";
 
             using (MySqlConnection con = Database.GetConnection())
             {
@@ -105,7 +103,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCalls(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry("An exception has occured in GetCalls(): {e.Message}");
                             }
                         }
                     }
@@ -118,9 +116,67 @@ namespace CallLogTracker.backend.database
         public static SortableBindingList<Call> GetCallsForToday()
         {
             SortableBindingList<Call> calls = new SortableBindingList<Call>();
+            if (Global.Instance.CurrentCompany == null)
+            {
+                Global.Instance.MainForm.GetConsole().AddEntry(": Company was null while attempting to fetch calls. Returning an empty list...");
+                return calls;
+            }
+
+            string q = $"SELECT * FROM Calls WHERE date_recorded='{DateTime.Now.Date.ToShortDateString()}' AND " +
+                $"company_id={Global.Instance.CurrentCompany.ID};";
+
+            using (MySqlConnection con = Database.GetConnection())
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            try
+                            {
+                                while (reader.Read())
+                                {
+                                    Call c = new Call
+                                    {
+                                        ID = reader.GetInt32(0),
+                                        CompanyID = reader.GetInt32(1),
+                                        UserID = reader.GetInt32(2),
+                                        CallerName = reader.GetString(3),
+                                        CallerPhone = reader.GetString(4),
+                                        Message = reader.GetString(6),
+                                        IsUrgent = reader.GetBoolean(7),
+                                        Date = DateTime.Parse(reader.GetString(8)),
+                                        Timestamp = reader.GetDateTime(9)
+                                    };
+
+                                    if (reader.IsDBNull(5))
+                                        c.CallerEmail = "N/A";
+                                    else
+                                        c.CallerEmail = reader.GetString(5);
+
+                                    calls.Add(c);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Global.Instance.MainForm.GetConsole().AddEntry("An exception has occured in GetCallsForToday(): {e.Message}");
+                            }
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return calls;
+        }
+
+        public static SortableBindingList<Call> GetCallsForTodayCurrentUser()
+        {
+            SortableBindingList<Call> calls = new SortableBindingList<Call>();
             if (Global.Instance.CurrentUser == null || Global.Instance.CurrentCompany == null)
             {
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> : User or company was null while attempting to fetch calls. Returning an empty list...");
+                Global.Instance.MainForm.GetConsole().AddEntry(": User or company was null while attempting to fetch calls. Returning an empty list...");
                 return calls;
             }
 
@@ -164,7 +220,66 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCallsForToday(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry("An exception has occured in GetCallsForTodayCurrentUser(): {e.Message}");
+                            }
+                        }
+                    }
+                }
+                con.Close();
+            }
+            return calls;
+        }
+
+        public static SortableBindingList<Call> GetAllCallsCurrentUser()
+        {
+            SortableBindingList<Call> calls = new SortableBindingList<Call>();
+            if (Global.Instance.CurrentUser == null || Global.Instance.CurrentCompany == null)
+            {
+                Global.Instance.MainForm.GetConsole().AddEntry(": User or company was null while attempting to fetch calls. Returning an empty list...");
+                return calls;
+            }
+
+            string q = $"SELECT * FROM Calls WHERE " +
+                $"(user_id={Global.Instance.CurrentUser.ID} AND " +
+                $"company_id={Global.Instance.CurrentCompany.ID});";
+
+            using (MySqlConnection con = Database.GetConnection())
+            {
+                con.Open();
+                using (MySqlCommand cmd = new MySqlCommand(q, con))
+                {
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            try
+                            {
+                                while (reader.Read())
+                                {
+                                    Call c = new Call
+                                    {
+                                        ID = reader.GetInt32(0),
+                                        CompanyID = reader.GetInt32(1),
+                                        UserID = reader.GetInt32(2),
+                                        CallerName = reader.GetString(3),
+                                        CallerPhone = reader.GetString(4),
+                                        Message = reader.GetString(6),
+                                        IsUrgent = reader.GetBoolean(7),
+                                        Date = DateTime.Parse(reader.GetString(8)),
+                                        Timestamp = reader.GetDateTime(9)
+                                    };
+
+                                    if (reader.IsDBNull(5))
+                                        c.CallerEmail = "N/A";
+                                    else
+                                        c.CallerEmail = reader.GetString(5);
+
+                                    calls.Add(c);
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Global.Instance.MainForm.GetConsole().AddEntry("An exception has occured in GetAllCallsCurrentUser(): {e.Message}");
                             }
                         }
                     }
@@ -304,7 +419,7 @@ namespace CallLogTracker.backend.database
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in DeleteCall(): {ex.Message}");
+                    Global.Instance.MainForm.GetConsole().AddEntry("An exception has occured in DeleteCall(): {ex.Message}");
                     con.Close();
                     return false;
                 }

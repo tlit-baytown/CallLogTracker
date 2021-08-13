@@ -42,7 +42,7 @@ namespace CallLogTracker.gui.dialogs
             else
             {
                 CMessageBox.Show("Only 1 connection window can be opened at a time!", "Error", MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to open multiple database connections denied.");
+                Global.Instance.MainForm.GetConsole().AddEntry("Attempt to open multiple database connections denied.");
             }
         }
 
@@ -70,7 +70,7 @@ namespace CallLogTracker.gui.dialogs
                             }
                         }
 
-                        Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Database connected: {Database.Server}\\{Database.DB}");
+                        Global.Instance.MainForm.GetConsole().AddEntry($"Database connected: {Database.Server}\\{Database.DB}");
                         break;
                     }
                     default: //unknown error; display error code for debugging

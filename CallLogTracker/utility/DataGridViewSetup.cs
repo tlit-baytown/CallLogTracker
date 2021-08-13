@@ -33,6 +33,16 @@ namespace CallLogTracker.utility
                 Width = 100
             };
             columnsToAdd.Add(dateColumn);
+            DataGridViewColumn takenByColumn = new KryptonDataGridViewTextBoxColumn
+            {
+                HeaderText = "Taken By",
+                Name = "takenByColumn",
+                SortMode = DataGridViewColumnSortMode.Programmatic,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                Width = 150,
+                Visible = false
+            };
+            columnsToAdd.Add(takenByColumn);
             DataGridViewColumn urgentColumn = new KryptonDataGridViewTextBoxColumn
             {
                 HeaderText = "Is Urgent?",
@@ -73,6 +83,7 @@ namespace CallLogTracker.utility
             grid.Columns.AddRange(columnsToAdd.ToArray());
 
             grid.AddInternalColumn(dateColumn, new OutlookGridDateTimeGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
+            grid.AddInternalColumn(takenByColumn, new OutlookGridDateTimeGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
             grid.AddInternalColumn(urgentColumn, new OutlookGridDefaultGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
             grid.AddInternalColumn(nameColumn, new OutlookGridDefaultGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
             grid.AddInternalColumn(phoneColumn, new OutlookGridDefaultGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);

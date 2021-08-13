@@ -79,7 +79,7 @@ namespace CallLogTracker.gui.user_controls
             {
                 string richText = Validator.ToRichText(errors);
                 CRichMsgBox.Show("The employee did not pass validation checks. Check below for issues:", "Invalid Employee", richText, MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Employee could not be added because of validation checks.");
+                Global.Instance.MainForm.GetConsole().AddEntry("Employee could not be added because of validation checks.");
                 return;
             }
             else
@@ -103,7 +103,7 @@ namespace CallLogTracker.gui.user_controls
                         if (index != -1)
                             Global.Instance.Users[index] = newUser;
                         else
-                            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Could not find user with id {newUser.ID} in the list of users.");
+                            Global.Instance.MainForm.GetConsole().AddEntry($"Could not find user with id {newUser.ID} in the list of users.");
                     }
 
                     Global.Instance.MainForm.UpdateUsers();

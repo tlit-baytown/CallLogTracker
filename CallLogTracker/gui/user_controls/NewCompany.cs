@@ -62,7 +62,7 @@ namespace CallLogTracker.gui.user_controls
             {
                 string richText = Validator.ToRichText(errors);
                 CRichMsgBox.Show("The company did not pass validation checks. Check below for issues:", "Invalid Company", richText, MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Company could not be added because of validation checks.");
+                Global.Instance.MainForm.GetConsole().AddEntry("Company could not be added because of validation checks.");
                 return;
             }
             else
@@ -81,7 +81,7 @@ namespace CallLogTracker.gui.user_controls
                         if (index != -1)
                             Global.Instance.Companies[index] = newCompany;
                         else
-                            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Could not find company with id {newCompany.ID} in the list of companies.");
+                            Global.Instance.MainForm.GetConsole().AddEntry($"Could not find company with id {newCompany.ID} in the list of companies.");
                     }
 
                     DialogResult result = CMessageBox.Show("Would you like to make the newly added company the current one?\nThis action will log you out.", "Make Current?", MessageBoxButtons.YesNo, Resources.info_64x64);

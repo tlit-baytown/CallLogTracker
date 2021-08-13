@@ -8,6 +8,8 @@ using JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace CallLogTracker.gui.user_controls
@@ -15,6 +17,7 @@ namespace CallLogTracker.gui.user_controls
     public partial class ViewCallsCtl : UserControl
     {
         private bool onlyCallsToday = true;
+        private bool onlyCurrentUserCalls = true;
         private List<OutlookGridRow> rows = new List<OutlookGridRow>();
 
         public ViewCallsCtl()
@@ -39,7 +42,11 @@ namespace CallLogTracker.gui.user_controls
         {
             if (!getCallsBGWorker.IsBusy & Global.Instance.CurrentUser != null)
             {
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Loading calls for {Global.Instance.CurrentUser.Name}...");
+                if (onlyCurrentUserCalls)
+                    Global.Instance.MainForm.GetConsole().AddEntry($"Loading calls for {Global.Instance.CurrentUser.Name}...");
+                else
+                    Global.Instance.MainForm.GetConsole().AddEntry("Loading all calls...");
+
                 getCallsBGWorker.RunWorkerAsync();
             }
         }
@@ -50,15 +57,21 @@ namespace CallLogTracker.gui.user_controls
             {
                 Call c = dgCalls.SelectedRows[0].Tag as Call;
                 if (Notifier.Instance.Notify(c))
-                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Recipients notified of call {c.ID}.{c.UserID}.{c.CompanyID}");
+                    Global.Instance.MainForm.GetConsole().AddEntry($"Recipients notified of call {c.ID}.{c.UserID}.{c.CompanyID}");
                 else
-                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> There was an error while trying to notify recipients of call {c.ID}.{c.UserID}.{c.CompanyID}.");
+                    Global.Instance.MainForm.GetConsole().AddEntry($"There was an error while trying to notify recipients of call {c.ID}.{c.UserID}.{c.CompanyID}.");
             }
         }
 
         private void chkOnlyCallsToday_Click(object sender, EventArgs e)
         {
             onlyCallsToday = (chkOnlyCallsToday.Checked == ButtonCheckState.Checked);
+            LoadData();
+        }
+
+        private void chkOnlyCurrentUserCalls_Click(object sender, EventArgs e)
+        {
+            onlyCurrentUserCalls = (chkOnlyCurrentUserCalls.Checked == ButtonCheckState.Checked);
             LoadData();
         }
 
@@ -79,9 +92,13 @@ namespace CallLogTracker.gui.user_controls
 
         private void getCallsBGWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (onlyCallsToday)
+            if (onlyCallsToday && onlyCurrentUserCalls)
+                Global.Instance.CallsToday = CallConnector.GetCallsForTodayCurrentUser();
+            else if (onlyCallsToday && !onlyCurrentUserCalls)
                 Global.Instance.CallsToday = CallConnector.GetCallsForToday();
-            else
+            else if (!onlyCallsToday && onlyCurrentUserCalls)
+                Global.Instance.CallsToday = CallConnector.GetAllCallsCurrentUser();
+            else if (!onlyCallsToday && !onlyCurrentUserCalls)
                 Global.Instance.CallsToday = CallConnector.GetCalls();
 
             getCallsBGWorker.ReportProgress(10);
@@ -95,6 +112,7 @@ namespace CallLogTracker.gui.user_controls
                 row = new OutlookGridRow();
                 row.CreateCells(dgCalls, new object[] {
                     c.Date.ToShortDateString(),
+                    Global.Instance.Users.ToList().Where(u => u.ID == c.UserID).First().Name,
                     c.IsUrgent ? "*" : "",
                     c.CallerName,
                     c.CallerPhone,
@@ -110,14 +128,14 @@ namespace CallLogTracker.gui.user_controls
 
         private void getCallsBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Loading calls: {e.ProgressPercentage}%");
+            Global.Instance.MainForm.GetConsole().AddEntry($"Loading calls: {e.ProgressPercentage}%");
         }
 
         private void getCallsBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if (!Disposing && !IsDisposed)
             {
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Calls loaded!");
+                Global.Instance.MainForm.GetConsole().AddEntry("Calls loaded!");
 
                 dgCalls.SuspendLayout();
                 dgCalls.ClearInternalRows();
@@ -139,11 +157,62 @@ namespace CallLogTracker.gui.user_controls
                 }
 
                 dgCalls.ResumeLayout();
+
+                if (!onlyCurrentUserCalls)
+                    dgCalls.Columns["takenByColumn"].Visible = true;
+                else
+                    dgCalls.Columns["takenByColumn"].Visible = false;
+
+                UpdatePageName();
+
+                hdrGroup.ValuesSecondary.Heading = $"Total Calls: {dgCalls.Rows.Count}";
+
+                if (!onlyCurrentUserCalls)
+                    UpdateRowColors();
             }
             else
             {
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Call loading canceled!");
+                Global.Instance.MainForm.GetConsole().AddEntry("Call loading canceled!");
             }
+        }
+
+        private void UpdatePageName()
+        {
+            String titleText = "";
+
+            if (onlyCallsToday && onlyCurrentUserCalls)
+                titleText = $"Calls for {Global.Instance.CurrentUser.Name} on {DateTime.Now.ToLocalTime().ToShortDateString()}";
+            else if (onlyCallsToday && !onlyCurrentUserCalls)
+                titleText = $"All Calls on {DateTime.Now.ToLocalTime().ToShortDateString()}";
+            else if (!onlyCallsToday && onlyCurrentUserCalls)
+                titleText = $"All Calls for {Global.Instance.CurrentUser.Name}";
+            else if (!onlyCallsToday && !onlyCurrentUserCalls)
+                titleText = "All Calls";
+
+            GetParent().TextTitle = titleText;
+        }
+
+        //Highlights the current user's calls if we are showing all calls
+        private void UpdateRowColors()
+        {
+            dgCalls.SuspendLayout();
+            //192, 255, 192
+            foreach (DataGridViewRow row in dgCalls.Rows)
+            {
+                if ((row.Tag as Call).UserID == Global.Instance.CurrentUser.ID)
+                {
+                    row.DefaultCellStyle = new DataGridViewCellStyle
+                    {
+                        BackColor = Color.FromArgb(192, 255, 192) //light green
+                    };
+                }
+            }
+            dgCalls.ResumeLayout();
+        }
+
+        private KryptonPage GetParent()
+        {
+            return Parent as KryptonPage;
         }
     }
 }

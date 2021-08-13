@@ -77,7 +77,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetUser(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry($"An exception has occured in GetUser(): {e.Message}");
                             }
                         }
                     }
@@ -117,7 +117,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetUser(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry($"An exception has occured in GetUser(): {e.Message}");
                             }
                         }
                     }
@@ -170,7 +170,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetUsers(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry($"An exception has occured in GetUsers(): {e.Message}");
                             }
                         }
                     }
@@ -223,7 +223,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetUsers(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry($"An exception has occured in GetUsers(): {e.Message}");
                             }
                         }
                     }
@@ -363,7 +363,7 @@ namespace CallLogTracker.backend.database
                 }
                 catch (MySqlException ex)
                 {
-                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in DeleteUser(): {ex.Message}");
+                    Global.Instance.MainForm.GetConsole().AddEntry($"An exception has occured in DeleteUser(): {ex.Message}");
                     con.Close();
                     return false;
                 }

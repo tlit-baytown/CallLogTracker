@@ -74,9 +74,9 @@ namespace CallLogTracker.gui.user_controls
                 Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
 
                 if (Notifier.Instance.Notify(newCall))
-                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Recipients notified of call {newCall.ID}.{newCall.UserID}.{newCall.CompanyID}");
+                    Global.Instance.MainForm.GetConsole().AddEntry($"Recipients notified of call {newCall.ID}.{newCall.UserID}.{newCall.CompanyID}");
                 else
-                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> There was an error while trying to notify recipients of call {newCall.ID}.{newCall.UserID}.{newCall.CompanyID}.");
+                    Global.Instance.MainForm.GetConsole().AddEntry($"There was an error while trying to notify recipients of call {newCall.ID}.{newCall.UserID}.{newCall.CompanyID}.");
 
                 if (isEditing)
                     Global.Instance.MainForm.DockingWorkspace.DockingManager.CloseRequest(new string[] { Global.Instance.SelectedPageUniqueName });
@@ -106,7 +106,7 @@ namespace CallLogTracker.gui.user_controls
             {
                 string richText = Validator.ToRichText(errors);
                 CRichMsgBox.Show("The call did not pass validation checks. Check below for issues:", "Invalid Call", richText, MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Call could not be added because of validation checks.");
+                Global.Instance.MainForm.GetConsole().AddEntry("Call could not be added because of validation checks.");
                 return false;
             }
 
@@ -122,7 +122,7 @@ namespace CallLogTracker.gui.user_controls
                     if (index != -1)
                         Global.Instance.CallsToday[index] = newCall;
                     else
-                        Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Could not find call with id {newCall.ID} in the list of calls.");
+                        Global.Instance.MainForm.GetConsole().AddEntry($"Could not find call with id {newCall.ID} in the list of calls.");
                 }
 
                 Global.Instance.MainForm.UpdateCalls();
@@ -130,7 +130,7 @@ namespace CallLogTracker.gui.user_controls
                 return true;
             }
 
-            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> {callInsert}");
+            Global.Instance.MainForm.GetConsole().AddEntry($"{callInsert}");
 
             return false;
         }

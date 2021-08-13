@@ -124,7 +124,7 @@ namespace CallLogTracker.backend.notifications
 
             if (Settings.Default.SMSRecipients.Equals("None"))
             {
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> No employees in list to notify!");
+                Global.Instance.MainForm.GetConsole().AddEntry("No employees in list to notify!");
                 return false;
             }
 

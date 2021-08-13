@@ -35,11 +35,6 @@ namespace CallLogTracker
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //TODO: hook into console user control
-            //TextBoxWriter writer = new TextBoxWriter(txtConsole);
-            //Console.SetOut(writer);
-            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Call Logger Loaded!");
-
             InitializeSettings();
 
             DockingWorkspace = dockingManager.ManageWorkspace("MainWorkspace", dockableWorkspace);
@@ -52,6 +47,17 @@ namespace CallLogTracker
             Global.Instance.MainForm = this;
 
             cmbUsers.ComboBox.DisplayMember = "Name";
+
+            GetConsole().AddEntry("Call Logger Loaded!");
+        }
+
+        /// <summary>
+        /// Get the global log console.
+        /// </summary>
+        /// <returns>The log console where log entries are added.</returns>
+        public ConsoleCtl GetConsole()
+        {
+            return ConsolePg.GetConsole();
         }
 
         private void InitializeSettings()
@@ -62,8 +68,6 @@ namespace CallLogTracker
                 Settings.Default.UpgradeRequired = false;
                 Settings.Default.Save();
             }
-
-
         }
 
         private void btnNewDBConnection_Click(object sender, EventArgs e)
@@ -78,7 +82,7 @@ namespace CallLogTracker
             else
             {
                 CMessageBox.Show("Only 1 connection window can be opened at a time!", "Error", MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to open multiple database connections denied.");
+                GetConsole().AddEntry("Attempt to open multiple database connections denied.");
             }
         }
 
@@ -99,7 +103,7 @@ namespace CallLogTracker
                     {
                         if (Global.Instance.DatabaseConnected)
                             Global.Instance.MainForm.checkConnectionBGWorker.RunWorkerAsync();
-                        Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Database connected: {Database.Server}\\{Database.DB}");
+                        GetConsole().AddEntry("Database connected: {Database.Server}\\{Database.DB}");
                         break;
                     }
                     default: //unknown error; display error code for debugging
@@ -132,7 +136,7 @@ namespace CallLogTracker
 
         private void checkConnectionBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Checking database connection. Please wait... {e.ProgressPercentage}%");
+            GetConsole().AddEntry($"Checking database connection. Please wait... {e.ProgressPercentage}%");
         }
 
         private void checkConnectionBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -212,7 +216,7 @@ namespace CallLogTracker
         private void MainForm_Shown(object sender, EventArgs e)
         {
             checkConnectionBGWorker.RunWorkerAsync();
-            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Checking database connection. Please wait...");
+            GetConsole().AddEntry("Checking database connection. Please wait...");
 
         }
 
@@ -240,7 +244,7 @@ namespace CallLogTracker
             if (Global.Instance.CurrentUser == null)
             {
                 CMessageBox.Show("No employee is currently logged in!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to create a new call denied.");
+                GetConsole().AddEntry("Attempt to create a new call denied.");
                 return;
             }
 
@@ -254,7 +258,7 @@ namespace CallLogTracker
             if (Global.Instance.CurrentUser == null)
             {
                 CMessageBox.Show("No employee is currently logged in!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to create a new call denied.");
+                GetConsole().AddEntry("Attempt to create a new call denied.");
                 return;
             }
 
@@ -268,7 +272,7 @@ namespace CallLogTracker
             if (Global.Instance.CurrentUser == null)
             {
                 CMessageBox.Show("No employee is currently logged in!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to create a new call denied.");
+                GetConsole().AddEntry("Attempt to create a new call denied.");
                 return;
             }
 
@@ -282,7 +286,7 @@ namespace CallLogTracker
             if (Global.Instance.CurrentUser == null)
             {
                 CMessageBox.Show("There is no employee selected to edit!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to edit a non-existent employee denied.");
+                GetConsole().AddEntry("Attempt to edit a non-existent employee denied.");
                 return;
             }
 
@@ -296,7 +300,7 @@ namespace CallLogTracker
             if (Global.Instance.CurrentCompany == null)
             {
                 CMessageBox.Show("There is no company selected to edit!", "No Company", MessageBoxButtons.OK, Resources.error_64x64);
-                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> Attempt to edit a non-existent company denied.");
+                GetConsole().AddEntry("Attempt to edit a non-existent company denied.");
                 return;
             }
 
@@ -341,7 +345,7 @@ namespace CallLogTracker
                         else
                         {
                             CMessageBox.Show("Invalid password!", "Not Authenticated", MessageBoxButtons.OK, Resources.error_64x64);
-                            Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> {Global.Instance.CurrentUser.Name} attempted to sign into {selectedUser.Name}'s account.");
+                            GetConsole().AddEntry($"{Global.Instance.CurrentUser.Name} attempted to sign into {selectedUser.Name}'s account.");
 
                             int index = cmbUsers.Items.IndexOf(cmbUsers.Items.Cast<User>().Where(u => u.ID == Global.Instance.CurrentUser.ID).First());
                             cmbUsers.SelectedIndex = index == -1 ? 0 : index;

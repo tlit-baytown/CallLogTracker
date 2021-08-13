@@ -29,50 +29,44 @@ namespace CallLogTracker.gui.user_controls
         /// </summary>
         private void InitializeComponent()
         {
-            JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection2 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
-            this.kryptonHeaderGroup1 = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
-            this.btnNotify = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection outlookGridGroupCollection1 = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.OutlookGridGroupCollection();
+            this.hdrGroup = new ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup();
             this.chkOnlyCallsToday = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.chkOnlyCurrentUserCalls = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.btnNotify = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btnEdit = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btnRefresh = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.dgCalls = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid();
             this.groupBox = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
             this.getCallsBGWorker = new System.ComponentModel.BackgroundWorker();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).BeginInit();
-            this.kryptonHeaderGroup1.Panel.SuspendLayout();
-            this.kryptonHeaderGroup1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hdrGroup)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hdrGroup.Panel)).BeginInit();
+            this.hdrGroup.Panel.SuspendLayout();
+            this.hdrGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgCalls)).BeginInit();
             this.SuspendLayout();
             // 
-            // kryptonHeaderGroup1
+            // hdrGroup
             // 
-            this.kryptonHeaderGroup1.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
+            this.hdrGroup.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
             this.chkOnlyCallsToday,
+            this.chkOnlyCurrentUserCalls,
             this.btnNotify,
             this.btnEdit,
             this.btnRefresh});
-            this.kryptonHeaderGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.kryptonHeaderGroup1.Location = new System.Drawing.Point(0, 0);
-            this.kryptonHeaderGroup1.Name = "kryptonHeaderGroup1";
+            this.hdrGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.hdrGroup.Location = new System.Drawing.Point(0, 0);
+            this.hdrGroup.Name = "hdrGroup";
             // 
-            // kryptonHeaderGroup1.Panel
+            // hdrGroup.Panel
             // 
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.dgCalls);
-            this.kryptonHeaderGroup1.Panel.Controls.Add(this.groupBox);
-            this.kryptonHeaderGroup1.Size = new System.Drawing.Size(1113, 443);
-            this.kryptonHeaderGroup1.TabIndex = 0;
-            this.kryptonHeaderGroup1.ValuesPrimary.Heading = "";
-            this.kryptonHeaderGroup1.ValuesPrimary.Image = null;
-            this.kryptonHeaderGroup1.ValuesSecondary.Heading = "";
-            // 
-            // btnNotify
-            // 
-            this.btnNotify.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
-            this.btnNotify.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
-            this.btnNotify.Text = "Notify";
-            this.btnNotify.UniqueName = "02F4C5D7D27E44EEFC8DC905C3AAB7F6";
-            this.btnNotify.Click += new System.EventHandler(this.btnNotify_Click);
+            this.hdrGroup.Panel.Controls.Add(this.dgCalls);
+            this.hdrGroup.Panel.Controls.Add(this.groupBox);
+            this.hdrGroup.Size = new System.Drawing.Size(1113, 443);
+            this.hdrGroup.TabIndex = 0;
+            this.hdrGroup.ValuesPrimary.Heading = "";
+            this.hdrGroup.ValuesPrimary.Image = null;
+            this.hdrGroup.ValuesSecondary.Heading = "Total Calls: 0";
             // 
             // chkOnlyCallsToday
             // 
@@ -83,6 +77,22 @@ namespace CallLogTracker.gui.user_controls
             this.chkOnlyCallsToday.ToolTipTitle = "Quick Filter";
             this.chkOnlyCallsToday.UniqueName = "CE7C2F9E30E146FF59AA0DFA225F48B0";
             this.chkOnlyCallsToday.Click += new System.EventHandler(this.chkOnlyCallsToday_Click);
+            // 
+            // chkOnlyCurrentUserCalls
+            // 
+            this.chkOnlyCurrentUserCalls.Checked = ComponentFactory.Krypton.Toolkit.ButtonCheckState.Checked;
+            this.chkOnlyCurrentUserCalls.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
+            this.chkOnlyCurrentUserCalls.Text = "Show Only Your Calls";
+            this.chkOnlyCurrentUserCalls.UniqueName = "36F699B1ACC5488C2DA2CC95C7F189B8";
+            this.chkOnlyCurrentUserCalls.Click += new System.EventHandler(this.chkOnlyCurrentUserCalls_Click);
+            // 
+            // btnNotify
+            // 
+            this.btnNotify.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
+            this.btnNotify.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
+            this.btnNotify.Text = "Notify";
+            this.btnNotify.UniqueName = "02F4C5D7D27E44EEFC8DC905C3AAB7F6";
+            this.btnNotify.Click += new System.EventHandler(this.btnNotify_Click);
             // 
             // btnEdit
             // 
@@ -111,10 +121,11 @@ namespace CallLogTracker.gui.user_controls
             this.dgCalls.AllowDrop = true;
             this.dgCalls.AllowUserToAddRows = false;
             this.dgCalls.AllowUserToDeleteRows = false;
+            this.dgCalls.AllowUserToResizeRows = false;
             this.dgCalls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgCalls.FillMode = JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.FillMode.GROUPSANDNODES;
             this.dgCalls.GroupBox = this.groupBox;
-            this.dgCalls.GroupCollection = outlookGridGroupCollection2;
+            this.dgCalls.GroupCollection = outlookGridGroupCollection1;
             this.dgCalls.Location = new System.Drawing.Point(0, 32);
             this.dgCalls.Name = "dgCalls";
             this.dgCalls.PreviousSelectedGroupRow = -1;
@@ -145,14 +156,14 @@ namespace CallLogTracker.gui.user_controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.kryptonHeaderGroup1);
+            this.Controls.Add(this.hdrGroup);
             this.Name = "ViewCallsCtl";
             this.Size = new System.Drawing.Size(1113, 443);
             this.Load += new System.EventHandler(this.ViewCallsCtl_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1.Panel)).EndInit();
-            this.kryptonHeaderGroup1.Panel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.kryptonHeaderGroup1)).EndInit();
-            this.kryptonHeaderGroup1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hdrGroup.Panel)).EndInit();
+            this.hdrGroup.Panel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.hdrGroup)).EndInit();
+            this.hdrGroup.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgCalls)).EndInit();
             this.ResumeLayout(false);
 
@@ -160,7 +171,7 @@ namespace CallLogTracker.gui.user_controls
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup kryptonHeaderGroup1;
+        private ComponentFactory.Krypton.Toolkit.KryptonHeaderGroup hdrGroup;
         private JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid dgCalls;
         private JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox groupBox;
         private System.ComponentModel.BackgroundWorker getCallsBGWorker;
@@ -168,5 +179,6 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnEdit;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnRefresh;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnNotify;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup chkOnlyCurrentUserCalls;
     }
 }

@@ -65,7 +65,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCompany(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry($"An exception has occured in GetCompany(): {e.Message}");
                             }
                         }
                     }
@@ -106,7 +106,7 @@ namespace CallLogTracker.backend.database
                             }
                             catch (Exception e)
                             {
-                                Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in GetCompanies(): {e.Message}");
+                                Global.Instance.MainForm.GetConsole().AddEntry($"An exception has occured in GetCompanies(): {e.Message}");
                             }
                         }
                     }
@@ -224,7 +224,7 @@ namespace CallLogTracker.backend.database
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"{DateTime.Now.ToLocalTime()} -> An exception has occured in DeleteCompany(): {ex.Message}");
+                    Global.Instance.MainForm.GetConsole().AddEntry($"An exception has occured in DeleteCompany(): {ex.Message}");
                     con.Close();
                     return false;
                 }

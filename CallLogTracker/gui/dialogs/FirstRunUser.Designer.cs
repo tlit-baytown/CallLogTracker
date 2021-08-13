@@ -37,7 +37,9 @@ namespace CallLogTracker.gui.dialogs
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "FirstRunUser";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "No employees present in the database. Please create your account now.";
             this.Load += new System.EventHandler(this.FirstRunUser_Load);
