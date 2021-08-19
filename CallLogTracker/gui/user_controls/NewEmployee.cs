@@ -62,7 +62,8 @@ namespace CallLogTracker.gui.user_controls
 
         private void btnAddEmployee_Click(object sender, EventArgs e)
         {
-            Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
+            if (GetParent() != null)
+                Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
 
             List<ValidatorError> errors = newUser.ValidateObject();
 

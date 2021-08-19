@@ -10,6 +10,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using static CallLogTracker.utility.CEventArgs;
 using static CallLogTracker.utility.Enums;
 
 namespace CallLogTracker.gui.user_controls
@@ -18,6 +19,8 @@ namespace CallLogTracker.gui.user_controls
     {
         private readonly Company newCompany;
         private bool isEditing = false;
+
+        public EventHandler CompanyCreated;
 
         public NewCompany()
         {
@@ -54,7 +57,8 @@ namespace CallLogTracker.gui.user_controls
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
+            if (GetParent() != null)
+                Global.Instance.SelectedPageUniqueName = GetParent().UniqueName;
 
             List<ValidatorError> errors = newCompany.ValidateObject();
 
@@ -83,6 +87,8 @@ namespace CallLogTracker.gui.user_controls
                         else
                             Global.Instance.MainForm.GetConsole().AddEntry($"Could not find company with id {newCompany.ID} in the list of companies.");
                     }
+
+                    CompanyCreated?.Invoke(this, new CompanyCreatedEventArgs(newCompany));
 
                     DialogResult result = CMessageBox.Show("Would you like to make the newly added company the current one?\nThis action will log you out.", "Make Current?", MessageBoxButtons.YesNo, Resources.info_64x64);
                     if (result == DialogResult.Yes)

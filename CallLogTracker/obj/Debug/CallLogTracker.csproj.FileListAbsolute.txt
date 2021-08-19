@@ -177,3 +177,9 @@ C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\C
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.exe
 C:\Users\Windows10-VM\Documents\GitHub\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.pdb
 D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.NotificationsForm.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\CallLogTracker.exe.manifest
+D:\Documents\Projects\CallLogTracker\CallLogTracker\bin\Debug\CallLogTracker.application
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.TrustInfo.xml
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.exe.manifest
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.application
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.FirstRunCompany.resources

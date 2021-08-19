@@ -27,6 +27,8 @@ namespace CallLogTracker.backend.database.wrappers
 
         public bool IsUrgent { get; set; }
 
+        public bool IsResolved { get; set; }
+
         public List<ValidatorError> ValidateObject()
         {
             List<ValidatorError> errors = new List<ValidatorError>();
@@ -73,6 +75,11 @@ namespace CallLogTracker.backend.database.wrappers
                 return $"{DateTime.Now.ToLocalTime()} -> Call with id {{{ID}}} has been deleted.";
             else
                 return $"{DateTime.Now.ToLocalTime()} -> An error has occured while trying to delete a call in the database.";
+        }
+
+        public override string ToString()
+        {
+            return $"{ID} - {CallerName} - {Timestamp.ToShortDateString()} {Timestamp.ToLocalTime().ToShortTimeString()}";
         }
     }
 }

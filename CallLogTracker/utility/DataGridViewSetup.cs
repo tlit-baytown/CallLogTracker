@@ -53,6 +53,16 @@ namespace CallLogTracker.utility
                 MaxInputLength = 1
             };
             columnsToAdd.Add(urgentColumn);
+            DataGridViewColumn unresolvedColumn = new KryptonDataGridViewTextBoxColumn
+            {
+                HeaderText = "Is Resolved?",
+                Name = "unresolvedColumn",
+                SortMode = DataGridViewColumnSortMode.Programmatic,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader,
+                Width = 88,
+                MaxInputLength = 1
+            };
+            columnsToAdd.Add(unresolvedColumn);
             DataGridViewColumn nameColumn = new KryptonDataGridViewTextBoxColumn
             {
                 HeaderText = "Name",
@@ -85,6 +95,7 @@ namespace CallLogTracker.utility
             grid.AddInternalColumn(dateColumn, new OutlookGridDateTimeGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
             grid.AddInternalColumn(takenByColumn, new OutlookGridDateTimeGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
             grid.AddInternalColumn(urgentColumn, new OutlookGridDefaultGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
+            grid.AddInternalColumn(unresolvedColumn, new OutlookGridDefaultGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
             grid.AddInternalColumn(nameColumn, new OutlookGridDefaultGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
             grid.AddInternalColumn(phoneColumn, new OutlookGridDefaultGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);
             grid.AddInternalColumn(messageColumn, new OutlookGridDefaultGroup(null) { OneItemText = "1 call", XXXItemsText = " calls" }, SortOrder.None, -1, -1);

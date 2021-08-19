@@ -39,6 +39,10 @@ namespace CallLogTracker.gui.user_controls
             this.dgCalls = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGrid();
             this.groupBox = new JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.KryptonOutlookGridGroupBox();
             this.getCallsBGWorker = new System.ComponentModel.BackgroundWorker();
+            this.chkOnlyUnresolved = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.btnDeleteCall = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.btnNotifyAllUnresolved = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.deleteBGWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.hdrGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hdrGroup.Panel)).BeginInit();
             this.hdrGroup.Panel.SuspendLayout();
@@ -51,8 +55,11 @@ namespace CallLogTracker.gui.user_controls
             this.hdrGroup.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
             this.chkOnlyCallsToday,
             this.chkOnlyCurrentUserCalls,
+            this.chkOnlyUnresolved,
             this.btnNotify,
+            this.btnNotifyAllUnresolved,
             this.btnEdit,
+            this.btnDeleteCall,
             this.btnRefresh});
             this.hdrGroup.Dock = System.Windows.Forms.DockStyle.Fill;
             this.hdrGroup.Location = new System.Drawing.Point(0, 0);
@@ -88,17 +95,15 @@ namespace CallLogTracker.gui.user_controls
             // 
             // btnNotify
             // 
-            this.btnNotify.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
             this.btnNotify.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
+            this.btnNotify.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
             this.btnNotify.Text = "Notify";
             this.btnNotify.UniqueName = "02F4C5D7D27E44EEFC8DC905C3AAB7F6";
             this.btnNotify.Click += new System.EventHandler(this.btnNotify_Click);
             // 
             // btnEdit
             // 
-            this.btnEdit.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
             this.btnEdit.Image = global::CallLogTracker.Properties.Resources.edit_16x16;
-            this.btnEdit.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Alternate;
             this.btnEdit.Text = "Edit Selected Call...";
             this.btnEdit.ToolTipBody = "Edit the selected row in a pop-up editor.";
             this.btnEdit.ToolTipTitle = "Edit";
@@ -107,9 +112,7 @@ namespace CallLogTracker.gui.user_controls
             // 
             // btnRefresh
             // 
-            this.btnRefresh.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
             this.btnRefresh.Image = global::CallLogTracker.Properties.Resources.reload_16x16;
-            this.btnRefresh.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Alternate;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.ToolTipBody = "Reload the data from the database.";
             this.btnRefresh.ToolTipTitle = "Refresh";
@@ -132,7 +135,7 @@ namespace CallLogTracker.gui.user_controls
             this.dgCalls.ReadOnly = true;
             this.dgCalls.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgCalls.ShowEditingIcon = false;
-            this.dgCalls.Size = new System.Drawing.Size(1111, 377);
+            this.dgCalls.Size = new System.Drawing.Size(1111, 353);
             this.dgCalls.TabIndex = 1;
             // 
             // groupBox
@@ -151,6 +154,37 @@ namespace CallLogTracker.gui.user_controls
             this.getCallsBGWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.getCallsBGWorker_DoWork);
             this.getCallsBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.getCallsBGWorker_ProgressChanged);
             this.getCallsBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.getCallsBGWorker_RunWorkerCompleted);
+            // 
+            // chkOnlyUnresolved
+            // 
+            this.chkOnlyUnresolved.Checked = ComponentFactory.Krypton.Toolkit.ButtonCheckState.Checked;
+            this.chkOnlyUnresolved.HeaderLocation = ComponentFactory.Krypton.Toolkit.HeaderLocation.SecondaryHeader;
+            this.chkOnlyUnresolved.Text = "Show Only Un-Resolved Calls";
+            this.chkOnlyUnresolved.UniqueName = "3C55906A99F04276BAA6C3D40D502510";
+            this.chkOnlyUnresolved.Click += new System.EventHandler(this.chkOnlyUnresolved_Click);
+            // 
+            // btnDeleteCall
+            // 
+            this.btnDeleteCall.Image = global::CallLogTracker.Properties.Resources.delete_16x16;
+            this.btnDeleteCall.Text = "Delete Selected Call";
+            this.btnDeleteCall.UniqueName = "0CDB89DF2CFF4A9DCD9644050492EAC7";
+            this.btnDeleteCall.Click += new System.EventHandler(this.btnDeleteCall_Click);
+            // 
+            // btnNotifyAllUnresolved
+            // 
+            this.btnNotifyAllUnresolved.Image = global::CallLogTracker.Properties.Resources.notification_16x16;
+            this.btnNotifyAllUnresolved.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
+            this.btnNotifyAllUnresolved.Text = "Notify About Unresolved";
+            this.btnNotifyAllUnresolved.UniqueName = "0E64527BE35C46C5DEA2302D73AFF12D";
+            this.btnNotifyAllUnresolved.Click += new System.EventHandler(this.btnNotifyAllUnresolved_Click);
+            // 
+            // deleteBGWorker
+            // 
+            this.deleteBGWorker.WorkerReportsProgress = true;
+            this.deleteBGWorker.WorkerSupportsCancellation = true;
+            this.deleteBGWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.deleteBGWorker_DoWork);
+            this.deleteBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.deleteBGWorker_ProgressChanged);
+            this.deleteBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.deleteBGWorker_RunWorkerCompleted);
             // 
             // ViewCallsCtl
             // 
@@ -180,5 +214,9 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnRefresh;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnNotify;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup chkOnlyCurrentUserCalls;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup chkOnlyUnresolved;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnNotifyAllUnresolved;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnDeleteCall;
+        private System.ComponentModel.BackgroundWorker deleteBGWorker;
     }
 }

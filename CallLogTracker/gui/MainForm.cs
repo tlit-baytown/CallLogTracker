@@ -154,21 +154,52 @@ namespace CallLogTracker
                 dbform.ShowDialog();
             }
 
-            if (Database.GetNumberOfRows("User") == 0)
+            if (Database.GetNumberOfRows("Company") == 0)
             {
-                FirstRunUser firstRunUser = new FirstRunUser();
-                firstRunUser.UserCreated += ProcessLogin;
-                firstRunUser.ShowDialog();
+                FirstRunCompany firstRunCompany = new FirstRunCompany();
+                firstRunCompany.CompanyCreated += ProcessCompany;
+                firstRunCompany.ShowDialog();
             }
             else
             {
-                if (Global.Instance.NumberOfLoginFormsOpen == 0)
+                if (Database.GetNumberOfRows("User") == 0)
                 {
-                    LogIn();
+                    FirstRunUser firstRunUser = new FirstRunUser();
+                    firstRunUser.UserCreated += ProcessLogin;
+                    firstRunUser.ShowDialog();
+                }
+                else
+                {
+                    if (Global.Instance.NumberOfLoginFormsOpen == 0)
+                    {
+                        LogIn();
+                    }
                 }
             }
 
             Notifier.Instance.Initialize();
+        }
+
+        private void ProcessCompany(object sender, EventArgs e)
+        {
+            if (e is CompanyCreatedEventArgs args)
+            {
+                Global.Instance.CurrentCompany = args.CreatedCompany;
+
+                if (Database.GetNumberOfRows("User") == 0)
+                {
+                    FirstRunUser firstRunUser = new FirstRunUser();
+                    firstRunUser.UserCreated += ProcessLogin;
+                    firstRunUser.ShowDialog();
+                }
+                else
+                {
+                    if (Global.Instance.NumberOfLoginFormsOpen == 0)
+                    {
+                        LogIn();
+                    }
+                }
+            }
         }
 
         private void ProcessLogin(object sender, EventArgs e)

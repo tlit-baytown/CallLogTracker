@@ -1,0 +1,14 @@
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.csproj.AssemblyReference.cache
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.dialogs.DatabaseConnection.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.dialogs.FirstRunUser.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.dialogs.LoginForm.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.dialogs.NotificationsForm.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.MainForm.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.user_controls.ConsoleCtl.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.user_controls.NewCall.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.user_controls.NewCompany.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.user_controls.NewEmployee.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.gui.user_controls.ViewCallsCtl.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.Properties.Resources.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.csproj.GenerateResource.cache
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Release\CallLogTracker.csproj.CoreCompileInputs.cache
