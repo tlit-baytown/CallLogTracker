@@ -56,21 +56,135 @@ namespace CallLogTracker.gui.user_controls
             }
         }
 
+        List<Call> callsToNotifyAbout;
         private void btnNotify_Click(object sender, EventArgs e)
         {
-            if (dgCalls.SelectedRows.Count == 1)
+            callsToNotifyAbout = new List<Call>();
+
+            if (dgCalls.SelectedRows.Count > 0)
             {
-                Call c = dgCalls.SelectedRows[0].Tag as Call;
-                if (Notifier.Instance.Notify(c))
-                    Global.Instance.MainForm.GetConsole().AddEntry($"Recipients notified of call {c.ID}.{c.UserID}.{c.CompanyID}");
-                else
-                    Global.Instance.MainForm.GetConsole().AddEntry($"There was an error while trying to notify recipients of call {c.ID}.{c.UserID}.{c.CompanyID}.");
+                foreach (DataGridViewRow row in dgCalls.SelectedRows)
+                {
+                    if (row.Tag is Call c)
+                        callsToNotifyAbout.Add(c);
+                }
+
+                if (!notifyBGWorker.IsBusy)
+                {
+                    Global.Instance.MainForm.GetConsole().AddEntry("Notifing users about selected calls...");
+                    notifyBGWorker.RunWorkerAsync();
+                }
+            }
+            else
+            {
+                CMessageBox.Show("No Calls were selected. There is nothing to notify users about.", "No Calls", MessageBoxButtons.OK, Resources.error_64x64);
             }
         }
 
         private void btnNotifyAllUnresolved_Click(object sender, EventArgs e)
         {
+            callsToNotifyAbout = new List<Call>();
+            foreach (DataGridViewRow row in dgCalls.Rows)
+            {
+                if (row.Tag is Call c)
+                    if (!c.IsResolved)
+                        callsToNotifyAbout.Add(c);
+            }
 
+            if (callsToNotifyAbout.Count == 0)
+            {
+                CMessageBox.Show("There are currently no \"Unresolved\" calls. Nothing to notify about.", "No Calls", MessageBoxButtons.OK, Resources.info_64x64);
+                return;
+            }
+
+            if (!notifyBGWorker.IsBusy)
+            {
+                Global.Instance.MainForm.GetConsole().AddEntry("Notifing users about unresolved calls...");
+                notifyBGWorker.RunWorkerAsync();
+            }
+        }
+
+        int numberOfCallsNotified = 0;
+        Call current;
+        private void notifyBGWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            foreach (Call c in callsToNotifyAbout)
+            {
+                current = c;
+                if (Notifier.Instance.Notify(current))
+                {
+                    numberOfCallsNotified++;
+                }
+                else
+                    Global.Instance.MainForm.GetConsole().AddEntry($"There was an error while trying to notify recipients of call {c.ID}.{c.UserID}.{c.CompanyID}.");
+            }
+        }
+
+        private void notifyBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            Global.Instance.MainForm.GetConsole().AddEntry($"Recipients notified of call {current.ID}.{current.UserID}.{current.CompanyID}");
+        }
+
+        private void notifyBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            CMessageBox.Show($"Notified users about {numberOfCallsNotified} Call(s).\n{callsToNotifyAbout.Count - numberOfCallsNotified} Call(s) could not be processed.", "Success", MessageBoxButtons.OK, Resources.success_64x64);
+        }
+
+        List<Call> callsToUpdate;
+        private void btnMarkResolved_Click(object sender, EventArgs e)
+        {
+            if (dgCalls.SelectedRows.Count > 0)
+            {
+                callsToUpdate = new List<Call>();
+                foreach (DataGridViewRow row in dgCalls.SelectedRows)
+                {
+                    if (row.Tag is Call c)
+                    {
+                        if (!c.IsResolved)
+                            callsToUpdate.Add(c);
+                    }
+                }
+
+                if (!updateBGWorker.IsBusy)
+                {
+                    updateBGWorker.RunWorkerAsync();
+                    Global.Instance.MainForm.GetConsole().AddEntry("Updating all selected calls to \"Resolved\" status...");
+                }
+            }
+        }
+
+        private Call currentCall;
+        private void updateBGWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if (callsToUpdate != null)
+                updateBGWorker.ReportProgress(100);
+
+            foreach (Call c in callsToUpdate)
+            {
+                currentCall = c;
+                currentCall.IsResolved = true;
+                string msg = currentCall.Update();
+                if (msg.Contains("error"))
+                {
+                    Global.Instance.MainForm.GetConsole().AddEntry("There was an unexpected error updating the call's status. Please try again.");
+                    updateBGWorker.ReportProgress(100);
+                }
+            }
+        }
+
+        private void updateBGWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (currentCall != null)
+                Global.Instance.MainForm.GetConsole().AddEntry($"Updating status of call: {currentCall.ID}.{currentCall.UserID}.{currentCall.CompanyID}... {e.ProgressPercentage}%");
+        }
+
+        private void updateBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (!Disposing && !IsDisposed)
+            {
+                LoadData();
+                CMessageBox.Show($"{callsToUpdate.Count} Call(s) have been marked as resolved.", "Success", MessageBoxButtons.OK, Resources.success_64x64);
+            }
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -79,7 +193,19 @@ namespace CallLogTracker.gui.user_controls
             {
                 DataGridViewRow r = dgCalls.SelectedRows[0];
                 Call c = r.Tag as Call;
-                Global.Instance.MainForm.DockingWorkspace.DockingManager.AddFloatingWindow("Floating", new KryptonPage[] { new NewCallPage(c) });
+
+                if (c.UserID != Global.Instance.CurrentUser.ID)
+                {
+                    CMessageBox.Show("You cannot edit calls taken by someone else!", "Error", MessageBoxButtons.OK, Resources.error_64x64);
+                    return;
+                }
+
+                if (c.IsResolved)
+                {
+                    DialogResult result = CMessageBox.Show("The selected call has been marked as \"Resolved\".\n Are you sure you want to edit it?", "Error", MessageBoxButtons.YesNo, Resources.warning_64x64);
+                    if (result == DialogResult.Yes)
+                        Global.Instance.MainForm.DockingWorkspace.DockingManager.AddFloatingWindow("Floating", new KryptonPage[] { new NewCallPage(c) });
+                }
             }
         }
 
@@ -353,6 +479,5 @@ namespace CallLogTracker.gui.user_controls
         {
             return Parent as KryptonPage;
         }
-        
     }
 }

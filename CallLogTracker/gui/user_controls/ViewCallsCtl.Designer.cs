@@ -43,6 +43,9 @@ namespace CallLogTracker.gui.user_controls
             this.btnDeleteCall = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.btnNotifyAllUnresolved = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
             this.deleteBGWorker = new System.ComponentModel.BackgroundWorker();
+            this.btnMarkResolved = new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup();
+            this.updateBGWorker = new System.ComponentModel.BackgroundWorker();
+            this.notifyBGWorker = new System.ComponentModel.BackgroundWorker();
             ((System.ComponentModel.ISupportInitialize)(this.hdrGroup)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.hdrGroup.Panel)).BeginInit();
             this.hdrGroup.Panel.SuspendLayout();
@@ -53,11 +56,12 @@ namespace CallLogTracker.gui.user_controls
             // hdrGroup
             // 
             this.hdrGroup.ButtonSpecs.AddRange(new ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup[] {
-            this.chkOnlyCallsToday,
             this.chkOnlyCurrentUserCalls,
+            this.chkOnlyCallsToday,
             this.chkOnlyUnresolved,
             this.btnNotify,
             this.btnNotifyAllUnresolved,
+            this.btnMarkResolved,
             this.btnEdit,
             this.btnDeleteCall,
             this.btnRefresh});
@@ -186,6 +190,30 @@ namespace CallLogTracker.gui.user_controls
             this.deleteBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.deleteBGWorker_ProgressChanged);
             this.deleteBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.deleteBGWorker_RunWorkerCompleted);
             // 
+            // btnMarkResolved
+            // 
+            this.btnMarkResolved.Image = global::CallLogTracker.Properties.Resources.success_16x16;
+            this.btnMarkResolved.Style = ComponentFactory.Krypton.Toolkit.PaletteButtonStyle.Standalone;
+            this.btnMarkResolved.Text = "Mark as Resolved";
+            this.btnMarkResolved.UniqueName = "C0133BC28E8A4487EF8F73852C2DF557";
+            this.btnMarkResolved.Click += new System.EventHandler(this.btnMarkResolved_Click);
+            // 
+            // updateBGWorker
+            // 
+            this.updateBGWorker.WorkerReportsProgress = true;
+            this.updateBGWorker.WorkerSupportsCancellation = true;
+            this.updateBGWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.updateBGWorker_DoWork);
+            this.updateBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.updateBGWorker_ProgressChanged);
+            this.updateBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.updateBGWorker_RunWorkerCompleted);
+            // 
+            // notifyBGWorker
+            // 
+            this.notifyBGWorker.WorkerReportsProgress = true;
+            this.notifyBGWorker.WorkerSupportsCancellation = true;
+            this.notifyBGWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.notifyBGWorker_DoWork);
+            this.notifyBGWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.notifyBGWorker_ProgressChanged);
+            this.notifyBGWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.notifyBGWorker_RunWorkerCompleted);
+            // 
             // ViewCallsCtl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,5 +246,8 @@ namespace CallLogTracker.gui.user_controls
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnNotifyAllUnresolved;
         private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnDeleteCall;
         private System.ComponentModel.BackgroundWorker deleteBGWorker;
+        private ComponentFactory.Krypton.Toolkit.ButtonSpecHeaderGroup btnMarkResolved;
+        private System.ComponentModel.BackgroundWorker updateBGWorker;
+        private System.ComponentModel.BackgroundWorker notifyBGWorker;
     }
 }

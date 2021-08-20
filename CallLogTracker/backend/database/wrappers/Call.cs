@@ -40,7 +40,7 @@ namespace CallLogTracker.backend.database.wrappers
             if (Message.Length <= 0 || Message.Length > 65535)
                 errors.Add(ValidatorError.Call_InvalidMessage);
 
-            if (CallerEmail != null)
+            if (CallerEmail != null || !CallerEmail.Equals(string.Empty))
                 errors.AddRange(Validator.Email(CallerEmail));
 
             return errors;
