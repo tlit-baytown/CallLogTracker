@@ -183,3 +183,4 @@ D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.Tru
 D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.exe.manifest
 D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.application
 D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.FirstRunCompany.resources
+D:\Documents\Projects\CallLogTracker\CallLogTracker\obj\Debug\CallLogTracker.gui.dialogs.AboutBox.resources

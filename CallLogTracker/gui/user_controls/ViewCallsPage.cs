@@ -16,8 +16,6 @@ namespace CallLogTracker.gui.user_controls
                 Dock = System.Windows.Forms.DockStyle.Fill
             };
             Controls.Add(userCtl);
-
-            ClearFlags(KryptonPageFlags.DockingAllowClose | KryptonPageFlags.DockingAllowFloating);
         }
 
         public void UpdateCalls()

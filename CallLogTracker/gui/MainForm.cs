@@ -5,6 +5,7 @@ using CallLogTracker.gui.dialogs;
 using CallLogTracker.gui.user_controls;
 using CallLogTracker.Properties;
 using CallLogTracker.security;
+using CallLogTracker.utility;
 using ComponentFactory.Krypton.Docking;
 using ComponentFactory.Krypton.Navigator;
 using ComponentFactory.Krypton.Toolkit;
@@ -13,7 +14,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Linq;
+using System.Reflection;
 using System.Windows.Forms;
 using static CallLogTracker.utility.CEventArgs;
 
@@ -251,8 +254,6 @@ namespace CallLogTracker
 
         }
 
-
-
         public void LogOut()
         {
             if (Global.Instance.CurrentUser != null)
@@ -310,6 +311,27 @@ namespace CallLogTracker
             KryptonPage page = new NewCallPage();
             dockingManager.AddToWorkspace("MainWorkspace", new KryptonPage[] { page });
             dockingManager.FindDockingWorkspace("MainWorkspace").SelectPage(page.UniqueName);
+        }
+
+        private void btnViewCalls_Click(object sender, EventArgs e)
+        {
+            if (Global.Instance.CurrentUser == null)
+            {
+                CMessageBox.Show("No employee is currently logged in!", "No Employee", MessageBoxButtons.OK, Resources.error_64x64);
+                GetConsole().AddEntry("Attempt to create a new call denied.");
+                return;
+            }
+
+            KryptonPage page = new ViewCallsPage();
+            if (dockingManager.ContainsPage(page))
+            {
+                dockingManager.RemovePage(page, true);
+                dockingManager.AddDockspace("Control", DockingEdge.Bottom, new KryptonPage[] { page });
+            }
+            else
+            {
+                dockingManager.AddDockspace("Control", DockingEdge.Bottom, new KryptonPage[] { page });
+            }
         }
 
         private void btnEditCurrentEmployee_Click(object sender, EventArgs e)
@@ -417,6 +439,88 @@ namespace CallLogTracker
         {
             NotificationsForm nf = new NotificationsForm();
             nf.ShowDialog();
+        }
+
+        private void btnCheckUpdates_Click(object sender, EventArgs e)
+        {
+            UpdateCheckInfo info = null;
+
+            if (ApplicationDeployment.IsNetworkDeployed)
+            {
+                ApplicationDeployment ad = ApplicationDeployment.CurrentDeployment;
+
+                try
+                {
+                    info = ad.CheckForDetailedUpdate();
+                }
+                catch (DeploymentDownloadException dde)
+                {
+                    CRichMsgBox.Show("The new version of the application cannot be downloaded at this time.", "Error", $"Please check your network connection, or try again later. Error: {dde.Message}", MessageBoxButtons.OK, Resources.error_64x64);
+                    return;
+                }
+                catch (InvalidDeploymentException ide)
+                {
+                    CRichMsgBox.Show("Cannot check for a new version of the application.\nThe ClickOnce deployment is corrupt.", "Error", $"Please redeploy the application and try again. Error: {ide.Message}", MessageBoxButtons.OK, Resources.error_64x64);
+                    return;
+                }
+                catch (InvalidOperationException ioe)
+                {
+                    CRichMsgBox.Show("This application cannot be updated.\nIt is likely not a ClickOnce application.", "Error", $"Error: {ioe.Message}", MessageBoxButtons.OK, Resources.error_64x64);
+                    return;
+                }
+
+                if (info.UpdateAvailable)
+                {
+                    bool doUpdate = true;
+
+                    if (!info.IsUpdateRequired)
+                    {
+                        DialogResult dr = CMessageBox.Show($"An update is available.\nWould you like to update the application now?\nSize of Update: {Utility.FormatSize(info.UpdateSizeBytes)}", "Update Available", MessageBoxButtons.OKCancel, Resources.info_64x64);
+                        if (!(DialogResult.OK == dr))
+                        {
+                            doUpdate = false;
+                        }
+                    }
+                    else
+                    {
+                        // Display a message that the app MUST reboot. Display the minimum required version.
+                        CMessageBox.Show("This application has detected a mandatory update from your current " +
+                            "version to version " + info.MinimumRequiredVersion.ToString() +
+                            ". The application will now install the update and restart.",
+                            "Update Available", MessageBoxButtons.OK,
+                            Resources.warning_64x64);
+                    }
+
+                    if (doUpdate)
+                    {
+                        try
+                        {
+                            ad.Update();
+                            CMessageBox.Show("The application has been upgraded, and will now restart.", "Update Pending", MessageBoxButtons.OK, Resources.warning_64x64);
+                            Application.Restart();
+                        }
+                        catch (DeploymentDownloadException dde)
+                        {
+                            CRichMsgBox.Show("Cannot install the latest version of the application.", "Error", $"Please check your network connection, or try again later. Error: {dde}", MessageBoxButtons.OK, Resources.error_64x64);
+                            return;
+                        }
+                    }
+                }
+                else
+                {
+                    CMessageBox.Show($"Congrats! You are running the latest version.\nVersion: {Assembly.GetExecutingAssembly().GetName().Version}", "No Updates", MessageBoxButtons.OK, Resources.info_64x64);
+                }
+            }
+            else
+            {
+                CRichMsgBox.Show("Cannot check for a new version of the application.\nThe ClickOnce deployment is corrupt.", "Error", $"Please redeploy the application and try again.", MessageBoxButtons.OK, Resources.error_64x64);
+                return;
+            }
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            new AboutBox().ShowDialog();
         }
     }
 }

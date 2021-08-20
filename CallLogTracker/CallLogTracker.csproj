@@ -199,6 +199,12 @@
     <Compile Include="backend\notifications\TemplateData.cs" />
     <Compile Include="backend\SMSRecipient.cs" />
     <Compile Include="Global.cs" />
+    <Compile Include="gui\dialogs\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\dialogs\CMessageBox.cs" />
     <Compile Include="gui\dialogs\CRichMessageBox.cs" />
     <Compile Include="gui\dialogs\DeleteMessageForm.cs">
@@ -299,7 +305,11 @@
     <Compile Include="utility\Enums.cs" />
     <Compile Include="utility\SortableBindingList.cs" />
     <Compile Include="utility\TextBoxWriter.cs" />
+    <Compile Include="utility\Utility.cs" />
     <Compile Include="utility\Validator.cs" />
+    <EmbeddedResource Include="gui\dialogs\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="gui\dialogs\DatabaseConnection.resx">
       <DependentUpon>DatabaseConnection.cs</DependentUpon>
     </EmbeddedResource>
