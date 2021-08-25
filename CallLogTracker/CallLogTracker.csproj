@@ -1,0 +1,551 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C5C23B94-8641-4F36-A23D-7F8519D70035}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CallLogTracker</RootNamespace>
+    <AssemblyName>CallLogTracker</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Documents\Projects\CallLogTracker\Publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.2.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>CallLogTracker.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>phone.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>3A7F83F1CCF144B7D5878F951A05E5843BFB40B3</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Design, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Docking, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Navigator, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Navigator.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Ribbon, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Ribbon.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Toolkit, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="ComponentFactory.Krypton.Workspace, Version=4.4.1.0, Culture=neutral, PublicKeyToken=a87e673e9ecb6e8e, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Z:\Drive\UI Libraries\DLLS\Forked-Krypton\ComponentFactory.Krypton.Workspace.dll</HintPath>
+    </Reference>
+    <Reference Include="EmailValidation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=60f3df2f38e92638, processorArchitecture=MSIL">
+      <HintPath>packages\EmailValidation.1.0.5\lib\net45\EmailValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.14.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>packages\Google.Protobuf.3.14.0\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid">
+      <HintPath>Z:\Drive\UI Libraries\DLLS\JDHSoftware.Krypton.Toolkit.KryptonOutlookGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Compression.LZ4.1.1.11\lib\net46\K4os.Compression.LZ4.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Compression.LZ4.Streams, Version=1.1.11.0, Culture=neutral, PublicKeyToken=2186fa9121ef231d, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Compression.LZ4.Streams.1.1.11\lib\net46\K4os.Compression.LZ4.Streams.dll</HintPath>
+    </Reference>
+    <Reference Include="K4os.Hash.xxHash, Version=1.0.6.0, Culture=neutral, PublicKeyToken=32cd54395057cec3, processorArchitecture=MSIL">
+      <HintPath>packages\K4os.Hash.xxHash.1.0.6\lib\net46\K4os.Hash.xxHash.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Logging.1.1.2\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.IdentityModel.Tokens.5.1.2\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.25.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.8.0.25\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.24.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>packages\SendGrid.9.24.1\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
+      <HintPath>packages\starkbank-ecdsa.1.3.1\lib\net452\StarkbankEcdsa.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.IdentityModel.Tokens.Jwt.5.1.2\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Twilio, Version=5.64.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Twilio.5.64.1\lib\net451\Twilio.dll</HintPath>
+    </Reference>
+    <Reference Include="Ubiety.Dns.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.8.0.25\lib\net452\Ubiety.Dns.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Zstandard.Net, Version=1.1.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.8.0.25\lib\net452\Zstandard.Net.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="backend\database\CallConnector.cs" />
+    <Compile Include="backend\database\CompanyConnector.cs" />
+    <Compile Include="backend\database\Database.cs" />
+    <Compile Include="backend\database\IDBObject.cs" />
+    <Compile Include="backend\database\Queries.cs" />
+    <Compile Include="backend\database\UserConnector.cs" />
+    <Compile Include="backend\database\wrappers\Call.cs" />
+    <Compile Include="backend\database\wrappers\Company.cs" />
+    <Compile Include="backend\database\wrappers\User.cs" />
+    <Compile Include="backend\EmailRecipient.cs" />
+    <Compile Include="backend\notifications\MessageObject.cs" />
+    <Compile Include="backend\notifications\Email.cs" />
+    <Compile Include="backend\notifications\Notifier.cs" />
+    <Compile Include="backend\notifications\SMS.cs" />
+    <Compile Include="backend\notifications\TemplateData.cs" />
+    <Compile Include="backend\SMSRecipient.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="gui\dialogs\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\CMessageBox.cs" />
+    <Compile Include="gui\dialogs\CRichMessageBox.cs" />
+    <Compile Include="gui\dialogs\DeleteMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\DeleteMessageForm.Designer.cs">
+      <DependentUpon>DeleteMessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\FirstRunCompany.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\FirstRunCompany.Designer.cs">
+      <DependentUpon>FirstRunCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\FirstRunUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\FirstRunUser.Designer.cs">
+      <DependentUpon>FirstRunUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\MessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\MessageForm.Designer.cs">
+      <DependentUpon>MessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\DatabaseConnection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\DatabaseConnection.Designer.cs">
+      <DependentUpon>DatabaseConnection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\RichMessageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\RichMessageForm.Designer.cs">
+      <DependentUpon>RichMessageForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\dialogs\NotificationsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\dialogs\NotificationsForm.Designer.cs">
+      <DependentUpon>NotificationsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\user_controls\ConsoleCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\ConsoleCtl.Designer.cs">
+      <DependentUpon>ConsoleCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\user_controls\ConsolePage.cs" />
+    <Compile Include="gui\user_controls\NewCall.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\NewCall.Designer.cs">
+      <DependentUpon>NewCall.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\user_controls\NewCallPage.cs" />
+    <Compile Include="gui\user_controls\NewCompany.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\NewCompany.Designer.cs">
+      <DependentUpon>NewCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\user_controls\NewCompanyPage.cs" />
+    <Compile Include="gui\user_controls\NewEmployee.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\NewEmployee.Designer.cs">
+      <DependentUpon>NewEmployee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\user_controls\NewEmployeePage.cs" />
+    <Compile Include="gui\user_controls\ViewCallsCtl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="gui\user_controls\ViewCallsCtl.Designer.cs">
+      <DependentUpon>ViewCallsCtl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\user_controls\ViewCallsPage.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="security\Hasher.cs" />
+    <Compile Include="Test.cs" />
+    <Compile Include="utility\CEventArgs.cs" />
+    <Compile Include="utility\ConfigReader.cs" />
+    <Compile Include="utility\DataGridViewSetup.cs" />
+    <Compile Include="utility\Enums.cs" />
+    <Compile Include="utility\SortableBindingList.cs" />
+    <Compile Include="utility\TextBoxWriter.cs" />
+    <Compile Include="utility\Utility.cs" />
+    <Compile Include="utility\Validator.cs" />
+    <EmbeddedResource Include="gui\dialogs\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\dialogs\DatabaseConnection.resx">
+      <DependentUpon>DatabaseConnection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\dialogs\FirstRunCompany.resx">
+      <DependentUpon>FirstRunCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\dialogs\FirstRunUser.resx">
+      <DependentUpon>FirstRunUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\dialogs\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\dialogs\NotificationsForm.resx">
+      <DependentUpon>NotificationsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\ConsoleCtl.resx">
+      <DependentUpon>ConsoleCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\NewCall.resx">
+      <DependentUpon>NewCall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\NewCompany.resx">
+      <DependentUpon>NewCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\NewEmployee.resx">
+      <DependentUpon>NewEmployee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\user_controls\ViewCallsCtl.resx">
+      <DependentUpon>ViewCallsCtl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\app.manifest" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.Call.datasource" />
+    <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.Company.datasource" />
+    <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.User.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\060-warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\db_connection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\delete_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_arrow_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\down_arrow_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\error_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reload_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\settings_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up_arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up_arrow_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\up_arrow_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\updated.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\updated_24x24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\view_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warning_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\035-database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\299-smartphone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\312-notification.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\356-paper plane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\117-database.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\367-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\041-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\043-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\045-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\051-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\218-edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\346-home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mailbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\notification_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\success.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\success_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\success_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\computer_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\man_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\man_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save_64x64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home_32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone_128x128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="phone.ico" />
+    <None Include="Resources\edit_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
