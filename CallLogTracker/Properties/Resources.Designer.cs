@@ -480,15 +480,6 @@ namespace CallLogTracker.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to supportbayareatx@teamlogicit.com.
-        /// </summary>
-        internal static string SendGrid_Sender {
-            get {
-                return ResourceManager.GetString("SendGrid_Sender", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap settings {
@@ -505,60 +496,6 @@ namespace CallLogTracker.Properties {
             get {
                 object obj = ResourceManager.GetObject("settings_24x24", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to api-1403F02EF14F11EBA866F23C91C88F4E.
-        /// </summary>
-        internal static string Smtp2Go_ApiKey {
-            get {
-                return ResourceManager.GetString("Smtp2Go_ApiKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to https://api.smtp2go.com/v3/.
-        /// </summary>
-        internal static string Smtp2Go_BaseUrl {
-            get {
-                return ResourceManager.GetString("Smtp2Go_BaseUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to N2VxcW1na3Jvc2Qw.
-        /// </summary>
-        internal static string Smtp2Go_Password {
-            get {
-                return ResourceManager.GetString("Smtp2Go_Password", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 465.
-        /// </summary>
-        internal static string Smtp2Go_Port {
-            get {
-                return ResourceManager.GetString("Smtp2Go_Port", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CallLogTracker.
-        /// </summary>
-        internal static string Smtp2Go_Username {
-            get {
-                return ResourceManager.GetString("Smtp2Go_Username", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to mail.smtp2go.com.
-        /// </summary>
-        internal static string SMTPServer {
-            get {
-                return ResourceManager.GetString("SMTPServer", resourceCulture);
             }
         }
         
@@ -589,78 +526,6 @@ namespace CallLogTracker.Properties {
             get {
                 object obj = ResourceManager.GetObject("success_64x64", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AC59979c53cf8c22931e28428be980312d.
-        /// </summary>
-        internal static string Twilio_AccountSID {
-            get {
-                return ResourceManager.GetString("Twilio_AccountSID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to aafd4452879efa1f30b0428987ff7b40.
-        /// </summary>
-        internal static string Twilio_AuthToken {
-            get {
-                return ResourceManager.GetString("Twilio_AuthToken", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 8a01a857aacac83ba10791cc52fc61df.
-        /// </summary>
-        internal static string Twilio_AuthTokenTesting {
-            get {
-                return ResourceManager.GetString("Twilio_AuthTokenTesting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to +18327848935.
-        /// </summary>
-        internal static string Twilio_PhoneNumber {
-            get {
-                return ResourceManager.GetString("Twilio_PhoneNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to PNbb220159c555da3b1e1f8add55f06da0.
-        /// </summary>
-        internal static string Twilio_PhoneNumberSID {
-            get {
-                return ResourceManager.GetString("Twilio_PhoneNumberSID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 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.
-        /// </summary>
-        internal static string Twilio_SendGridAPIKey {
-            get {
-                return ResourceManager.GetString("Twilio_SendGridAPIKey", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to d-50807f6db340404f953362825abf5f02.
-        /// </summary>
-        internal static string Twilio_SendGridTemplateID {
-            get {
-                return ResourceManager.GetString("Twilio_SendGridTemplateID", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to AC45a87ee1c047ca71f3ecb51adcafd29c.
-        /// </summary>
-        internal static string Twilio_TestSID {
-            get {
-                return ResourceManager.GetString("Twilio_TestSID", resourceCulture);
             }
         }
         

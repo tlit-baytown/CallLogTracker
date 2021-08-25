@@ -23,8 +23,8 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationVersion>1.0.2.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -301,6 +301,7 @@
     <Compile Include="security\Hasher.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="utility\CEventArgs.cs" />
+    <Compile Include="utility\ConfigReader.cs" />
     <Compile Include="utility\DataGridViewSetup.cs" />
     <Compile Include="utility\Enums.cs" />
     <Compile Include="utility\SortableBindingList.cs" />

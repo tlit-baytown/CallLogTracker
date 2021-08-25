@@ -574,9 +574,6 @@
         rI9GMmB9dBsQ/8WmECteH/PbZX1MCUQ3AwMACQ/5TFwqH0kAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="Twilio_PhoneNumberSID" xml:space="preserve">
-    <value>PNbb220159c555da3b1e1f8add55f06da0</value>
-  </data>
   <data name="035-database" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -1171,9 +1168,6 @@
         Vj6mJyTu6dTp/wNga6jVuH2U3wAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="Twilio_AccountSID" xml:space="preserve">
-    <value>AC59979c53cf8c22931e28428be980312d</value>
-  </data>
   <data name="error_16x16" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACX
@@ -1212,9 +1206,6 @@
   </data>
   <data name="man_32x32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\man_32x32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Smtp2Go_ApiKey" xml:space="preserve">
-    <value>api-1403F02EF14F11EBA866F23C91C88F4E</value>
   </data>
   <data name="mailbox" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2121,12 +2112,6 @@
         RU5ErkJggg==
 </value>
   </data>
-  <data name="Twilio_AuthToken" xml:space="preserve">
-    <value>aafd4452879efa1f30b0428987ff7b40</value>
-  </data>
-  <data name="SendGrid_Sender" xml:space="preserve">
-    <value>supportbayareatx@teamlogicit.com</value>
-  </data>
   <data name="add_16x16" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACX
@@ -2136,9 +2121,6 @@
         Cx7MBAcMRxEAXwsEVCZOWCN/FqAX/eOpYmJyXDQmYns/CNo5apoi8OYXyG8hd4jZz8iQFVZE7rQUaBw9
         YmbIKmM9NaGK7iozmJCb9LQjAEdNYm6HzATDKXz5x+9szBskVf4K4wQCOgAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <data name="Smtp2Go_BaseUrl" xml:space="preserve">
-    <value>https://api.smtp2go.com/v3/</value>
   </data>
   <data name="reload_16x16" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2882,9 +2864,6 @@
         Mkkye9B9bAYAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="Smtp2Go_Port" xml:space="preserve">
-    <value>465</value>
-  </data>
   <data name="settings" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAACR
@@ -3166,12 +3145,6 @@
         eL43ytokHZZNgAAAIPPIUH7F1iQdlk2AAAAAVDM839IkXZZNgAAAADSqKT4ca5LOyiZAAAAABtUYt8Yb
         pbOGXoP52gBQEU455f8DJ03AAZ8IFWUAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="Twilio_AuthTokenTesting" xml:space="preserve">
-    <value>8a01a857aacac83ba10791cc52fc61df</value>
-  </data>
-  <data name="Twilio_TestSID" xml:space="preserve">
-    <value>AC45a87ee1c047ca71f3ecb51adcafd29c</value>
   </data>
   <data name="phone" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3477,9 +3450,6 @@
         FiegbV2IIHj5eiOxEQeyEDkvxTCnhxHM+XEMc3ohgTm/ksGcXkq1Ob2Wa5MjMeJ0IFfnm9cN84TFMmR3
         lLEWn2ZVk1u0rBPr/TitG6oWSifqt/oUH+Hz3PN+AQF0LpEGTv9iAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="Smtp2Go_Username" xml:space="preserve">
-    <value>CallLogTracker</value>
   </data>
   <data name="db_connection" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3910,9 +3880,6 @@
         IPttFSA8XTWVfWbxVObCIsVVB7MXZp26Chz8/3bNVPa5qqn0M7WH0j+qeyD97VWHM1/fcDTzt43HM492
         PJg5MnAm+zY1k5/IVUdUDj6V/f85m6cu1RVX/D/6bCwLu/vEswAAAABJRU5ErkJggg==
 </value>
-  </data>
-  <data name="Twilio_PhoneNumber" xml:space="preserve">
-    <value>+18327848935</value>
   </data>
   <data name="man_16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\man_16x16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -4387,9 +4354,6 @@
         30uis/0k/HO7bCOF3SwrX9MTkvV0dPx//fMb7qJ+QsYAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="Twilio_SendGridTemplateID" xml:space="preserve">
-    <value>d-50807f6db340404f953362825abf5f02</value>
-  </data>
   <data name="045-man" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -4646,9 +4610,6 @@
         kL6mfgrvEYiLTcZXjLOPP2ft78kRG+1sCw8AEA2ucZ1aX79A31Q/W19VX6YvrZ+q1tRP1OfxKYLOe8H4
         tfGw8bfBXfx6VPHC+apwfGZgYF85VmPSrFn/Hz5dfF9aNaPoAAAAAElFTkSuQmCC
 </value>
-  </data>
-  <data name="Twilio_SendGridAPIKey" xml:space="preserve">
-    <value>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</value>
   </data>
   <data name="312-notification" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -5052,9 +5013,6 @@
         0aDjc/Ah/hyx+Fk8J54br4nXxjZiW7HN2HbsI/YV+4x9xzHEscQxxbHFMZ7hzgFASia/9/8BPNXTAo6s
         qPYAAAAASUVORK5CYII=
 </value>
-  </data>
-  <data name="SMTPServer" xml:space="preserve">
-    <value>mail.smtp2go.com</value>
   </data>
   <data name="reload" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6215,9 +6173,6 @@
   </data>
   <data name="phone_128x128" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\phone_128x128.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Smtp2Go_Password" xml:space="preserve">
-    <value>N2VxcW1na3Jvc2Qw</value>
   </data>
   <data name="299-smartphone" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

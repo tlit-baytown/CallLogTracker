@@ -1,4 +1,5 @@
 ﻿using CallLogTracker.Properties;
+using CallLogTracker.utility;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Collections.Generic;
@@ -16,16 +17,16 @@ namespace CallLogTracker.backend.notifications
 
         static async Task Execute(MessageObject obj)
         {
-            SendGridClient client = new SendGridClient(Resources.Twilio_SendGridAPIKey);
-            EmailAddress from = new EmailAddress(Resources.SendGrid_Sender);
+            SendGridClient client = new SendGridClient(ConfigReader.Instance.SendGrid_ApiKey);
+            EmailAddress from = new EmailAddress(ConfigReader.Instance.SendGrid_Sender);
             if (obj.To.Count == 1)
             {
-                var msg = MailHelper.CreateSingleTemplateEmail(from, obj.To.First(), Resources.Twilio_SendGridTemplateID, obj.Data.First());
+                var msg = MailHelper.CreateSingleTemplateEmail(from, obj.To.First(), ConfigReader.Instance.SendGrid_Template_Id, obj.Data.First());
                 var response = await client.SendEmailAsync(msg);
             }
             else
             {
-                var msg = MailHelper.CreateMultipleTemplateEmailsToMultipleRecipients(from, obj.To, Resources.Twilio_SendGridTemplateID, (List<object>)obj.Data.Cast<object>());
+                var msg = MailHelper.CreateMultipleTemplateEmailsToMultipleRecipients(from, obj.To, ConfigReader.Instance.SendGrid_Template_Id, (List<object>)obj.Data.Cast<object>());
                 var response = await client.SendEmailAsync(msg);
             }
         }

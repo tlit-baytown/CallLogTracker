@@ -52,6 +52,14 @@ namespace CallLogTracker
             cmbUsers.ComboBox.DisplayMember = "Name";
 
             GetConsole().AddEntry("Call Logger Loaded!");
+
+            ConfigReader.Instance.Initialize();
+
+            if (!ConfigReader.Instance.ValidConfig)
+            {
+                CMessageBox.Show("The configuration file was either not present, could not be read, or contained invalid entries.\nPlease correct the config.cfg file.\nThe application will now exit!", "Error Reading Config", MessageBoxButtons.OK, Resources.error_64x64);
+                Application.Exit();
+            }
         }
 
         /// <summary>
@@ -251,7 +259,6 @@ namespace CallLogTracker
         {
             checkConnectionBGWorker.RunWorkerAsync();
             GetConsole().AddEntry("Checking database connection. Please wait...");
-
         }
 
         public void LogOut()

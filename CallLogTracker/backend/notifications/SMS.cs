@@ -1,4 +1,5 @@
 ﻿using CallLogTracker.Properties;
+using CallLogTracker.utility;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,14 +29,14 @@ namespace CallLogTracker.backend.notifications
 
         private SMS()
         {
-            TwilioClient.Init(Resources.Twilio_AccountSID, Resources.Twilio_AuthToken);
+            TwilioClient.Init(ConfigReader.Instance.Twilio_AccountSID, ConfigReader.Instance.Twilio_AuthToken);
         }
 
         public string SendSMS(string txtBody, PhoneNumber recipient)
         {
             var message = MessageResource.Create(
                 body: txtBody,
-                from: new PhoneNumber(Resources.Twilio_PhoneNumber),
+                from: new PhoneNumber(ConfigReader.Instance.Twilio_PhoneNumber),
                 to: recipient
             );
             return $"{DateTime.Now.ToLocalTime()} -> Message to {recipient} has been {message.Status}.";
