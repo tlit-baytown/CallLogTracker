@@ -354,8 +354,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.Call.datasource" />
     <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.Company.datasource" />
     <None Include="Properties\DataSources\CallLogTracker.backend.database.wrappers.User.datasource" />
