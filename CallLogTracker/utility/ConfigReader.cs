@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CallLogTracker.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace CallLogTracker.utility
 {
     public class ConfigReader
     {
-        private const string configFile = "../config.cfg";
+        private string configFile = Settings.Default.ConfigLocation;
 
         private static ConfigReader instance;
         private static object padlock = new object();
@@ -31,6 +32,12 @@ namespace CallLogTracker.utility
 
         public void Initialize()
         {
+            if (configFile.Equals("None"))
+            {
+                ValidConfig = false;
+                return;
+            }
+
             if (!File.Exists(configFile))
             {
                 File.Create(configFile);

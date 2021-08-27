@@ -82,5 +82,17 @@ namespace CallLogTracker.Properties {
                 this["EmailRecipients"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("None")]
+        public string ConfigLocation {
+            get {
+                return ((string)(this["ConfigLocation"]));
+            }
+            set {
+                this["ConfigLocation"] = value;
+            }
+        }
     }
 }

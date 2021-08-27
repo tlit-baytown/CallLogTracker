@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Deployment.Application;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
@@ -57,8 +58,27 @@ namespace CallLogTracker
 
             if (!ConfigReader.Instance.ValidConfig)
             {
-                CMessageBox.Show("The configuration file was either not present, could not be read, or contained invalid entries.\nPlease correct the config.cfg file.\nThe application will now exit!", "Error Reading Config", MessageBoxButtons.OK, Resources.error_64x64);
-                Application.Exit();
+                DialogResult result = CMessageBox.Show("The configuration file was either not present, could not be read, or contained invalid entries.\nPlease select the location for the config.cfg file.", "Error Reading Config", MessageBoxButtons.OKCancel, Resources.error_64x64);
+                if (result == DialogResult.OK)
+                {
+                    if (configFolderSelect.ShowDialog() == DialogResult.OK)
+                    {
+                        Settings.Default.ConfigLocation = Path.Combine(configFolderSelect.SelectedPath, "config.cfg");
+                        Settings.Default.Save();
+
+                        ConfigReader.Instance.Initialize(); //re-initalize the config reader
+                        if (!ConfigReader.Instance.ReadConfig())
+                        {
+                            CMessageBox.Show("A valid configuration file is required for this application. The application will now exit.", "No Valid Config", MessageBoxButtons.OK, Resources.error_64x64);
+                            Application.Exit();
+                        }
+                    }
+                }
+                else
+                {
+                    CMessageBox.Show("A valid configuration file is required for this application. The application will now exit.", "No Valid Config", MessageBoxButtons.OK, Resources.error_64x64);
+                    Application.Exit();
+                }
             }
         }
 

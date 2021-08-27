@@ -127,7 +127,9 @@ namespace CallLogTracker.gui.user_controls
 
         private void notifyBGWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            CMessageBox.Show($"Notified users about {numberOfCallsNotified} Call(s).\n{callsToNotifyAbout.Count - numberOfCallsNotified} Call(s) could not be processed.", "Success", MessageBoxButtons.OK, Resources.success_64x64);
+            CMessageBox.Show($"Notified users about {numberOfCallsNotified} Call(s).\n" +
+            $"{(callsToNotifyAbout.Count - numberOfCallsNotified <= 0 ? 0 : callsToNotifyAbout.Count - numberOfCallsNotified)} " +
+            $"Call(s) could not be processed.", "Success", MessageBoxButtons.OK, Resources.success_64x64);
         }
 
         List<Call> callsToUpdate;

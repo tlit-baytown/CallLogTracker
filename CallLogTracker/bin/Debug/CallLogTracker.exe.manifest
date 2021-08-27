@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
-  <asmv1:assemblyIdentity name="CallLogTracker.exe" version="1.0.2.5" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
+  <asmv1:assemblyIdentity name="CallLogTracker.exe" version="1.0.2.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
   <description asmv2:iconFile="phone.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
@@ -55,14 +55,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CallLogTracker.exe" size="622560">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CallLogTracker.exe" size="623584">
       <assemblyIdentity name="CallLogTracker" version="1.0.2.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FEjNm6pOFQUI/y6lWDwWl2JI6RcSBcsaTgWvz+WIJpI=</dsig:DigestValue>
+        <dsig:DigestValue>rWjr5LQdXD2dejnXm5y3ZNjgPs2icZGa8PMbo/m+gF8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -390,13 +390,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="CallLogTracker.exe.config" size="1921">
+  <file name="CallLogTracker.exe.config" size="2028">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>SoQWFaKH6IDcrU5+2jFWA73sQQbj5uT+T20wB5vzEkc=</dsig:DigestValue>
+      <dsig:DigestValue>y2gTN53+scxTw1B4icsZgf/4ouOCYBLFVUaZctZ2A1Q=</dsig:DigestValue>
     </hash>
   </file>
   <file name="phone.ico" size="7964">

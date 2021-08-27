@@ -46,17 +46,18 @@ namespace CallLogTracker
             this.btnSMSNotifications = new System.Windows.Forms.ToolStripMenuItem();
             this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnNewDBConnection = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.cmbUsers = new System.Windows.Forms.ToolStripComboBox();
             this.checkConnectionBGWorker = new System.ComponentModel.BackgroundWorker();
             this.dockingManager = new ComponentFactory.Krypton.Docking.KryptonDockingManager();
             this.kryptonManager = new ComponentFactory.Krypton.Toolkit.KryptonManager(this.components);
             this.dockableWorkspace = new ComponentFactory.Krypton.Docking.KryptonDockableWorkspace();
             this.panContent = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
-            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCheckUpdates = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.callBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.configFolderSelect = new System.Windows.Forms.FolderBrowserDialog();
             this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dockableWorkspace)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panContent)).BeginInit();
@@ -212,6 +213,32 @@ namespace CallLogTracker
             this.btnNewDBConnection.Text = "Edit Connection...";
             this.btnNewDBConnection.Click += new System.EventHandler(this.btnNewDBConnection_Click);
             // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnCheckUpdates,
+            this.btnAbout});
+            this.helpToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources.info_64x64;
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // btnCheckUpdates
+            // 
+            this.btnCheckUpdates.Image = global::CallLogTracker.Properties.Resources.updated_24x24;
+            this.btnCheckUpdates.Name = "btnCheckUpdates";
+            this.btnCheckUpdates.Size = new System.Drawing.Size(175, 26);
+            this.btnCheckUpdates.Text = "Check for Updates";
+            this.btnCheckUpdates.Click += new System.EventHandler(this.btnCheckUpdates_Click);
+            // 
+            // btnAbout
+            // 
+            this.btnAbout.Image = global::CallLogTracker.Properties.Resources._356_paper_plane;
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(175, 26);
+            this.btnAbout.Text = "About";
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
+            // 
             // cmbUsers
             // 
             this.cmbUsers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -255,32 +282,6 @@ namespace CallLogTracker
             this.panContent.Size = new System.Drawing.Size(1584, 733);
             this.panContent.TabIndex = 4;
             // 
-            // helpToolStripMenuItem
-            // 
-            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnCheckUpdates,
-            this.btnAbout});
-            this.helpToolStripMenuItem.Image = global::CallLogTracker.Properties.Resources.info_64x64;
-            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
-            this.helpToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
-            this.helpToolStripMenuItem.Text = "Help";
-            // 
-            // btnCheckUpdates
-            // 
-            this.btnCheckUpdates.Image = global::CallLogTracker.Properties.Resources.updated_24x24;
-            this.btnCheckUpdates.Name = "btnCheckUpdates";
-            this.btnCheckUpdates.Size = new System.Drawing.Size(184, 26);
-            this.btnCheckUpdates.Text = "Check for Updates";
-            this.btnCheckUpdates.Click += new System.EventHandler(this.btnCheckUpdates_Click);
-            // 
-            // btnAbout
-            // 
-            this.btnAbout.Image = global::CallLogTracker.Properties.Resources._356_paper_plane;
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(184, 26);
-            this.btnAbout.Text = "About";
-            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
-            // 
             // userBindingSource
             // 
             this.userBindingSource.DataSource = typeof(CallLogTracker.backend.database.wrappers.User);
@@ -288,6 +289,10 @@ namespace CallLogTracker
             // callBindingSource
             // 
             this.callBindingSource.DataSource = typeof(CallLogTracker.backend.database.wrappers.Call);
+            // 
+            // configFolderSelect
+            // 
+            this.configFolderSelect.Description = "Select the folder where the config.cfg file is stored.";
             // 
             // MainForm
             // 
@@ -342,6 +347,7 @@ namespace CallLogTracker
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem btnCheckUpdates;
         private System.Windows.Forms.ToolStripMenuItem btnAbout;
+        private System.Windows.Forms.FolderBrowserDialog configFolderSelect;
     }
 }
 
