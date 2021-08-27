@@ -37,7 +37,6 @@ namespace CallLogTracker.backend.notifications
             var message = MessageResource.Create(
                 body: txtBody,
                 from: new PhoneNumber(ConfigReader.Instance.Twilio_PhoneNumber),
-                statusCallback: new Uri("https://9e37a11616fc8c83a51d0621c41cbf66.m.pipedream.net"),
                 to: recipient
             );
             return $"{DateTime.Now.ToLocalTime()} -> Message to {recipient} has been {message.Status}.";

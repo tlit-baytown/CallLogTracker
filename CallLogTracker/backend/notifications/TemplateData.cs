@@ -27,9 +27,12 @@ namespace CallLogTracker.backend.notifications
         [JsonProperty("timestamp")]
         public DateTime TimeStamp { get; set; } = DateTime.Now;
 
+        public int CallID { get; set; } = 0;
+
         public string ToSMSMessage()
         {
             StringBuilder bldr = new StringBuilder();
+            bldr.Append($"Call ID: {CallID}").Append("\n");
             bldr.Append($"{Subject}").Append("\n");
             bldr.Append($"Call Taken By: {Answerer}\n");
             bldr.Append($"Caller: {CallerName}\n");
