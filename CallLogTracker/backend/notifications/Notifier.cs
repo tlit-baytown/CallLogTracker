@@ -136,7 +136,8 @@ namespace CallLogTracker.backend.notifications
                 EmailAddress = c.CallerEmail == null ? "" : c.CallerEmail,
                 Message = c.Message.Length > 255 ? c.Message.Substring(0, 255) : c.Message,
                 Subject = c.IsUrgent ? "Urgent message from Call Tracker" : "New message from Call Tracker",
-                TimeStamp = c.Date
+                TimeStamp = c.Date,
+                CallID = c.ID
             };
 
             //SMS Notifications
